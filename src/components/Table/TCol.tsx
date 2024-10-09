@@ -10,13 +10,13 @@ interface Props {
 /** Component */
 export const TCol = (props: Props) => {
   /** Retrieval */
-  const { isPC } = store.global();
+  const { screenType } = store.global();
 
   /** Template */
   return (
     <div className={`flex xs:flex-col md:flex-row justify-center xs:items-start md:items-center ${props.className}`}>
       {/* mobile label */}
-      {!isPC && <span className="mb-2 text-base text-tip-1 whitespace-nowrap">{props.label}</span>}
+      {screenType < SCREEN.M && <span className="mb-2 text-base text-tip-1 whitespace-nowrap">{props.label}</span>}
 
       {/* value */}
       {props.children}

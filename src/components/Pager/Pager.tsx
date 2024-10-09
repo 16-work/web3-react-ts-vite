@@ -12,7 +12,7 @@ interface Props {
 /** Component */
 export const Pager = (props: Props) => {
   /** Retrieval */
-  const { isPC } = store.global();
+  const { screenType } = store.global();
 
   /** Params */
   const isShow = props.total > props.pageSize;
@@ -22,8 +22,8 @@ export const Pager = (props: Props) => {
     isShow && (
       <Pagination
         className={`w-fit m-auto select-none ${props.className}`}
-        showQuickJumper={isPC}
-        simple={!isPC}
+        showQuickJumper={screenType >= SCREEN.M}
+        simple={screenType < SCREEN.M}
         current={props.page}
         pageSize={props.pageSize}
         total={props.total}

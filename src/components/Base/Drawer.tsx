@@ -16,13 +16,13 @@ interface Props {
 /** Component */
 export const Drawer = (props: Props) => {
   /** Params */
-  const { isPC } = store.global();
+  const { screenType } = store.global();
   const placement = props.placement || 'bottom';
 
   /** Template */
   return (
     <ADrawer
-      open={!isPC && props.isShow}
+      open={screenType < SCREEN.M && props.isShow}
       onClose={props.onClose}
       placement={placement}
       width={placement === 'bottom' ? 'auto' : '80%'}

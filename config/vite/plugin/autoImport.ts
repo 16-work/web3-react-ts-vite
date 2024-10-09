@@ -19,6 +19,7 @@ export const setAutoImport = () => {
           '@/utils/tools': ['tools'],
           '@/utils/events': ['events'],
           '@/utils/format': ['format'],
+          '@/constants/common': ['SCREEN'],
           '@/constants/events': ['EVENTS'],
           '@/hooks/useForm.ts': ['useForm'],
           'react-i18next': ['useTranslation'],

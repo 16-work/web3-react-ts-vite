@@ -2,7 +2,7 @@
 export const useMenus = () => {
   /** Retrieval */
   const { t } = useTranslation();
-  const { isPC } = store.global();
+  const { screenType } = store.global();
 
   /** Params */
   const state = ahooks.reactive({
@@ -25,12 +25,12 @@ export const useMenus = () => {
       },
     ];
 
-    if (!isPC) {
+    if (screenType < SCREEN.M) {
       list.push(...[]);
     }
 
     return list;
-  }, [isPC, t]);
+  }, [screenType, t]);
 
   /** Actions */
   useEffect(() => {

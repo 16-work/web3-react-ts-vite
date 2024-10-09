@@ -50,7 +50,7 @@ interface Props {
 /** Component */
 export const Table = (props: Props) => {
   /** Retrieval */
-  const { isPC } = store.global();
+  const { screenType } = store.global();
 
   /** Params */
   const styleType = props.styleType ?? 'base';
@@ -78,7 +78,7 @@ export const Table = (props: Props) => {
   return (
     <div className={`h-full flex flex-col rounded-20 overflow-hidden ${props.className}`}>
       {/* thead */}
-      {isPC && (
+      {screenType >= SCREEN.M && (
         <>
           <div className={theadClassName}>
             {props.labels.map((label, index) => (
@@ -124,7 +124,7 @@ export const Table = (props: Props) => {
         {props.skeleton &&
           !props.isInit &&
           props.isLoading &&
-          Array.from({ length: isPC ? 4 : 1 }).map((_, index) => (
+          Array.from({ length: screenType >= SCREEN.M ? 4 : 1 }).map((_, index) => (
             <div key={index}>
               {/* hr */}
               {index !== 0 && <div className={hrClassName}></div>}

@@ -7,7 +7,7 @@ import { useAccount } from 'wagmi';
 export const BtnUser = () => {
   /** Retrieval */
   const account = useAccount();
-  const { isPC } = store.global();
+  const { isPC, screenType } = store.global();
 
   /** Template */
   return (
@@ -18,7 +18,7 @@ export const BtnUser = () => {
           <Button
             className="btn-primary xs:w-full md:w-fit h-50 px-16 rounded-8 font-base"
             onClick={() => {
-              if (!isPC && account.address) tools.copy(account.address);
+              if (screenType < SCREEN.M && account.address) tools.copy(account.address);
             }}
           >
             {format.address(account.address, 6, 4)}
