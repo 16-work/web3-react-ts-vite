@@ -1,0 +1,7 @@
+.base-gradient {
+    @apply border border-transparent bg-origin-border overflow-hidden;
+}
+
+.gradient-roll-bg {
+  @apply bg-gradient-to-r bg-[length:200%_200%] bg-[0%_0%] hover:bg-[100%_100%] transition-all duration-500 select-none text-common-1;
+}

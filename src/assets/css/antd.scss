@@ -1,0 +1,334 @@
+/* 分页器(正常版) */
+.ant-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: fit !important;
+  margin-bottom: 2px;
+
+  // 左右箭头
+  .ant-pagination-item-link {
+    color: rgb(var(--cus-gray-800)) !important;
+    background: transparent !important;
+  }
+  .ant-pagination-item-link:hover {
+    color: rgb(var(--cus-primary-2)) !important;
+    background: transparent !important;
+  }
+
+  // 页数按钮
+  .ant-pagination-item {
+    border: none;
+    background: transparent !important;
+
+    a {
+      border-radius: 8px;
+      border: 2px solid;
+      border-color: transparent;
+      color: rgb(var(--text-common-1));
+      transition: border-color 0.3s ease; /* 添加这个属性 */
+    }
+    a:hover {
+      border-color: rgb(var(--cus-gray-800));
+    }
+  }
+
+  // 页数按钮(激活)
+  .ant-pagination-item-active {
+    background: rgb(var(--cus-primary-1)) !important;
+
+    a {
+      border: 2px solid;
+      border-color: rgb(var(--cus-gray-800));
+      color: rgb(var(--text-common-1)) !important;
+    }
+  }
+
+  // 省略
+  .ant-pagination-item-ellipsis {
+    color: rgb(var(--text-common-1)) !important;
+  }
+  .ant-pagination-item-link-icon {
+    color: rgb(var(--cus-primary-1)) !important;
+  }
+
+  // 快捷跳转
+  .ant-pagination-options-quick-jumper {
+    color: rgb(var(--text-common-1));
+
+    input {
+      background: transparent !important;
+      border: 2px solid rgb(var(--cus-gray-800)) !important;
+      box-shadow: none !important;
+      color: rgb(var(--text-common-1));
+    }
+  }
+
+  // 每页条数选择
+  .ant-select {
+    display: none;
+  }
+}
+
+
+
+/* 分页器(简洁版) */
+.ant-pagination-simple {
+  display: flex;
+  align-items: center;
+  height: 30px !important;
+
+  li {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+  }
+
+  .ant-pagination-simple-pager {
+    @apply text-common-1;
+
+    input {
+      width: fit-content !important;
+      height: 100%;
+      margin-top: -5px;
+      background: transparent !important;
+      border: 2px solid rgb(var(--cus-gray-800)) !important;
+      box-shadow: none;
+
+      &:hover {
+        border-color: rgb(var(--cus-primary-1)) !important;
+      }
+    }
+  }
+
+  // 箭头
+  .ant-pagination-item-link {
+    margin-top: -0.2rem;
+  }
+}
+
+
+
+/* 气泡框 */
+.ant-popover {
+  // 背景
+  .ant-popover-inner {
+    padding: 0;
+    background: #fff !important;
+    overflow: hidden;
+    border: 2px solid rgb(var(--cus-gray-800));
+  }
+  .ant-popover-arrow::before {
+    background: transparent !important;
+  }
+}
+
+
+
+/* 上传文件 */
+.ant-upload-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+
+  .ant-upload {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+  }
+}
+
+
+
+/* 模态框 */
+.ant-modal {
+  .ant-modal-content {
+    padding: 0 !important;
+    border-radius: 1rem !important;
+    // overflow: hidden;
+  }
+}
+
+
+
+/* 滑动条输入框 */
+.ant-slider {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 8px;
+  border: 2px solid rgb(var(--cus-gray-800));
+
+  // 底部条
+  .ant-slider-rail {
+    background: #fff !important;
+  }
+
+  // 激活条
+  .ant-slider-track {
+    height: 100%;
+    margin-top: -4px;
+    border-radius: inherit;
+    background: rgb(var(--cus-primary-1)) !important;
+  }
+
+  // 激活点
+  .ant-slider-handle {
+    top: 50% !important;
+    transform: translateX(-50%) translateY(-50%) !important;
+
+    width: 24px !important;
+    height: 24px !important;
+
+    background: #fff;
+    border: 2px solid rgb(var(--cus-gray-800));
+    border-radius: 50% !important;
+
+    @media screen and (max-width: 750px) {
+      width: 17px !important;
+      height: 17px !important;
+    }
+
+  
+
+  }
+  .ant-slider-handle::after {
+    display: none !important;
+  }
+
+  // 节点
+  .ant-slider-dot {
+    display: none;
+  }
+
+  // 节点标签
+  .ant-slider-mark-text {
+    @apply mt-10 text-common-1 font-sm;
+  }
+}
+
+
+
+/* tooltip */ 
+.ant-tooltip {
+  z-index: 2 !important;
+
+  // 箭头
+  .ant-tooltip-arrow::before {
+    background: #fff !important;
+  }
+
+  // 内容
+  .ant-tooltip-inner {
+    min-height: 0 !important;
+    padding: 0 1rem !important;
+    border-radius: 0.2rem !important;
+    background: #fff !important;
+    
+    @apply font-base text-common-1;
+  }
+}
+
+
+
+/* 进度条 */ 
+.ant-progress {
+  .ant-progress-inner {
+    height: 10px;
+    overflow: visible !important;
+
+    border: 2px solid #000 !important;
+
+    @media screen and (max-width: 750px) {
+      border-width: 1px !important;
+    }
+    
+    // 进度文本
+    .ant-progress-text {
+      color: transparent !important;
+      @apply text-title-1;
+    }
+
+    // 进度背景
+    .ant-progress-bg {
+      height: 100% !important;
+    }
+
+    // 进度条粗细
+    .ant-progress-circle-trail {
+      stroke-width: 0.2rem;
+    }
+
+    // 圆圈
+    .ant-progress-bg {
+      overflow: visible !important;
+
+
+      &::before {
+        content: '';
+
+        @apply absolute position-center-v right-0 translate-x-1/2 xs:w-26 xs:h-26 md:w-14 md:h-14 border-2 border-gray-800 bg-white rounded-full;
+      }
+
+      &::after {
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+
+/** 环形进度条 */
+.ant-progress-circle {
+  .ant-progress-inner {
+    border-radius: 50%;
+  }
+}
+
+
+/* 抽屉 */ 
+.ant-drawer {
+  // 去除聚焦边缘线
+  &:focus-visible {
+    outline: none !important;
+  }
+
+
+  .ant-drawer-content-wrapper {
+    box-shadow: none !important;
+  }
+ 
+
+  // 隐藏头部
+  .ant-drawer-header {
+    display: none;
+  }
+
+  .ant-drawer-body {
+    // 内边距
+    padding: 0 !important;
+  }
+}
+
+
+
+/* 图片 */ 
+.ant-image {
+  flex-shrink: 0 !important; // （防止在flex里被挤没）
+  overflow: hidden;
+}
+// 图片预览（删除preview文本）
+.ant-image-mask {
+  .ant-image-mask-info {
+    // 将div下的所有元素隐藏文字大小为0
+    visibility: hidden;
+    font-size: 0; 
+  }
+
+  .ant-image-mask-info span{
+    // 再单独给span标签添加样式 让其显示并且给出文字大小
+    visibility: visible;
+    // font-size: 20px;
+    margin-right: 0 !important;
+    @apply font-xl;
+  }
+}
+

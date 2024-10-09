@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// 导入默认主题
+@import './theme-light-blue.scss';
+
+@layer base {
+    :root {
+        @extend .primary;
+        @extend .second;
+        @extend .gray;
+        @extend .feature;
+        @extend .text;
+        @extend .other;
+    }
+}

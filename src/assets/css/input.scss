@@ -1,0 +1,10 @@
+.base-input {
+  @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-transparent placeholder-gray-500 duration-700 outline-none;
+}
+
+.input-1 {
+  @apply base-input bg-white border-2 border-gray-800 text-common-1 duration-300;
+  &:hover {
+    box-shadow: 0px 0px 15px 3px rgb(var(--cus-primary-1));
+  }
+}

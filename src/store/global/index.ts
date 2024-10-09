@@ -1,0 +1,36 @@
+import { create } from 'zustand';
+import { GlobalStore } from './types';
+import { devtools, persist } from 'zustand/middleware';
+import { DEFAULT_THEME } from '@/constants/common';
+
+export default create<GlobalStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        theme: DEFAULT_THEME,
+        setTheme: (theme) =>
+          set((state) => {
+            document.body.classList.remove(state.theme);
+            document.body.classList.add(theme);
+            return { theme };
+          }),
+
+        isPC: true,
+        setIsPC: (bool) => set(() => ({ isPC: bool })),
+
+        screenType: tools.getScreenType(),
+        setScreenType: (type) => set(() => ({ screenType: type })),
+
+        isOpenDrawer: false,
+        setIsOpenDrawer: (bool) => set(() => ({ isOpenDrawer: bool })),
+
+        usdtUnitPrice: '0',
+        setUsdtUnitPrice: (value) => set(() => ({ usdtUnitPrice: value })),
+
+        tokenIconList: {},
+        setTokenIconList: (update) => set((state) => ({ tokenIconList: { ...state.tokenIconList, ...update } })),
+      }),
+      { name: 'global' }
+    )
+  )
+);

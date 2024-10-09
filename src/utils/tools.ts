@@ -1,0 +1,110 @@
+import { CHAIN_ID, getCurrentChain } from '@/constants/chains';
+import { SCREEN, screenMinSize } from '@/constants/common';
+import { WAGMI_CONFIG } from '@/constants/wagmi';
+import BigNumber from 'bignumber.js';
+import copy from 'copy-to-clipboard';
+import { getBytecode } from 'wagmi/actions';
+
+export const tools = {
+  copy,
+
+  sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
+
+  logTimeOverhead: (func: Function) => {
+    console.time('Time overhead:');
+    func();
+    console.timeEnd('Time overhead:');
+  },
+
+  pxToRem: (px: number) => {
+    return `${px / 16}rem`;
+  },
+
+  getScreenType: (): SCREEN => {
+    const width = window.innerWidth;
+    const screenTypes: SCREEN[] = Object.keys(screenMinSize).map(Number);
+
+    // 返回当前类型的条件：当前级minWidth < width < 下一级minWidth
+    for (const type of screenTypes) {
+      if (width < screenMinSize[type]) return type;
+    }
+
+    // 都不匹配则返回最大屏幕类型
+    return Math.max(...screenTypes);
+  },
+
+  // 获取当前状态
+  getActiveStatus: (start: number, end: number) => {
+    if (!start || !end) return 'Ended';
+
+    const startTime = new Date(start).getTime();
+    const endTime = new Date(end).getTime();
+    const nowTime = Date.now();
+
+    if (endTime <= nowTime) return 'Ended';
+    else if (startTime > nowTime) return 'Upcoming';
+    else return 'Live';
+  },
+
+  // 表格排序比较
+  compare: (field: string, sort: string) => {
+    return (m: any, n: any) => {
+      if (sort === 'asc') return m[field] - n[field];
+      else return n[field] - m[field];
+    };
+  },
+
+  safeDiv: (a: string | number, b: string | number): BigNumber => {
+    if (new BigNumber(b).isEqualTo(0) || b === '0' || !b) {
+      return new BigNumber(0);
+    }
+    return new BigNumber(a).div(b);
+  },
+
+  // 获取用户的时区
+  getUserTimeZone: () => {
+    try {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return timeZone;
+    } catch (e) {
+      console.error('无法获取用户的时区信息', e);
+      return null;
+    }
+  },
+
+  isAndroidNonChrome: (): boolean => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /android/.test(userAgent);
+  },
+
+  // 滚动到指定元素顶端
+  scrollToTop: (selector: string = 'document', behavior: ScrollBehavior = 'smooth') => {
+    // 默认滚动到页面最上方
+    if (selector === 'document') {
+      const scrollBox = document.querySelector('.scroll-box>div');
+      scrollBox?.scrollTo({ top: 0, behavior });
+    }
+    // 滚动到指定元素的顶端
+    else {
+      const e = document.querySelector(selector);
+      e?.scrollIntoView({ block: 'start', behavior });
+    }
+  },
+
+  // 判断地址类型
+  getAddressType: async (hash: string) => {
+    try {
+      const res = await getBytecode(WAGMI_CONFIG, { address: hash as `0x${string}` });
+      if (res) return 'contract';
+      else return 'account';
+    } catch (error) {
+      return 'error';
+    }
+  },
+
+  gotoScan: (hash: string, chainId: number = CHAIN_ID) => {
+    if (getCurrentChain(chainId)) {
+      window.open(`${getCurrentChain(chainId)?.['blockExplorers']?.['default']['url']}/tx/${hash}`);
+    }
+  },
+};
