@@ -24,13 +24,13 @@ export const tools = {
     const width = window.innerWidth;
     const screenTypes: SCREEN[] = Object.keys(screenMinSize).map(Number);
 
-    // 返回当前类型的条件：当前级minWidth < width < 下一级minWidth
-    for (const type of screenTypes) {
-      if (width < screenMinSize[type]) return type;
+    // 从最大类型开始循环，找出第一个匹配的类型
+    for (const type of screenTypes.reverse()) {
+      if (width >= screenMinSize[type]) return type;
     }
 
-    // 都不匹配则返回最大屏幕类型
-    return Math.max(...screenTypes);
+    // 都不匹配则返回最小屏幕类型
+    return SCREEN.S;
   },
 
   // 获取当前状态
