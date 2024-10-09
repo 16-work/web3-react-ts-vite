@@ -1,11 +1,11 @@
 import { BtnChain } from '../BtnChain';
 import { BtnUser } from '../BtnUser';
-import { MenusPC } from '../Menus/MenusPC';
+import { MenusScreenL } from '../Menus/MenusScreenL';
 import { SwitchLanguage } from '../SwitchLanguage';
 import { SwitchTheme } from '../SwitchTheme';
 
 /** Component */
-export const LayoutNavPC = () => {
+export const NavScreenL = () => {
   /** Template */
   return (
     <div className="layout-nav-w h-60 z-[5] flex-align-x justify-between bg-gray-5">
@@ -16,7 +16,7 @@ export const LayoutNavPC = () => {
       </Link>
 
       {/* box: menus */}
-      <MenusPC />
+      <MenusScreenL />
 
       {/* right */}
       <div className="flex-align-x xs:gap-x-14 md:gap-x-20">

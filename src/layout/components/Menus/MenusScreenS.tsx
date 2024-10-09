@@ -7,7 +7,7 @@ interface Props {
 }
 
 /** Component */
-export const MenusMobile = (props: Props) => {
+export const MenusScreenS = (props: Props) => {
   /** Retrieval */
   const menusHook = useMenus();
   const account = useAccount();

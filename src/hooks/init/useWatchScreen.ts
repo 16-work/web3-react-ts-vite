@@ -11,6 +11,7 @@ export const useWatchScreen = () => {
   useEffect(() => {
     const resize = () => {
       setIsPC(window.innerWidth >= screenMinSize[SCREEN.M] && !isMobileDevice() ? true : false);
+
       setScreenType(tools.getScreenType());
     };
     resize(); // 初始检测

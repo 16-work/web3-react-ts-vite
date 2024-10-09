@@ -1,12 +1,12 @@
 import { useAccount } from 'wagmi';
-import { BtnConnect } from './BtnConnect';
-import { MenusMobile } from './Menus/MenusMobile';
-import { DropUser } from './BtnUser/DropUser';
-import { SwitchLanguage } from './SwitchLanguage';
-import { SwitchTheme } from './SwitchTheme';
+import { BtnConnect } from '../BtnConnect';
+import { MenusScreenS } from '../Menus/MenusScreenS';
+import { DropUser } from '../BtnUser/DropUser';
+import { SwitchLanguage } from '../SwitchLanguage';
+import { SwitchTheme } from '../SwitchTheme';
 
 /** Component */
-export const MobileDrawer = () => {
+export const DrawerScreenS = () => {
   /** Retrieval */
   const account = useAccount();
 
@@ -45,7 +45,7 @@ export const MobileDrawer = () => {
             <div className="h-2 my-30 bg-gray-800"></div>
 
             {/* menus */}
-            <MenusMobile onClick={() => (state.isShowDrawer = false)} />
+            <MenusScreenS onClick={() => (state.isShowDrawer = false)} />
           </div>
 
           {/* bottom */}

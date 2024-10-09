@@ -1,7 +1,7 @@
 import { useMenus } from '@/hooks/useMenus';
 
 /** Component */
-export const MenusPC = () => {
+export const MenusScreenL = () => {
   /** Retrieval */
   const { menus, state } = useMenus();
 

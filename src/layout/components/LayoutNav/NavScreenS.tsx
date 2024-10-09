@@ -1,8 +1,8 @@
 import { BtnChain } from '../BtnChain';
-import { MobileDrawer } from '../MobileDrawer';
+import { DrawerScreenS } from './DrawerScreenS';
 
 /** Component */
-export const LayoutNavMobile = () => {
+export const NavScreenS = () => {
   /** Template */
   return (
     <div className="layout-nav-w h-60 !mt-20 !mb-40 z-[5] flex-align-x justify-between">
@@ -17,7 +17,7 @@ export const LayoutNavMobile = () => {
         <BtnChain />
 
         {/* drawer */}
-        <MobileDrawer />
+        <DrawerScreenS />
       </div>
     </div>
   );
