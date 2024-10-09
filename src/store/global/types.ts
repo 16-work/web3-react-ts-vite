@@ -1,4 +1,4 @@
-import { SCREEN } from '@/constants/common';
+import { SCREEN } from '@config/constants/screen';
 
 export interface GlobalStore {
   theme: string;

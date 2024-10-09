@@ -1,6 +1,6 @@
 import { CHAIN_ID, getCurrentChain } from '@/constants/chains';
-import { SCREEN, screenMinSize } from '@/constants/common';
 import { WAGMI_CONFIG } from '@/constants/wagmi';
+import { SCREEN, screenMinSize } from '@config/constants/screen';
 import BigNumber from 'bignumber.js';
 import copy from 'copy-to-clipboard';
 import { getBytecode } from 'wagmi/actions';
@@ -20,17 +20,18 @@ export const tools = {
     return `${px / 16}rem`;
   },
 
-  getScreenType: (): SCREEN => {
+  getScreenType: () => {
     const width = window.innerWidth;
     const screenTypes: SCREEN[] = Object.keys(screenMinSize).map(Number);
 
     // 从最大类型开始循环，找出第一个匹配的类型
     for (const type of screenTypes.reverse()) {
+      // @ts-ignore
       if (width >= screenMinSize[type]) return type;
     }
 
     // 都不匹配则返回最小屏幕类型
-    return SCREEN.S;
+    return SCREEN.XS;
   },
 
   // 获取当前状态

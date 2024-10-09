@@ -22,8 +22,8 @@ export const Pager = (props: Props) => {
     isShow && (
       <Pagination
         className={`w-fit m-auto select-none ${props.className}`}
-        showQuickJumper={screenType >= SCREEN.M}
-        simple={screenType < SCREEN.M}
+        showQuickJumper={screenType >= SCREEN.MD}
+        simple={screenType < SCREEN.MD}
         current={props.page}
         pageSize={props.pageSize}
         total={props.total}

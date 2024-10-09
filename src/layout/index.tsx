@@ -14,9 +14,8 @@ export const Layout = () => {
     <>
       {/* 上下布局 */}
       <div className="pc-min-w h-screen flex flex-col bg-gray-5">
-        <span>{screenType}</span>
         {/* layout-nav */}
-        {screenType >= SCREEN.M ? <NavScreenL /> : <NavScreenS />}
+        {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
 
         <div id="drawer-root" className="relative flex-1 overflow-hidden">
           <Scrollbar autoHeight={false} className="scroll-box absolute w-full h-full">

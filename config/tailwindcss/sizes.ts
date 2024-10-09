@@ -1,13 +1,4 @@
-// 屏幕尺寸
-export const screenSizes = {
-  xs: '0px',
-  sm: '640px',
-  md: '750px',
-  lg: '1024px',
-  xl: '1280px',
-  xxl: '1650px',
-  xxxl: '1800px',
-};
+import { SCREEN, screenMinSize } from '../../config/constants/screen';
 
 // 通用尺寸
 const getSizes = () => {
@@ -21,3 +12,11 @@ const getSizes = () => {
   return sizes;
 };
 export const commonSizes = getSizes();
+
+// 屏幕尺寸
+export const screenSizes = Object.entries(SCREEN).reduce((acc, [key, value]) => {
+  if (typeof value === 'number') {
+    acc[key.toLowerCase()] = `${screenMinSize[value]}px`;
+  }
+  return acc;
+}, {} as Record<string, string>);

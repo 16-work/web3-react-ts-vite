@@ -78,7 +78,7 @@ export const Table = (props: Props) => {
   return (
     <div className={`h-full flex flex-col rounded-20 overflow-hidden ${props.className}`}>
       {/* thead */}
-      {screenType >= SCREEN.M && (
+      {screenType >= SCREEN.MD && (
         <>
           <div className={theadClassName}>
             {props.labels.map((label, index) => (
@@ -124,7 +124,7 @@ export const Table = (props: Props) => {
         {props.skeleton &&
           !props.isInit &&
           props.isLoading &&
-          Array.from({ length: screenType >= SCREEN.M ? 4 : 1 }).map((_, index) => (
+          Array.from({ length: screenType >= SCREEN.MD ? 4 : 1 }).map((_, index) => (
             <div key={index}>
               {/* hr */}
               {index !== 0 && <div className={hrClassName}></div>}

@@ -26,7 +26,7 @@ export const BoxScrollLoad = (props: Props) => {
         hasMore={props.hasMore}
         loader={
           <div className="relative w-full h-50">
-            <Load />
+            <Loading />
           </div>
         }
         endMessage={<Divider className="text-18 !text-[--c-text-tip] select-none">{t('tip.nothingMore')}</Divider>}

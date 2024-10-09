@@ -1,4 +1,4 @@
-import { SCREEN, screenMinSize } from '@/constants/common';
+import { screenMinSize } from '@config/constants/screen';
 
 /** Hook */
 export const useWatchScreen = () => {
@@ -10,7 +10,7 @@ export const useWatchScreen = () => {
   // 判断设备类型(PC/Mobile) & 屏幕类型
   useEffect(() => {
     const resize = () => {
-      setIsPC(window.innerWidth >= screenMinSize[SCREEN.M] && !isMobileDevice() ? true : false);
+      setIsPC(window.innerWidth >= screenMinSize[SCREEN.MD] && !isMobileDevice() ? true : false);
 
       setScreenType(tools.getScreenType());
     };

@@ -12,18 +12,6 @@ export const LANGUAGE = languageType.includes(localCache.get('language', navigat
 // 默认英文
 // export const LANGUAGE = localCache.get('language', 'en');
 
-/* 屏幕类型 */
-export enum SCREEN {
-  S = 0,
-  M = 1,
-  L = 2,
-}
-export const screenMinSize = {
-  [SCREEN.S]: 0,
-  [SCREEN.M]: 750,
-  [SCREEN.L]: 1340,
-};
-
 // 页脚链接
 export const FOOTER_LINKS: Record<string, Record<string, string>> = {
   X: {
