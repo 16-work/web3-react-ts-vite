@@ -2,17 +2,10 @@
 @import './common.scss';
 
 * {
+  @apply normal;
+
   margin: 0;
   padding: 0;
-  @apply normal;
-}
-
-html {
-  overflow-y: hidden;
-}
-
-#root {
-  height: 100vh;
 }
 
 pre {
@@ -28,7 +21,17 @@ pre {
 
 
 
-/* 屏幕适配（自动） */ 
+/* 屏幕适配 */
+// 方案1: 固定尺寸
+html {
+  font-size: 16px;
+
+  @media screen and (max-width: 750px) {
+    font-size: 8px;
+  }
+}
+
+// 方案2: 动态尺寸
 // $minFontSize: 12.8px;
 // $maxFontSize: 17.829px;
 // $minScreen: 430px;
@@ -39,18 +42,16 @@ pre {
 // }
 
 
-// /* 屏幕适配（固定尺寸） */
-html {
-  font-size: 16px;
 
-  @media screen and (max-width: 750px) {
-    font-size: 8px;
-  }
+/* 滚动条相关 */
+html {
+  overflow-y: hidden;
 }
 
+#root {
+  height: 100vh;
+}
 
-
-/* 滚动条 */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
