@@ -44,20 +44,6 @@
 
 
 
-/* 字体粗细 */
-.thin {
-  font-family: 'font-thin','PingFangSC-Light', Helvetica, sans-serif;
-}
-.normal {
-  font-family: 'font-normal','PingFangSC-Bold', Helvetica, sans-serif;
-}
-.bold {
-  font-family: 'font-bold','PingFangSC-Bold', Helvetica, sans-serif;
-}
-
-
-
-
 /* 超出省略 */
 .ellipsis-1 {
   @apply overflow-ellipsis overflow-hidden whitespace-nowrap;
