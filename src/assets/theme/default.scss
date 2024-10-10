@@ -5,6 +5,10 @@
 // 导入默认主题
 @import './theme-light-blue.scss';
 
+:root {
+  --default-theme: #{$theme-name}; 
+}
+
 @layer base {
     :root {
         @extend .primary;

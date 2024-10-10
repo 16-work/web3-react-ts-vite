@@ -1,3 +1,5 @@
+$theme-name: 'theme-light-blue'; 
+
 // 只用颜色变量的话可以只写这(eg. var(--cus-gray-100))
 // 注意：不要用--c，会和antd冲突
 
@@ -52,8 +54,7 @@
 }
 
 @layer base {
-  /* 亮蓝主题 */
-  .theme-light-blue {
+  .#{$theme-name} {
     @extend .primary;
     @extend .second;
     @extend .gray;

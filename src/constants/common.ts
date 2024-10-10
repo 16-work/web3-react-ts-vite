@@ -1,5 +1,5 @@
 // 默认主题
-export const DEFAULT_THEME = 'theme-light-blue';
+export const DEFAULT_THEME = getComputedStyle(document.documentElement).getPropertyValue('--default-theme').trim();
 
 /* 语言类型 */
 export const languageType = ['en', 'zh-TW', 'zh-CN'];
