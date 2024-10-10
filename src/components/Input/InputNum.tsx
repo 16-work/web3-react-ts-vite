@@ -8,11 +8,14 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCha
 
 /** Component */
 export const InputNum = (props: Props) => {
+  /** Params */
+  const debouncedValue = ahooks.debounce(formatInputLocaleString(props.value ?? ''), { wait: 10 }); // 防止中/日/韩输入法下，onChange多次触发导致格式化多次
+
   /* Template */
   return (
     <input
       {...props}
-      value={formatInputLocaleString(props.value ?? '')}
+      value={debouncedValue}
       onChange={(e) => props.onChange && props.onChange(formatInputOnlyPositive(e.target.value.trim()))}
       onBlur={(e) => {
         props.onBlur && props.onBlur(formatInputOnlyPositive(e.target.value.trim()));
