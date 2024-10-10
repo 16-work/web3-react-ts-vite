@@ -1,7 +1,7 @@
 /** Props */
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur' | 'onFocus'> {
-  value?: string;
-  onChange?: (newValue: string) => void;
+  value: string | number;
+  onChange: (newValue: string) => void;
   onBlur?: (newValue: string) => void;
   onFocus?: (newValue: string) => void;
 }
