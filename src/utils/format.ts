@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { t } from 'i18next';
 
 export const format = {
   time: (time: Date | number, format: string = 'YYYY/MM/DD HH:mm:ss') => {
@@ -7,14 +8,14 @@ export const format = {
 
   timeDistance: (time: number) => {
     const seconds = (new Date().getTime() - new Date(time).getTime()) / 1000;
-    if (seconds <= 30) return 'a few seconds ago';
-    else if (seconds <= 60) return 'half a minute ago';
-    else if (seconds <= 60 * 2) return 'a minute ago';
-    else if (seconds <= 60 * 60) return Math.floor(seconds / 60) + ' minute ago';
-    else if (seconds <= 60 * 60 * 2) return 'a hour ago';
-    else if (seconds <= 60 * 60 * 24) return Math.floor(seconds / 60 / 60) + ' hour ago';
-    else if (seconds <= 60 * 60 * 24 * 2) return 'a day ago';
-    else if (seconds <= 60 * 60 * 24 * 31) return Math.floor(seconds / 60 / 60 / 24) + ' day ago';
+    if (seconds <= 30) return t('common.aFewSecondsAgo');
+    else if (seconds <= 60) return t('common.halfAMinuteAgo');
+    else if (seconds <= 60 * 2) return t('common.aMinuteAgo');
+    else if (seconds <= 60 * 60) return t('common.nMinutesAgo', { minutes: Math.floor(seconds / 60) });
+    else if (seconds <= 60 * 60 * 2) return t('common.aHourAgo');
+    else if (seconds <= 60 * 60 * 24) return t('common.nHoursAgo', { hours: Math.floor(seconds / 60 / 60) });
+    else if (seconds <= 60 * 60 * 24 * 2) return t('common.aDayAgo');
+    else if (seconds <= 60 * 60 * 24 * 31) return t('common.nDaysAgo', { days: Math.floor(seconds / 60 / 60 / 24) });
     else return moment(time).format('YYYY/MM/DD HH:mm:ss');
   },
 
@@ -25,10 +26,10 @@ export const format = {
     const secs = Number(BigNumber(seconds % 60).toFixed(0, 3));
 
     let result = '';
-    if (days > 0) result += `${days}D `;
-    if (hours > 0) result += `${hours}H `;
-    if (minutes > 0) result += `${minutes}M `;
-    if (secs > 0 || (secs === 0 && days === 0 && hours === 0 && minutes === 0)) result += `${secs}S`;
+    if (days > 0) result += `${days}${t('common.d')} `;
+    if (hours > 0) result += `${hours}${t('common.h')} `;
+    if (minutes > 0) result += `${minutes}${t('common.m')} `;
+    if (secs > 0 || (secs === 0 && days === 0 && hours === 0 && minutes === 0)) result += `${secs}${t('common.s')}`;
 
     return result;
   },
