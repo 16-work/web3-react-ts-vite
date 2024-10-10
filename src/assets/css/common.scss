@@ -6,7 +6,7 @@
 @import './animation.scss';
 @import './position.scss';
 @import './focus.scss';
-@import './toast.scss';
+@import './plugin.scss';
 
 // PC端屏幕最小宽度（防止x轴出现双重滚动条）
 .pc-min-w {
@@ -17,11 +17,13 @@
 
 // 版心
 .w {
-  @apply pc-min-w xs:w-full md:max-w-1340 xs:px-30 md:px-40 relative z-[1] mx-auto;
+  @apply pc-min-w xs:w-full relative z-[1] mx-auto 
+         md:max-w-1340 xs:px-30 md:px-40;
 }
 // 顶部导航版心
 .layout-nav-w {
-  @apply w-full max-w-1650 relative top-0 m-auto xs:px-20 md:px-40;
+  @apply w-full relative top-0 m-auto 
+         max-w-1650 xs:px-20 md:px-40;
 }
 
 
