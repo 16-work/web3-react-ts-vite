@@ -1,17 +1,6 @@
 // 默认主题
 export const DEFAULT_THEME = getComputedStyle(document.documentElement).getPropertyValue('--default-theme').trim();
 
-/* 语言类型 */
-export const languageType = ['en', 'zh-TW', 'zh-CN'];
-// 默认跟随浏览器语言
-export const LANGUAGE = languageType.includes(localCache.get('language', navigator.language))
-  ? localCache.get('language', navigator.language) === 'zh-CN'
-    ? 'zh-TW'
-    : localCache.get('language', navigator.language)
-  : 'en';
-// 默认英文
-// export const LANGUAGE = localCache.get('language', 'en');
-
 // 页脚链接
 export const FOOTER_LINKS: Record<string, Record<string, string>> = {
   X: {

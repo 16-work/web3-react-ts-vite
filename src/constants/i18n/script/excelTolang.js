@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import xlsx from 'xlsx';
 
-const __dirname = path.resolve(`${process.cwd()}/src/i18n/script`);
+const __dirname = path.resolve(`${process.cwd()}/src/constants/i18n/script`);
 let workbook = xlsx.readFile(path.join(__dirname, 'i18n.xlsx'));
 
 let sheetNames = workbook.SheetNames;

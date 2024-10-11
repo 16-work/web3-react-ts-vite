@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { RouterProvider } from 'react-router-dom';
 import { browserRouter } from './router/index.ts';
 import 'virtual:svg-icons-register';
-import '@/i18n';
+import '@/constants/i18n';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import en from 'antd/locale/en_US';

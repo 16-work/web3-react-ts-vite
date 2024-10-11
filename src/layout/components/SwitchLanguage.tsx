@@ -1,11 +1,5 @@
-import { LANGUAGE } from '@/constants/common';
-import i18n from '@/i18n';
-
-/** Constants */
-const options = [
-  { label: 'English', value: 'en' },
-  { label: '中文', value: 'zh-TW' },
-];
+import i18n from '@/constants/i18n';
+import { convertLanguageMap, LANGUAGE, languageOptions } from '@/constants/i18n/config';
 
 /** Component */
 export const SwitchLanguage = () => {
@@ -14,7 +8,7 @@ export const SwitchLanguage = () => {
 
   /** Actions */
   const onChangeLanguage = (value: string) => {
-    const language = value === 'zh-CN' ? 'zh-TW' : value;
+    const language = convertLanguageMap[value] ? convertLanguageMap[value] : value;
     setLanguage(language);
     i18n.changeLanguage(language);
     localCache.set('language', language);
@@ -22,7 +16,7 @@ export const SwitchLanguage = () => {
 
   /** Template */
   return (
-    <DropList value={language} options={options} onSelect={(value) => onChangeLanguage(value)} arrow={true} hideDropArrow={true} trigger={['hover']}>
+    <DropList value={language} options={languageOptions} onSelect={(value) => onChangeLanguage(value)} arrow={true} hideDropArrow={true} trigger={['hover']}>
       <Svg name="language" className="xs:w-50 md:w-40 hover-primary" />
     </DropList>
   );
