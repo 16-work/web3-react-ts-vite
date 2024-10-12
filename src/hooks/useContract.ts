@@ -1,4 +1,4 @@
-import { CHAIN_ID, ChainId } from '@/constants/chains';
+import { DEFAULT_CHAIN_ID } from '@/constants/chains';
 import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 import { readContract } from '@wagmi/core';
 import { WAGMI_CONFIG } from '@/constants/wagmi';
@@ -16,7 +16,7 @@ interface BaseParams {
 }
 
 type Addresses = {
-  [chainId in ChainId]?: Address;
+  [key: number]: Address;
 };
 
 /** Hook */
@@ -62,7 +62,7 @@ export default () => {
           submitTransaction({
             hash,
             title,
-            chainId: account.chain?.id || CHAIN_ID,
+            chainId: account.chain?.id || DEFAULT_CHAIN_ID,
             description: desc,
             timestamp: Date.now() / 1000,
           });
@@ -116,7 +116,7 @@ export default () => {
 /** Functions */
 const getContractAddress = (address: Addresses, chainId?: number): `0x${string}` => {
   // @ts-ignore
-  return chainId && address[chainId] ? address[chainId] : address[CHAIN_ID];
+  return chainId && address[chainId] ? address[chainId] : address[DEFAULT_CHAIN_ID];
 };
 
 const handleContractError = (e: any, callback?: (error: any) => void) => {

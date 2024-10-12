@@ -1,4 +1,4 @@
-import { CHAIN_ID, getCurrentChain } from '@/constants/chains';
+import { chains, DEFAULT_CHAIN_ID } from '@/constants/chains';
 import { WAGMI_CONFIG } from '@/constants/wagmi';
 import { SCREEN, screenMinSize } from '@config/constants/screen';
 import BigNumber from 'bignumber.js';
@@ -103,9 +103,16 @@ export const tools = {
     }
   },
 
-  gotoScan: (hash: string, chainId: number = CHAIN_ID) => {
-    if (getCurrentChain(chainId)) {
-      window.open(`${getCurrentChain(chainId)?.['blockExplorers']?.['default']['url']}/tx/${hash}`);
+  // 通过id获取chain
+  getChainById: (chainId: number) => {
+    return Object.values(chains).find((chain) => chain.id === chainId);
+  },
+
+  // 跳转到scan
+  gotoScan: (hash: string, chainId: number = DEFAULT_CHAIN_ID) => {
+    const chain = tools.getChainById(chainId);
+    if (chain) {
+      window.open(`${chain?.['blockExplorers']?.['default']['url']}/tx/${hash}`);
     }
   },
 };

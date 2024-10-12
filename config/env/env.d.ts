@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 declare interface MetaEnv {
-  VITE_ENV: string;
+  VITE_ENV: 'dev' | 'production' | 'mock';
 
   VITE_APPNAME: string;
 
