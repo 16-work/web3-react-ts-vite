@@ -53,6 +53,10 @@ $theme-name: 'theme-light-green';
   --popover-bg: var(--cus-gray-50);
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
   .#{$theme-name} {
     @extend .primary;

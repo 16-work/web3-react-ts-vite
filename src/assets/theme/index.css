@@ -1,3 +1,5 @@
+
+
 @import '@/assets/theme/default.scss';
 
 /* 导入除默认主题外的其它主题 */
@@ -7,4 +9,4 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 这个文件必须是.css后缀 */
+/* index.css这个文件必须是.css后缀 */
