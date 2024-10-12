@@ -7,29 +7,28 @@ import { RouterProvider } from 'react-router-dom';
 import { browserRouter } from './router/index.ts';
 import 'virtual:svg-icons-register';
 import '@/constants/i18n';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/locale/zh_CN';
-import en from 'antd/locale/en_US';
+import { initI18n } from '@/constants/i18n';
+import { AntdProvider } from './components/Base/AntdProvider.tsx';
 
 const App = () => {
-  /** retrieval */
-  const { i18n } = useTranslation();
-
   /** template */
   return (
     <WalletProvider>
-      <ConfigProvider locale={i18n.language === 'en' ? en : zhCN}>
+      <AntdProvider>
         <div className="h-full">
           <RouterProvider router={browserRouter} />
           <ToastContainer />
         </div>
-      </ConfigProvider>
+      </AntdProvider>
     </WalletProvider>
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <>
-    <App />
-  </>
-);
+// i18n初始化完成后再渲染
+initI18n().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <>
+      <App />
+    </>
+  );
+});

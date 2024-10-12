@@ -11,11 +11,26 @@ const theme = { accentColor: 'rgb(var(--cus-primary-1))' }; // 主题
 
 /** Component */
 export const WalletProvider = (props: { children: ReactNode }) => {
+  /** Retrieval */
+  const { i18n } = useTranslation();
+
+  /** Params */
+  const locale = useMemo(() => {
+    switch (i18n.language) {
+      case 'zh-CN':
+        return 'zh';
+      case 'zh-TW':
+        return 'zh';
+      default:
+        return 'en';
+    }
+  }, [i18n.language]);
+
   /** Template */
   return (
     <WagmiProvider config={WAGMI_CONFIG}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider locale="en" theme={store.global().theme.search('light') ? lightTheme(theme) : darkTheme(theme)} coolMode>
+        <RainbowKitProvider locale={locale} theme={store.global().theme.search('light') ? lightTheme(theme) : darkTheme(theme)} coolMode>
           {props.children}
         </RainbowKitProvider>
       </QueryClientProvider>
