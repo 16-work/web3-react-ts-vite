@@ -30,7 +30,7 @@ export const WalletProvider = (props: { children: ReactNode }) => {
   return (
     <WagmiProvider config={WAGMI_CONFIG}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider locale={locale} theme={store.global().theme.search('light') ? lightTheme(theme) : darkTheme(theme)} coolMode>
+        <RainbowKitProvider locale={locale} theme={store.global().theme.search('light') !== -1 ? lightTheme(theme) : darkTheme(theme)} coolMode>
           {props.children}
         </RainbowKitProvider>
       </QueryClientProvider>
