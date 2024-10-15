@@ -115,7 +115,6 @@ export default () => {
 
 /** Functions */
 const getContractAddress = (address: Addresses, chainId?: number): `0x${string}` => {
-  // @ts-ignore
   return chainId && address[chainId] ? address[chainId] : address[DEFAULT_CHAIN_ID];
 };
 
