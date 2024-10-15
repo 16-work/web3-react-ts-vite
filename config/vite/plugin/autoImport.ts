@@ -26,6 +26,7 @@ export const setAutoImport = () => {
           '@/utils/ahooks/index.ts': ['ahooks'],
           '@/utils/yup.ts': [['default', 'yup']],
           '@/utils/notification': ['toast', 'msg'],
+          '@/constants/chains': ['CURRENCY_SYMBOL'],
           '@config/constants/screen.ts': ['SCREEN'],
           '@/hooks/init/useRouterFun.ts': ['router'],
           '@/hooks/init/useGlobalHooks.ts': ['hooks'],

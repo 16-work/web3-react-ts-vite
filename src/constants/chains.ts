@@ -13,3 +13,6 @@ export const CHAINS_ICON: Record<number, string> = {
   [chains.base.id]: 'chain-base',
   [chains.baseSepolia.id]: 'chain-base',
 };
+
+// 链Symbol
+export const CURRENCY_SYMBOL = chains.base.nativeCurrency.symbol;
