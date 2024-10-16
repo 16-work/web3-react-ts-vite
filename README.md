@@ -1,5 +1,29 @@
 # README
 
+**启动项目：**
+
+```
+pnpm i
+```
+
+```
+pnpm build:packages
+```
+
+```
+pnpm dev
+```
+
+**安装包：**
+
+由于使用了Turbo的缘故，装包需要`-w`
+
+```
+pnpm add -w 包名
+```
+
+
+
 ## 一、技术栈
 
 **基础：** React、typescript、vite
