@@ -1,35 +1,64 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
+  "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "env": ["RISK_APP_SECRET", "SERVER_NODE_REAL_API_ETH", "SERVER_NODE_REAL_API_GOERLI"],
-      "outputs": ["dist/**", "!.vercel/**/*"]
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "RISK_APP_SECRET",
+        "SERVER_NODE_REAL_API_ETH",
+        "SERVER_NODE_REAL_API_GOERLI"
+      ],
+      "outputs": [
+        "dist/**",
+        "!.vercel/**/*"
+      ]
     },
     "test": {
-      "outputs": ["coverage/**"],
-      "dependsOn": ["^build"]
+      "outputs": [
+        "coverage/**"
+      ],
+      "dependsOn": [
+        "^build"
+      ]
     },
     "test:config": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "build:storybook": {
-      "dependsOn": ["^build"],
-      "outputs": ["storybook-static/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "storybook-static/**"
+      ]
     },
     "build:uikit": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "start": {
       "cache": false
     },
     "build:list": {
-      "outputs": ["list/**"]
+      "outputs": [
+        "list/**"
+      ]
     },
     "integration-test": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "clean": {
