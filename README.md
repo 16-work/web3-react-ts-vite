@@ -32,7 +32,7 @@ pnpm add -w 包名
 
 **样式：** tailwindcss、antd、framer-motion
 
-**其它：** axios、ahooks
+**其它：** axios、ahooks、turbo
 
 
 
@@ -887,6 +887,10 @@ const { 字段名1 , 字段名n = 默认值 } = useWatch({ control });
     --transaction // web3交易模块
 ```
 
+
+
+#### 7.1 基础使用
+
 **创建Store模块：**
 
 - 新建`@/store/模块名/types.ts`、`@/store/模块名/index.ts`
@@ -934,6 +938,40 @@ const { isPC, setIsPC } = store.global();
 
 
 
+#### 7.2 常用Store介绍
+
+**global：**
+
+```ts
+theme & setTheme 主题
+
+isPC & setIsPC 是否为PC端
+
+screenType & setScreenType 屏幕类型
+
+tasks & setTask 存储异步任务列表
+
+isOpenDrawer & setIsOpenDrawer 打开移动端主抽屉
+
+usdtUnitPrice & setUsdtUnitPrice USDT单价
+
+tokenIconList & setTokenIconList 代币列表
+```
+
+**user：**
+
+```ts
+isShowVerifyTip & setIsShowVerifyTip 是否显示401提示
+
+usersToken & setUsersToken 用户token列表
+```
+
+**transaction：**
+
+别动，和交易提示相关
+
+
+
 ### 8. AHooks
 
 **数据响应式：**
@@ -970,7 +1008,8 @@ const { run: 方法名, isLoading } = ahooks.request(
 **带锁异步：**
 
 ```ts
-const { run: 方法名, isLoading } = ahooks.lockFn(async () => {
+// isLoading是局部加载状态，task是非局部加载状态(可外部控制)
+const { run: 方法名, isLoading, task } = ahooks.lockFn(async () => {
     /* before */
     
 
@@ -986,6 +1025,8 @@ const { run: 方法名, isLoading } = ahooks.lockFn(async () => {
 
 - [文档](https://ahooks.js.org/zh-CN/hooks/use-request/index)
 - 使用时都是`ahooks.去掉use的hook名`
+
+
 
 
 
@@ -1146,6 +1187,33 @@ export const use合约名 = () => {
 ```ts
 const { 合约方法 } = use合约名();
 await 合约方法()
+```
+
+**配合task获取成功状态：**
+
+```tsx
+const { 写合约方法名 } = use合约名();
+const { run, task } = ahooks.lockFn(async () => {
+    await 写合约方法名(task);
+});
+```
+
+```ts
+const 写合约方法名 = (task: Task, value?: bigint) => {
+  return hooks.contract.write(task, {
+    contractConfig,
+    functionName: 'functionName',
+    args: [],
+    value,
+  });
+};
+```
+
+```tsx
+<!-- 这样交易成功或失败后才会停止loading -->
+<Button isLoading={task.status === 0} onClick={run}>
+  Test Task
+</Button>
 ```
 
 
