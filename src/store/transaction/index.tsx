@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { events } from '@/utils/events';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { Transaction, TransactionStore } from '@/store/transaction/type';
+import { Transaction, TransactionStore } from '@/store/transaction/types';
 
 export default create<TransactionStore>()(
   devtools(
