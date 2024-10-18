@@ -10,6 +10,9 @@ export interface GlobalStore {
   screenType: SCREEN;
   setScreenType: (type: SCREEN) => void;
 
+  tasks: Task[];
+  setTask: (params: { index: number; id?: string; status?: TaskStatus }) => void;
+
   isOpenDrawer: boolean;
   setIsOpenDrawer: (bool: boolean) => void;
 
@@ -19,3 +22,10 @@ export interface GlobalStore {
   tokenIconList: Record<string, string>;
   setTokenIconList: (list: Record<string, string>) => void;
 }
+
+export interface Task {
+  id: string;
+  status: TaskStatus;
+}
+
+export type TaskStatus = -1 | 0 | 1;

@@ -5,6 +5,7 @@ import { WAGMI_CONFIG } from '@/constants/wagmi';
 import { Address } from 'viem';
 import { ContractFunctionRevertedError, TransactionExecutionError } from 'viem';
 import { t } from 'i18next';
+import { Task } from '@/store/global/types';
 
 interface BaseParams {
   contractConfig: {
@@ -31,6 +32,7 @@ export default () => {
   // 写合约
   const write = useCallback(
     async (
+      task: Task,
       params: BaseParams & {
         value?: bigint; // payable时有value，nonpayable时无value
         message?: {
@@ -40,8 +42,10 @@ export default () => {
         callback?: () => void;
       }
     ) => {
+      const { contractConfig, functionName, args, value, message, callback } = params;
+
       try {
-        const { contractConfig, functionName, args, value, message, callback } = params;
+        task.status = 0;
 
         const res = await publicClient?.simulateContract({
           address: getContractAddress(contractConfig.address, account.chainId),
@@ -67,6 +71,8 @@ export default () => {
             timestamp: Date.now() / 1000,
           });
 
+          task.id = hash;
+
           callback && callback();
         }
 
@@ -77,6 +83,8 @@ export default () => {
         handleContractError(e, (error: string) => {
           msg.error(error);
         });
+
+        task.status = -1;
       }
     },
     [publicClient, account.address, walletClient, submitTransaction, account.chainId]
@@ -85,9 +93,9 @@ export default () => {
   // 读合约
   const read = useCallback(
     async (params: BaseParams) => {
-      try {
-        const { contractConfig, functionName, args } = params;
+      const { contractConfig, functionName, args } = params;
 
+      try {
         const res = await readContract(WAGMI_CONFIG, {
           address: getContractAddress(contractConfig.address, account.chainId),
           abi: contractConfig.abi,

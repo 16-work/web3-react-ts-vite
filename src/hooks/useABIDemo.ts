@@ -1,5 +1,6 @@
 import { ABIDemo } from '@/constants/abi/Demo';
 import { contracts } from '@/constants/contracts';
+import { Task } from '@/store/global/types';
 
 /** Hook */
 export const useABIDemo = () => {
@@ -10,8 +11,8 @@ export const useABIDemo = () => {
   };
 
   /** Actions */
-  const writeFunc = (value?: bigint) => {
-    return hooks.contract.write({
+  const writeFunc = (task: Task, value?: bigint) => {
+    return hooks.contract.write(task, {
       contractConfig,
       functionName: 'functionName',
       args: [],
