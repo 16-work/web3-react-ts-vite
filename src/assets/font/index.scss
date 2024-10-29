@@ -1,0 +1,25 @@
+$default-font-family: 'PingFangSC-Light', Helvetica, sans-serif;
+
+@font-face {
+  font-family: 'font-thin';
+  src: url('../font/font-thin.woff2'); // 注意路径，根据引入者位置写
+}
+.thin {
+  font-family: 'font-thin', $default-font-family;
+}
+
+@font-face {
+  font-family: 'font-normal';
+  src: url('../font/font-normal.woff2'); // 注意路径，根据引入者位置写
+}
+.normal {
+  font-family: 'font-normal', $default-font-family;
+}
+
+@font-face {
+  font-family: 'font-bold';
+  src: url('../font/font-bold.woff2'); // 注意路径，根据引入者位置写
+}
+.bold {
+  font-family: 'font-bold', $default-font-family;
+}

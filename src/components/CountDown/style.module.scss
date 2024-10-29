@@ -1,0 +1,52 @@
+@import '@/assets/css/gradient.scss';
+
+.time {
+  position: relative;
+  height: 46px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.text {
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  @apply text-common-1;
+}
+.time .top {
+  position: relative;
+}
+.time .bottom {
+  line-height: 5px; /* 把数字头顶到上面去 */
+}
+.block {
+  width: 40px;
+  height: 23px;
+  overflow: hidden;
+
+  @apply bg-primary-1;
+}
+.time .flipBox {
+  position: absolute;
+  top: 0; /* 为了把flip-box 放到top表面上 */
+  width: 40px;
+  height: 23px;
+  transform-style: preserve-3d;
+  transform-origin: bottom; /* 以底部为旋转的基准点 */
+  transition: transform 0.9s;
+}
+.flipBox .flipBlock {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+.flipBox .front {
+  @apply bg-primary-1;
+}
+.flipBox .back {
+  transform: rotateX(0deg) rotateY(-180deg) scale(-1);
+  line-height: 5px; /* 把数字上移了*/
+  @apply bg-primary-1;
+}

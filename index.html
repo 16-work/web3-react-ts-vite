@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>%VITE_APPNAME%</title>
+</head>
+
+<body>
+  <div id="root">
+    <style>
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
+
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: 300px;
+        width: 100vw;
+        height: 100vh;
+        margin: 0 auto;
+      }
+
+      #logo {
+        width: 10rem;
+        height: 10rem;
+        background: url('/favicon.svg') no-repeat center;
+        animation: rotate-h 3s ease-in-out infinite;
+      }
+
+      @keyframes rotate-h {
+        0% {
+          transform: rotateY(0deg);
+        }
+
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+    </style>
+    <div id="loading">
+      <div id="logo"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGDW3CT13T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZGDW3CT13T');
+  </script>
+</body>
+
+</html>

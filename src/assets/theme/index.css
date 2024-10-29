@@ -1,0 +1,10 @@
+@import '@/assets/theme/default.scss';
+
+/* 导入除默认主题外的其它主题 */
+@import '@/assets/theme/theme-light-green.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css这个文件必须是.css后缀 */

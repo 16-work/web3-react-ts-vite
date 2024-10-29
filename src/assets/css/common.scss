@@ -1,0 +1,46 @@
+@import './antd.scss';
+@import './text.scss';
+@import './button.scss';
+@import './input.scss';
+@import './gradient.scss';
+@import './animation.scss';
+@import './position.scss';
+@import './focus.scss';
+@import './plugin.scss';
+@import './hr.scss';
+
+// PC端屏幕最小宽度（防止x轴出现双重滚动条）
+.pc-min-w {
+  @apply md:min-w-1340;
+}
+
+
+
+// 版心
+.w {
+  @apply pc-min-w xs:w-full relative z-[1] mx-auto 
+         md:max-w-1340 xs:px-30 md:px-40;
+}
+// 顶部导航版心
+.layout-nav-w {
+  @apply w-full m-auto 
+         max-w-1650 xs:px-20 md:px-40;
+}
+
+
+
+// 页面最小高度
+.page-min-h {
+  @apply xs:min-h-[calc(100vh-150px)] md:min-h-[calc(100vh-220px)];
+}
+
+
+
+// 顶部导航按钮高度
+.layout-nav-btn-h {
+  @apply xs:h-50 md:h-45;
+}
+// 顶部导航图标宽度
+.layout-nav-icon-w {
+  @apply xs:w-50 md:w-35;
+}

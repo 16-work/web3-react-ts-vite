@@ -1,0 +1,17 @@
+/* 骨架屏渐变动画 */
+.skeleton {
+  $bg: rgb(0, 0, 0);
+  background-image: linear-gradient(90deg, rgba($bg, 0.06) 25%, rgba($bg, 0.15) 37%, rgba($bg, 0.06) 63%) !important;
+  background-size: 400% 100%;
+
+  animation: skeleton-animation 1.4s ease infinite;
+}
+@keyframes skeleton-animation {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}

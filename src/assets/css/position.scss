@@ -1,0 +1,27 @@
+/* 定位 */
+// 中心居中
+.position-center {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+// 垂直居中
+.position-center-v {
+    @apply top-1/2 -translate-y-1/2;
+}
+
+// 水平居中
+.position-center-h {
+    @apply left-1/2 -translate-x-1/2;
+}
+
+/* flex */
+// x轴对齐
+.flex-align-x {
+    @apply flex items-center;
+}
+
+// y轴对齐
+.flex-align-y {
+    @apply flex flex-col items-center;
+}
+
