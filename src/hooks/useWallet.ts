@@ -1,4 +1,4 @@
-import { useConnectModal, useChainModal } from '@rainbow-me/rainbowkit';
+import { useConnectModal, useChainModal, useAccountModal } from '@rainbow-me/rainbowkit';
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
 import { SiweMessage } from 'siwe';
 
@@ -9,6 +9,7 @@ export default () => {
   const { t } = useTranslation();
   const { openChainModal } = useChainModal();
   const { signMessageAsync } = useSignMessage();
+  const { openAccountModal } = useAccountModal();
   const { openConnectModal } = useConnectModal();
   const { disconnect: logout } = useDisconnect();
   const { usersToken, setUsersToken } = store.user();
@@ -16,6 +17,10 @@ export default () => {
   /** Actions */
   const connect = () => {
     if (openConnectModal) openConnectModal();
+  };
+
+  const viewAccountInfo = () => {
+    if (openAccountModal) openAccountModal();
   };
 
   const disconnect = () => {
@@ -70,6 +75,7 @@ export default () => {
   /** Return */
   return {
     connect,
+    viewAccountInfo,
     disconnect,
     switchChain,
     verify,
