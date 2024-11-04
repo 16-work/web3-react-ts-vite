@@ -3,10 +3,15 @@ import { WAGMI_CONFIG } from '@/constants/wagmi';
 import { SCREEN, screenMinSize } from '@config/constants/screen';
 import BigNumber from 'bignumber.js';
 import copy from 'copy-to-clipboard';
+import { t } from 'i18next';
+import { Options } from 'react-copy-to-clipboard';
 import { getBytecode } from 'wagmi/actions';
 
 export const tools = {
-  copy,
+  copy: (text: string, options?: Options | undefined) => {
+    copy(text, options);
+    msg.success(t('tip.copySuccessful'), { autoClose: 500 });
+  },
 
   sleep: (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
 
