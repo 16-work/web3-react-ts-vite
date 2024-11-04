@@ -11,7 +11,8 @@ pnpm i
 ```
 
 ```
-pnpm build:packages
+// 如需使用turbo，请执行本命令
+pnpm build:packages 
 ```
 
 ```
@@ -251,7 +252,7 @@ export default {
     
     // 举例
     list: '/list', // 静态路由
-    detail: '/detail'  + '/:动态参数名' // 动态路由
+    detail: '/detail' // 动态路由（怎么导入见下）
   };
   ```
 
@@ -265,9 +266,19 @@ export default {
       path: path.xxx,
       Component: 页面组件,
     },
+      
+    // 举例
+    {
+      path: path.list,
+      Component: PageList,
+    },
+    {
+      path: path.detail + '/:id',
+      Component: PageDetail,
+    },
   ];
   ```
-
+  
   
 
 **设置模块路由：**
@@ -1085,8 +1096,8 @@ export const DEFAULT_CHAIN = {
 };
 ...
 
-// 支持的链
-export const SUPPORT_CHAINS = env.VITE_ENV === 'production' ? [DEFAULT_CHAIN.PROD, chains.其它链n主网] : [DEFAULT_CHAIN.DEV, chains.其它链n测试];
+// 支持的链（不要直接用chain[]，因为contracts那里要用到id的类型提示）
+export const SUPPORT_CHAINS = env.VITE_ENV === 'production' ? [DEFAULT_CHAIN.PROD.id, chains.其它链n主网.id] : [DEFAULT_CHAIN.DEV.id, chains.其它链n测试网.id];
 
 // 链图标
 export const CHAINS_ICON: Record<number, string> = {
@@ -1132,7 +1143,7 @@ hooks.wallet.switchChain()
       [chains.其它链n主网.id]: '主网合约地址',
       [chains.其它链n测试网.id]: '测试网合约地址',
     },
-  } as const satisfies Record<string, Record<number, `0x${string}`>>;
+  } as const satisfies Record<string, Record<(typeof SUPPORT_CHAINS)[number], `0x${string}`>>;
   ```
 
 
