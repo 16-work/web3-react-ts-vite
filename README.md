@@ -476,14 +476,14 @@ html {
 **版心：**
 
 ```scss
-// 版心
+// 版心(这里最好别加margin-y，防止有些奇怪的地方要用w时还得!my)
 .w {
   @apply pc-min-w xs:w-full relative z-[1] mx-auto 
          md:max-w-??? xs:px-??? md:px-???;
 }
 // 顶部导航版心
 .layout-nav-w {
-  @apply w-full relative top-0 m-auto 
+  @apply w-full mx-auto 
          max-w-??? xs:px-??? md:px-???;
 }
 ```
