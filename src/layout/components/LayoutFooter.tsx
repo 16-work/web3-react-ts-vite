@@ -45,7 +45,12 @@ export const LayoutFooter = () => {
       {/* main */}
       <div className="w !my-0 xs:pb-40 md:pb-30">
         {/* icons */}
-        <div className="w-fit grid grid-cols-5 gap-x-60 m-auto">
+        <div
+          className="w-fit grid gap-x-60 m-auto"
+          style={{
+            gridTemplateColumns: `repeat(${icons.length}, minmax(0, 1fr))`,
+          }}
+        >
           {icons.map((item) => (
             <a key={item.label} href={item.href} target="_blank">
               <Svg name={item.icon} className="xs:w-50 md:w-40 hover-primary text-common-1" />
