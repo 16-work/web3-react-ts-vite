@@ -2,10 +2,12 @@ import IconDefaultToken from '@/assets/img/common/token-default.png';
 
 /** Props */
 interface Props {
-  size: number;
+  className: string; // 长/宽都写这(未设置height时自动和width一致)
+
+  // 显示图片：icon和contract 2选1
   icon?: string;
   contract?: string;
-  className?: string;
+
   preview?: boolean;
 }
 
@@ -13,6 +15,14 @@ interface Props {
 export const TokenIcon = (props: Props) => {
   /** Retrieval */
   const { tokenIconList, setTokenIconList } = store.global();
+
+  /** Params */
+  const className = useMemo(() => {
+    // 未设置height时自动和width一致
+    const regex = /\bh-(\d+|auto|full|screen)\b/;
+    if (regex.test(props.className)) return props.className;
+    else return props.className + ' aspect-square';
+  }, [props.className]);
 
   /** Actions */
   const checkIconByContract = async () => {
@@ -41,7 +51,7 @@ export const TokenIcon = (props: Props) => {
   /** Template */
   return (
     <Img
-      className={`${props.className} rounded-full`}
+      className={`${className} rounded-full`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}
       defaultImg="token"

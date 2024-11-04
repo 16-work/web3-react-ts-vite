@@ -1,7 +1,7 @@
 /** Props */
 interface Props {
   name: string;
-  className: string; // 长/宽/颜色都能在这写
+  className: string; // 长/宽/颜色都写这(未设置height时自动和width一致)
 
   color?: string;
   fill?: string;
