@@ -989,7 +989,7 @@ usersToken & setUsersToken 用户token列表
 
 ### 8. AHooks
 
-**数据响应式：**
+#### 8.1 响应式数据
 
 ```ts
 const state = ahooks.reactive({
@@ -1000,7 +1000,9 @@ const state = ahooks.reactive({
 state.变量名 = 新值;
 ```
 
-**异步请求：**
+
+
+#### 8.2 异步请求
 
 ```ts
 const { run: 方法名, isLoading } = ahooks.request(
@@ -1020,7 +1022,9 @@ const { run: 方法名, isLoading } = ahooks.request(
 );
 ```
 
-**带锁异步：**
+
+
+#### 8.3 带锁异步
 
 ```ts
 // isLoading是局部加载状态，task是非局部加载状态(可外部控制)
@@ -1040,6 +1044,62 @@ const { run: 方法名, isLoading, task } = ahooks.lockFn(async () => {
 
 - [文档](https://ahooks.js.org/zh-CN/hooks/use-request/index)
 - 使用时都是`ahooks.去掉use的hook名`
+
+
+
+
+
+### 9. Context
+
+**定义Context：**
+
+```ts
+// @/constants/demo.ts
+export const contextInitValue: TypeContextDemo = {
+  属性名: 默认值,
+};
+
+export type TypeContextDemo = {
+  属性名: 类型;
+};
+
+export const ContextDemo = createContext({ ...contextInitValue });
+```
+
+**使用Provider：**
+
+```tsx
+// 祖先组件
+import { ContextDemo, contextInitValue } from '@/constants/context/demo';
+
+/** Component */
+export const Father = () => {
+  /** Params */
+  const context = ahooks.reactive({ ...contextInitValue });
+
+  /** Template */
+  return (
+    
+      <ContextDemo.Provider value={context}>
+        <Child />
+      </ContextDemo.Provider>
+  );
+};
+```
+
+**调用Context：**
+
+```tsx
+import { ContextDemo } from '@/constants/context/demo';
+
+const Child = () => {
+  /** Retrieval */
+  const context = useContext(ContextDemo);
+
+  /** Template */
+  return <div>{context.属性名}</div>;
+};
+```
 
 
 
