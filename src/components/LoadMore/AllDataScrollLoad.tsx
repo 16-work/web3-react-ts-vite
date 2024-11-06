@@ -13,7 +13,7 @@ interface Props {
 }
 
 /** Component */
-export const ScrollLoadList = (props: Props) => {
+export const AllDataScrollLoad = (props: Props) => {
   /** Retrieval */
   const { isPC } = store.global();
   const { loadMore, hasMore, items } = useLoadMore(props.list);

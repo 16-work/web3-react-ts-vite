@@ -1391,9 +1391,8 @@ useEffect(() => {
       --PopoverText.tsx // 文本弹出提示
       --PopoverTip.tsx // 解释弹出提示
 
-    --ScrollLoad // 滚动加载
-      --ScrollLoadList.tsx // 无限滚动(所有数据)
-      --BoxScrollLoad.tsx // 下滚翻页
+    --LoadMore // 加载更多
+      --AllDataScrollLoad.tsx // 无限滚动(列表只取一次且超多条数据时可以考虑用)
 
     --Switch // 切换组件
       --CheckBox.tsx // 复选框
