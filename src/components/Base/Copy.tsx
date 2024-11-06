@@ -4,13 +4,12 @@ import { ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   text: string;
+  className?: string;
   iconClassName?: string;
 }
 
 /** Component */
 export const Copy = (props: Props) => {
-  /** Retrieval */
-
   /** Params */
   const iconClassName = useMemo(() => {
     // 未设置width时使用默认size
@@ -21,7 +20,7 @@ export const Copy = (props: Props) => {
 
   /** Template */
   return (
-    <div className="flex-align-x">
+    <div className={`flex-align-x ${props.className}`}>
       {props.children}
 
       <Svg
