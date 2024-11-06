@@ -516,7 +516,11 @@ html {
 
 在`@/assets/theme`下，新建`主题文件名.scss`
 
-> 推荐命名：`theme-[light/dark]-主题色.scss`
+> 推荐命名：`theme-[light/dark]-主题色.scss`。
+>
+> [light/dark]是因为有些第三方组件是用light/dark来配置亮暗的。
+>
+> -主题色.scss是因为<SwitchTheme>会自动读取`主题色`作为需要显示的主题列表项。
 
 
 
@@ -526,9 +530,13 @@ html {
 
   > 示例见：`theme-light-blue.scss`和`theme-light-green.scss`
 
+  > 在此文件下配置的颜色，仅能以scss变量的颜色使用，如：`color: rgb(var(--cus-primary-1))`
+
 - 在`config/tailwindcss/color.ts`设置相关变量
 
   > 示例见`config/tailwindcss/color.ts`默认内容
+  
+  > 在此文件下配置的颜色，可供tailwindcs使用，如`bg-primary-1`
 
 
 
@@ -549,7 +557,9 @@ html {
 
   
 
+**扩展：**
 
+实在不爱用tailwindcss，可以用styles，示例见`@/components/CountDown`目录内容。
 
 
 
