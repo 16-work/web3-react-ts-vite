@@ -13,7 +13,7 @@ export const Layout = () => {
   return (
     <>
       {/* 上下布局 */}
-      <div className="pc-min-w h-screen flex flex-col bg-gray-5 overflow-hidden">
+      <div className="pc-min-w h-screen flex flex-col overflow-hidden">
         {/* layout-nav */}
         {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
 

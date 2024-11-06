@@ -8,7 +8,7 @@
 
   // 左右箭头
   .ant-pagination-item-link {
-    color: rgb(var(--cus-gray-800)) !important;
+    color: rgb(var(--cus-gray-900)) !important;
     background: transparent !important;
   }
   .ant-pagination-item-link:hover {
@@ -29,7 +29,7 @@
       transition: border-color 0.3s ease; /* 添加这个属性 */
     }
     a:hover {
-      border-color: rgb(var(--cus-gray-800));
+      border-color: rgb(var(--cus-gray-900));
     }
   }
 
@@ -39,7 +39,7 @@
 
     a {
       border: 2px solid;
-      border-color: rgb(var(--cus-gray-800));
+      border-color: rgb(var(--cus-gray-900));
       color: rgb(var(--text-common-1)) !important;
     }
   }
@@ -58,7 +58,7 @@
 
     input {
       background: transparent !important;
-      border: 2px solid rgb(var(--cus-gray-800)) !important;
+      border: 2px solid rgb(var(--cus-gray-900)) !important;
       box-shadow: none !important;
       color: rgb(var(--text-common-1));
     }
@@ -92,7 +92,7 @@
       height: 100%;
       margin-top: -5px;
       background: transparent !important;
-      border: 2px solid rgb(var(--cus-gray-800)) !important;
+      border: 2px solid rgb(var(--cus-gray-900)) !important;
       box-shadow: none;
 
       &:hover {
@@ -116,7 +116,7 @@
     padding: 0;
     background: #fff !important;
     overflow: hidden;
-    border: 2px solid rgb(var(--cus-gray-800));
+    border: 2px solid rgb(var(--cus-gray-900));
   }
   .ant-popover-arrow::before {
     background: transparent !important;
@@ -155,7 +155,7 @@
   margin-left: 0 !important;
   margin-right: 0 !important;
   border-radius: 8px;
-  border: 2px solid rgb(var(--cus-gray-800));
+  border: 2px solid rgb(var(--cus-gray-900));
 
   // 底部条
   .ant-slider-rail {
@@ -179,7 +179,7 @@
     height: 24px !important;
 
     background: #fff;
-    border: 2px solid rgb(var(--cus-gray-800));
+    border: 2px solid rgb(var(--cus-gray-900));
     border-radius: 50% !important;
 
     @media screen and (max-width: 750px) {
@@ -265,7 +265,7 @@
       &::before {
         content: '';
 
-        @apply absolute position-center-v right-0 translate-x-1/2 xs:w-26 xs:h-26 md:w-14 md:h-14 border-2 border-gray-800 bg-white rounded-full;
+        @apply absolute position-center-v right-0 translate-x-1/2 xs:w-26 xs:h-26 md:w-14 md:h-14 border-2 border-gray-900 bg-white rounded-full;
       }
 
       &::after {

@@ -12,12 +12,12 @@
 }
 
 .hover-info {
-  @apply base-hover text-info-3 hover:text-info-2;
+  @apply base-hover text-info-1 hover:text-info-2;
 }
 
 
 
 /* 链接 */
 .link-1 {
-  @apply text-info-2 hover:text-info-3 cursor-pointer duration-300;
+  @apply text-info-1 hover:text-info-2 cursor-pointer duration-300;
 }

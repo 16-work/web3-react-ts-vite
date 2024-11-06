@@ -65,7 +65,7 @@ export const DropList = (props: Props) => {
                 className={`hover-primary px-20 font-base 
                     ${props.value === option.value || props.value === option ? 'bg-primary-1 !text-common-1' : ''}
 
-                    ${index === 0 ? '' : 'border-t-2 border-gray-800'}
+                    ${index === 0 ? '' : 'border-t-2 border-gray-900'}
                   `}
               >
                 {/* 下面是有左右边距的hr，上面是没有左右边距的hr */}

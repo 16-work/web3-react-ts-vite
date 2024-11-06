@@ -3,54 +3,46 @@ $theme-name: 'theme-light-green';
 // 只用颜色变量的话可以只写这(eg. var(--cus-gray-100))
 // 注意：不要用--c，会和antd冲突
 
-// 主题色
+// 主色系
 .primary {
   --cus-primary-1: 47, 237, 92; // #2fed5c
   --cus-primary-2: 26,233,147; // #1ae993
 }
 
-// 次要色
+// 次色系
 .second {
+  --cus-second-1: 153, 222, 57; // #99de39
+}
+
+// 灰色系
+.gray {
+  --cus-gray-100: 254, 253, 248; // #FFFDF8
+  --cus-gray-500: 153, 153, 153; // #999
+  --cus-gray-900: 51, 51, 51; // #333
+}
+
+// 功能色
+.feature {
   // 绿
   --cus-relax-1: 126, 187, 146; // #7EBB92
-  --cus-relax-2: 92, 161, 112; // #5CA170
-  --cus-relax-3: 5, 177, 131; // #05B183
 
   // 蓝
   --cus-info-1: 115, 171, 250; // #73ABFA
   --cus-info-2: 31, 125, 226; // #1F7DE2
-  --cus-info-3: 41, 86, 166; // #2956A6
 
   // 红
   --cus-stress-1: 226, 92, 85; // #E25C55
-  --cus-stress-2: 255, 0, 0; // #FF0000
 }
 
-.gray {
-  --cus-gray-5: 255, 255, 254; // #FFFFFE
-  --cus-gray-50: 255, 255, 248; // #FFFFF8
-  --cus-gray-100: 254, 253, 248; // #FFFDF8
-  --cus-gray-200: 235, 235, 235; // #EBEBEB
-  --cus-gray-300: 216, 216, 216; // #D8D8D8
-  --cus-gray-500: 153, 153, 153; // #999
-  --cus-gray-600: 102, 102, 102; // #666
-  --cus-gray-800: 51, 51, 51; // #333
-}
-
-.feature {
-  --hot-1: 239, 72, 104; // #EF4868
-  --hot-2: 103, 110, 229; // #676EE5
-  --hot-3: 255, 168, 32; // #FFA820
-}
-
+// 文本色
 .text {
-  --text-common-1: var(--cus-gray-800);
-  --text-tip-1: var(--cus-gray-600);
-  --text-tip-2: var(--cus-gray-500);
+  --text-common-1: var(--cus-gray-900);
+  --text-tip-1: var(--cus-gray-500);
 }
 
+// 其它
 .other {
-  --popover-bg: var(--cus-gray-50);
+  --popover-bg: var(--cus-gray-100);
 }
 
 @tailwind base;

@@ -9,7 +9,7 @@ import { SwitchTheme } from '../SwitchTheme';
 export const NavScreenL = () => {
   /** Template */
   return (
-    <div className="layout-nav-w relative top-0 h-60 z-[5] flex-align-x justify-between bg-gray-5">
+    <div className="layout-nav-w relative top-0 h-60 z-[5] flex-align-x justify-between">
       {/* box: logo */}
       <BoxLogo />
 

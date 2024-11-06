@@ -12,7 +12,7 @@ export const BtnChain = () => {
     account.address && (
       <Button
         className={`layout-nav-btn-h border-2 rounded-8 cursor-pointer duration-300
-          ${account.chain ? 'border-gray-800' : 'border-stress-1'}
+          ${account.chain ? 'border-gray-900' : 'border-stress-1'}
         `}
         onClick={() => hooks.wallet.switchChain()}
       >

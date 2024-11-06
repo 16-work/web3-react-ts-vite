@@ -5,18 +5,18 @@
 
 /* 主题按钮 */ 
 .btn-primary {
-  @apply base-btn border-2 border-gray-800 bg-primary-1 text-common-1;
+  @apply base-btn border-2 border-gray-900 bg-primary-1 text-common-1;
 }
 
 
 /* 次要按钮 */ 
 // 白底黑边
 .btn-second-1 {
-  @apply base-btn border-2 border-gray-800 bg-white active:bg-primary-1 text-common-1;
+  @apply base-btn border-2 border-gray-900 bg-white active:bg-primary-1 text-common-1;
 }
 
 
 /* 禁用按钮 */ 
 .btn-disabled {
-  @apply base-btn border-2 border-gray-600 bg-gray-300 text-tip-1;
+  @apply base-btn border-2 border-gray-900 bg-gray-500 text-common-1;
 }

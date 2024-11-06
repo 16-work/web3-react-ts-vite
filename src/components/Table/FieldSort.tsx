@@ -26,7 +26,7 @@ export const FieldSort = (props: Props) => {
         <div className="relative h-18 ml-5">
           <Svg
             name="sort-asc"
-            className={`w-10 absolute top-0 left-0 cursor-pointer ${props.sort === 'asc' ? 'text-info-2' : 'text-common-1'}`}
+            className={`w-10 absolute top-0 left-0 cursor-pointer ${props.sort === 'asc' ? 'text-primary-2' : 'text-common-1'}`}
             onClick={(e) => {
               e.stopPropagation();
               props.onSort('asc');
@@ -35,7 +35,7 @@ export const FieldSort = (props: Props) => {
 
           <Svg
             name="sort-desc"
-            className={`w-10 absolute bottom-0 left-0 cursor-pointer ${props.sort === 'desc' ? 'text-info-2' : 'text-common-1'}`}
+            className={`w-10 absolute bottom-0 left-0 cursor-pointer ${props.sort === 'desc' ? 'text-primary-2' : 'text-common-1'}`}
             onClick={(e) => {
               e.stopPropagation();
               props.onSort('desc');

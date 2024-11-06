@@ -3,7 +3,7 @@
 }
 
 .input-1 {
-  @apply base-input bg-white border-2 border-gray-800 text-common-1 duration-300;
+  @apply base-input bg-white border-2 border-gray-900 text-common-1 duration-300;
   &:hover {
     box-shadow: 0px 0px 15px 3px rgb(var(--cus-primary-1));
   }

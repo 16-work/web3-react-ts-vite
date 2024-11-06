@@ -1,20 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 
-import { baseColors, cusColors, textColors, featureColors, } from './config/tailwindcss/color';
+import { cusColors } from './config/tailwindcss/color';
 import { screenSizes, commonSizes } from './config/tailwindcss/sizes';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      ...cusColors,
-      ...baseColors,
-      ...featureColors,
+      ...cusColors.primary,
+      ...cusColors.feature,
+      ...cusColors.base,
+      ...cusColors.second,
     },
     textColor: {
-      ...textColors,
-      ...baseColors,
-      ...featureColors,
+      ...cusColors.primary,
+      ...cusColors.feature,
+      ...cusColors.base,
+      ...cusColors.text,
     },
     extend: {
       screens: screenSizes,

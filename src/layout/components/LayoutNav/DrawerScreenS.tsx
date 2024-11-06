@@ -29,7 +29,7 @@ export const DrawerScreenS = () => {
         title={
           // copy: address
           <Copy text={account.address!} iconClassName="w-30">
-            <span className="text-info-2 mr-10">{format.address(account.address ?? '', 5, 5)}</span>
+            <span className="text-common-1 mr-10">{format.address(account.address ?? '', 5, 5)}</span>
           </Copy>
         }
         placement="right"
@@ -50,7 +50,7 @@ export const DrawerScreenS = () => {
 
           {/* bottom */}
           {account.address && (
-            <div className="flex-align-x justify-between pt-30 border-t-2 border-gray-800">
+            <div className="flex-align-x justify-between pt-30 border-t-2 border-gray-900">
               {/* left */}
               <div className="flex-align-x gap-x-30">
                 {/* switch language */}
