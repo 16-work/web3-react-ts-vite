@@ -29,7 +29,6 @@ export const setAutoImport = () => {
           '@config/constants/screen.ts': ['SCREEN'],
           '@/hooks/init/useRouterFun.ts': ['router'],
           '@/hooks/init/useGlobalHooks.ts': ['hooks'],
-          '@/utils/numeral.ts': [['default', 'numeral']],
           '@/utils/parseLocaleToken': ['parseLocaleToken'],
           '@/constants/chain/index.ts': ['CURRENCY_SYMBOL'],
           '@/utils/bignumber.ts': [['default', 'BigNumber']],
