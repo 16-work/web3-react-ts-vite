@@ -2,6 +2,9 @@ import moment from 'moment';
 import { t } from 'i18next';
 import BigNumber from 'bignumber.js';
 
+// 数字缩写（别改顺序）
+export const NUMBER_ABBRS = ['Y', 'Z', 'E', 'P', 'T', 'B', 'M', 'K'] as const;
+
 export const format = {
   time: (time: Date | number, format: string = 'YYYY/MM/DD HH:mm:ss') => {
     return moment(time).format(format);
@@ -56,11 +59,38 @@ export const format = {
       .join('');
   },
 
-  bignum: (number: number | string, decimals: number = 4) => {
-    if (!number || number === '0') return '0';
+  bignum: (value: BigNumber | number | string, decimals?: number, abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]) => {
+    if (!value || value === '0') return '0';
     // 解析输入并转换为 BigNumber
-    const strNumber = new BigNumber(parseFloat(new BigNumber(number).toFixed(36))).toString();
+    const strNumber = new BigNumber(parseFloat(new BigNumber(value).toFixed(36))).toString();
     const [integralPart, decimalPart] = strNumber.split('.');
+
+    // 缩写
+    if (abbrOrigin !== undefined) {
+      const abbrs = NUMBER_ABBRS;
+
+      // 是否达到缩写标准
+      let isAbbrable = false;
+      if (typeof abbrOrigin === 'number' && BigNumber(integralPart).gte(abbrOrigin)) isAbbrable = true;
+      else {
+        const index = abbrs.findIndex((item) => item === abbrOrigin);
+        if (index !== -1 && BigNumber(integralPart).gte(10 ** (3 * (abbrs.length - index)))) isAbbrable = true;
+      }
+
+      // 开始缩写
+      if (isAbbrable) {
+        const dec = decimals ?? 2; // 缩写默认保留两位小数
+
+        for (let i = 0; i < abbrs.length; i++) {
+          if (BigNumber(integralPart).gte(10 ** (3 * (abbrs.length - i))))
+            return `${BigNumber(integralPart)
+              .div(10 ** (3 * (abbrs.length - i)))
+              .toFixed(dec)} ${abbrs[i]}`;
+        }
+      }
+    }
+
+    const dec = decimals ?? 4; // 非缩写默认保留4位小数
 
     // 检查是否为负数
     const isNegative = integralPart.startsWith('-');
@@ -92,28 +122,28 @@ export const format = {
         }
       }
       const sliceStr = decimalPart.slice(count, decimalPart.length);
-      if (count > 3 && Number(number) < 1) {
-        let currentDecimal = sliceStr.slice(0, decimals || 4).length;
+      if (count > 3 && BigNumber(value).lt(1)) {
+        let currentDecimal = sliceStr.slice(0, dec).length;
         let str = '';
-        while (currentDecimal < decimals) {
+        while (currentDecimal < dec) {
           str += '0';
           currentDecimal += 1;
         }
-        decPart = `.0${format.subscript(count)}${sliceStr.slice(0, decimals || 4)}`;
+        decPart = `.0${format.subscript(count)}${sliceStr.slice(0, dec)}`;
         decPart = decPart + str;
-      } else if (Number(number) < 1) {
+      } else if (BigNumber(value).lt(1)) {
         let currentDecimal = decimalPart.length;
 
         let str = '';
-        while (currentDecimal < decimals) {
+        while (currentDecimal < dec) {
           str += '0';
           currentDecimal += 1;
         }
-        decPart = `.${decimalPart.slice(0, decimals)}${str}`;
+        decPart = `.${decimalPart.slice(0, dec)}${str}`;
       } else {
         decPart = `.${decimalPart.slice(0, 2)}`;
       }
-    } else if (decimals !== 0) {
+    } else if (dec !== 0) {
       decPart = '.00';
     }
     return `${intPart}${decPart}`;

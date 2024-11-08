@@ -1516,8 +1516,15 @@ localCache.set('键名', 值) // 设值
 
 ```ts
 // 数字格式化(支持大数)
-format.bignum(数值, 小数位)
+format.bignum(数值, 小数位, 数字缩写)
 
+// eg.
+format.bignum('123456.789', 2); // 123,456.78
+format.bignum('123456.789', 2, "K"); // 123.46 K (从K位开始缩写)
+format.bignum('12345678910', 2, "K"); // 12.35 B
+```
+
+```ts
 // 其它见@/utils/format.ts，用法都是format.xxx
 ```
 
