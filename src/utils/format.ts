@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { t } from 'i18next';
+import BigNumber from 'bignumber.js';
 
 export const format = {
   time: (time: Date | number, format: string = 'YYYY/MM/DD HH:mm:ss') => {
@@ -32,13 +33,6 @@ export const format = {
     if (secs > 0 || (secs === 0 && days === 0 && hours === 0 && minutes === 0)) result += `${secs}${t('common.s')}`;
 
     return result;
-  },
-
-  address: (str: string, first: number, last: number) => {
-    if (str && typeof str != 'string') str = str + '';
-    if (!str || str.length <= last + first) return str;
-
-    return str.slice(0, first) + '...' + str.slice(str.length - last, str.length);
   },
 
   subscript: (num: number) => {
@@ -123,6 +117,31 @@ export const format = {
       decPart = '.00';
     }
     return `${intPart}${decPart}`;
+  },
+
+  rate: (current: BigNumber | number | string, max: BigNumber | number | string, returnType: 'string' | 'number' = 'string', decimalPlaces: number = 2) => {
+    const ratio = BigNumber(current)
+      .div(max)
+      .dp(decimalPlaces + 2, 1);
+
+    // 返回百分比数字
+    if (returnType === 'number') {
+      return BigNumber(ratio).times(100).toNumber() as number;
+    }
+    // 返回百分比字符串
+    else {
+      if (BigNumber(current).lte(0)) return '0%';
+      // <0.0...01
+      if (BigNumber(ratio).lt(BigNumber(1).div(10 ** (decimalPlaces + 2)))) return `<0.${String(10 ** (decimalPlaces - 1)).substring(1)}1%`;
+      else return `${ratio.times(100).toString()}%`;
+    }
+  },
+
+  address: (str: string, first: number, last: number) => {
+    if (str && typeof str != 'string') str = str + '';
+    if (!str || str.length <= last + first) return str;
+
+    return str.slice(0, first) + '...' + str.slice(str.length - last, str.length);
   },
 
   token: {
