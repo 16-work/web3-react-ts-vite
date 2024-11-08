@@ -21,6 +21,9 @@ export default create<GlobalStore>()(
         screenType: tools.getScreenType(),
         setScreenType: (type) => set(() => ({ screenType: type })),
 
+        isHitBottom: false,
+        setIsHitBottom: (bool) => set(() => ({ isHitBottom: bool })),
+
         tasks: [],
         setTask: (params) =>
           set((state) => {

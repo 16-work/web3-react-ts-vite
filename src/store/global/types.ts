@@ -10,6 +10,9 @@ export interface GlobalStore {
   screenType: SCREEN;
   setScreenType: (type: SCREEN) => void;
 
+  isHitBottom: boolean;
+  setIsHitBottom: (bool: boolean) => void;
+
   tasks: Task[];
   setTask: (params: { index: number; id?: string; status?: TaskStatus }) => void;
 

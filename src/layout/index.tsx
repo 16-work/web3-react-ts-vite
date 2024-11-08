@@ -7,7 +7,7 @@ import { NavScreenS } from './components/LayoutNav/NavScreenS';
 export const Layout = () => {
   /** Retrieval */
   useInit();
-  const { screenType } = store.global();
+  const { screenType, setIsHitBottom } = store.global();
 
   /** Template */
   return (
@@ -18,7 +18,7 @@ export const Layout = () => {
         {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
 
         <div id="drawer-root" className="relative flex-1 overflow-hidden">
-          <Scrollbar autoHeight={false} className="scroll-box absolute w-full h-full">
+          <Scrollbar autoHeight={false} className="scroll-box absolute w-full h-full" onHitBottom={(v) => setIsHitBottom(v)}>
             {/* animation */}
             <div className="page-min-h">
               <AnimationRoute>
