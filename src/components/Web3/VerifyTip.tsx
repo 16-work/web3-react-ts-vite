@@ -33,7 +33,7 @@ export const VerifyTip = () => {
             await hooks.wallet.verify();
           }}
         >
-          {t('tip.verify')}
+          {t('account.verify')}
         </Button>
       )}
     </div>
