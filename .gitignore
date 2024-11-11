@@ -3,7 +3,7 @@
 # config/env/.env.production
 
 # 不忽略这个文件，或先build再tsc（二选一）
-config/declare/auto-import.d.ts
+# config/declare/auto-import.d.ts
 
 # Logs
 logs
