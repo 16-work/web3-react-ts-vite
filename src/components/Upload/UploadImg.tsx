@@ -66,7 +66,7 @@ export const UploadImg = (props: Props) => {
 
   /** Template */
   return (
-    <div {...getRootProps()} className="relative flex-align-y justify-center border-2 cursor-pointer">
+    <div {...getRootProps()} className={`relative flex-align-y justify-center border-2 cursor-pointer ${props.className}`}>
       <input type={'file'} {...getInputProps()} />
 
       {props.img ? (
