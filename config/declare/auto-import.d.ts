@@ -53,6 +53,7 @@ declare global {
   const Skeleton: typeof import('../../src/components/Base/Skeleton')['Skeleton']
   const Svg: typeof import('../../src/components/Icon/Svg')['Svg']
   const TCol: typeof import('../../src/components/Table/TCol')['TCol']
+  const TabPanels: typeof import('../../src/components/Switch/TabPanels')['TabPanels']
   const Table: typeof import('../../src/components/Table/Table')['Table']
   const Tabs: typeof import('../../src/components/Switch/Tabs')['Tabs']
   const TokenIcon: typeof import('../../src/components/Icon/TokenIcon')['TokenIcon']

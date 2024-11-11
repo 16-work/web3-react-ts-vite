@@ -1362,6 +1362,7 @@ useEffect(() => {
       --CheckBox.tsx // 复选框
       --Radio.tsx // 单选框
       --Tabs.tsx // Tabs切换
+      --TabPanels.tsx // Tab切换面板
 
     --Table // 表格
       --FieldSort.tsx // 表头项排序按钮
