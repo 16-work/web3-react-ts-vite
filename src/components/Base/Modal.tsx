@@ -14,6 +14,7 @@ interface Props {
   children: React.ReactNode;
 
   okText?: string; // 确认文本
+  okAuth?: boolean; // 确认按钮是否开启认证
   cancelText?: string; // 取消文本（无值不显示取消按钮）
   footer?: React.ReactNode; // 自定义底部
 }
@@ -66,6 +67,7 @@ export const Modal = (props: Props) => {
               className={`btn-primary flex justify-center items-center px-10 py-8 rounded-full font-xl
                 ${props.cancelText ? '' : 'col-span-2'}
               `}
+              auth={props.okAuth}
               isLoading={props.isLoading}
               disabled={props.disabled}
               onClick={props.onOk}
