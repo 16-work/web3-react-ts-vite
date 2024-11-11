@@ -1,1 +1,1 @@
-export type CacheKey = 'address' | 'tokens' | 'language';
+export type CacheKey = 'address' | 'tokens' | 'language' | 'usdtUnitPrice';

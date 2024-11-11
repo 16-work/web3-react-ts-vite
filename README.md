@@ -1525,6 +1525,30 @@ format.bignum('12345678910', 2, "K"); // 12.35 B
 ```
 
 ```ts
+// 代币值精度格式化
+format.token.common(代币值(数量|价格...), {
+    decimal?: 代币精度(默认18), 
+    bignumDecimal?: 格式化后小数位数, 
+    abbrOrigin?: 大于指定值后开始缩写
+})
+
+// eg.
+format.token.common(token.balance, {abbrOrigin: "M"});
+format.token.common(BigNumber(token.amount).times(token.price));
+
+// 代币价格格式化（这个请去看代码中的注释后再用）
+format.token.usdt(代币价格, {
+    decimal?: 代币精度(默认18), 
+    bignumDecimal?: 格式化后小数位数, 
+    abbrOrigin?: 大于指定值后开始缩写
+})
+
+// eg.
+format.token.usdt(token.price, { decimal: 0 }) // 请根据传入代币价格的精度变化decimal（示例price是1Token的价格，不是1Wei的价格，所以decimal为0而不是18）
+format.token.usdt(BigNumber(total.supply).times(token.price), { abbrOrigin: "K" }) // 这里supply精度是18，price精度0，所以decimal用默认值就行
+```
+
+```ts
 // 其它见@/utils/format.ts，用法都是format.xxx
 ```
 

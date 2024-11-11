@@ -59,10 +59,10 @@ export const format = {
       .join('');
   },
 
-  bignum: (value: BigNumber | number | string, decimals?: number, abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]) => {
+  bignum: (value: BigNumber | string | bigint | number, decimals?: number, abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]) => {
     if (!value || value === '0') return '0';
     // 解析输入并转换为 BigNumber
-    const strNumber = new BigNumber(parseFloat(new BigNumber(value).toFixed(36))).toString();
+    const strNumber = new BigNumber(parseFloat(BigNumber(value.toString()).toFixed(36))).toString();
     const [integralPart, decimalPart] = strNumber.split('.');
 
     // 缩写
@@ -122,7 +122,7 @@ export const format = {
         }
       }
       const sliceStr = decimalPart.slice(count, decimalPart.length);
-      if (count > 3 && BigNumber(value).lt(1)) {
+      if (count > 3 && BigNumber(value.toString()).lt(1)) {
         let currentDecimal = sliceStr.slice(0, dec).length;
         let str = '';
         while (currentDecimal < dec) {
@@ -131,7 +131,7 @@ export const format = {
         }
         decPart = `.0${format.subscript(count)}${sliceStr.slice(0, dec)}`;
         decPart = decPart + str;
-      } else if (BigNumber(value).lt(1)) {
+      } else if (BigNumber(value.toString()).lt(1)) {
         let currentDecimal = decimalPart.length;
 
         let str = '';
@@ -176,20 +176,45 @@ export const format = {
 
   token: {
     /** 将原始值转为易读值: eg. 1500000000000000000 wei -> 1.50 ether */
-    common: (value: string | bigint, decimal: number = 18, bignumDecimal: number = 4) => {
-      const str = new BigNumber(value ? value.toString() : 0).div(10 ** decimal).toString();
-      return format.bignum(str, bignumDecimal);
+    common: (
+      value: BigNumber | string | bigint | number,
+      options?: {
+        decimal?: number; // 代币精度
+        bignumDecimal?: number; // 格式化后的小数位数
+        abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
+      }
+    ) => {
+      // before
+      const decimal = options?.decimal ?? 18;
+
+      // main
+      const str = BigNumber(value.toString())
+        .div(10 ** decimal)
+        .toString();
+      return format.bignum(str, options?.bignumDecimal, options?.abbrOrigin);
     },
 
-    /** 将原始值转为美元价格 */
-    usdt: (usdtUnitPrice: string, value: bigint | string, decimal: number = 18) => {
-      const usdtValue = BigNumber(String(value))
-        .times(usdtUnitPrice)
-        .div(10 ** 12)
-        .integerValue()
-        .toString();
-      const final = new BigNumber(usdtValue ? usdtValue.toString() : 0).div(10 ** decimal).toString();
-      return format.bignum(final, 4);
+    /** 将币种价格转为美元价格 */
+    usdt: (
+      tokenPrice: BigNumber | string | bigint | number,
+      options?: {
+        decimal?: number; // tokenPrice为wei的价格时默认18
+        bignumDecimal?: number; // 格式化后的小数位数
+        abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
+      }
+    ) => {
+      // before
+      const decimal = options?.decimal ?? 18;
+      const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例的usdtUnitPrice是1Token的USDT价格，不是1Wei的USDT价格。如果usdtUnitPrice含义有变化，请自行修改decimal默认值
+
+      const value = BigNumber(tokenPrice.toString())
+        .div(10 ** decimal)
+        .times(usdtUnitPrice);
+
+      // main
+      if (value.eq(0)) return `$0`;
+      else if (options?.abbrOrigin && value.lt(0.0001)) return `<$0.0001`; // 开始缩写才显示此情况
+      return `$${format.bignum(value, options?.bignumDecimal, options?.abbrOrigin)}`;
     },
   },
 };

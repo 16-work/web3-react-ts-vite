@@ -30,6 +30,7 @@ export const useInitGlobalData = () => {
 
       /* success */
       setUsdtUnitPrice(String(res));
+      localCache.set('usdtUnitPrice', String(res));
     },
     {
       pollingInterval: 1000 * 60 * 1, // 1min 刷新美元单价
