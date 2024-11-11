@@ -23,9 +23,9 @@ export default create<TransactionStore>()(
                   return (
                     <>
                       <div className="text-success font-lg">{description}</div>
-                      <div className="link-1 mt-8 font-base underline cursor-pointer" onClick={() => tools.gotoScan(hash, chainId)}>
+                      <a href={`${tools.getScan(chainId)}/tx/${hash}`} target="_blank" className="link-1 mt-8 font-base underline cursor-pointer">
                         View on Scan
-                      </div>
+                      </a>
                     </>
                   );
                 },

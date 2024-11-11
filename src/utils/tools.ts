@@ -113,6 +113,12 @@ export const tools = {
     return Object.values(chains).find((chain) => chain.id === chainId);
   },
 
+  // 获取scan
+  getScan: (chainId: number = DEFAULT_CHAIN_CURRENT.id) => {
+    const chain = tools.getChainById(chainId);
+    return `${chain?.['blockExplorers']?.['default']['url']}`;
+  },
+
   // 跳转到scan
   gotoScan: (hash: string, chainId: number = DEFAULT_CHAIN_CURRENT.id) => {
     const chain = tools.getChainById(chainId);
