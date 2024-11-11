@@ -1,4 +1,5 @@
 import * as hooks from 'ahooks';
+import { useReactive } from 'ahooks';
 import { Options, Service, Result } from 'ahooks/lib/useRequest/src/types';
 
 /* loading -> isLoading & 调整onError位置 */
@@ -6,7 +7,13 @@ export function newUseRequest<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
   onError: Options<TData, TParams> | ((e: Error, params: any) => void) = {},
   options: Options<TData, TParams> = {}
-): Omit<Result<TData, TParams> & { isLoading: boolean }, 'loading'> {
+): Omit<Result<TData, TParams> & { isLoading: boolean; isInit: boolean }, 'loading'> {
+  /** Params */
+  const state = useReactive({
+    isInit: false,
+  });
+
+  /** Actions */
   if (typeof onError === 'function') {
     options = {
       ...options,
@@ -19,6 +26,14 @@ export function newUseRequest<TData, TParams extends any[]>(
     options = onError;
   }
 
-  const { loading, ...res } = hooks.useRequest(service, options);
-  return { ...res, isLoading: loading };
+  const { loading, ...res } = hooks.useRequest(service, {
+    ...options,
+    onFinally: (params) => {
+      state.isInit = true;
+      options.onFinally && options.onFinally(params);
+    },
+  });
+
+  /** Return */
+  return { ...res, isLoading: loading, isInit: state.isInit };
 }
