@@ -27,6 +27,7 @@
     "antd": "^5.15.3",
     "axios": "^1.6.8",
     "bignumber.js": "^9.1.2",
+    "prettier": "^3.3.3",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "events": "^3.3.0",
