@@ -1,5 +1,5 @@
 import { useConnectModal, useChainModal, useAccountModal } from '@rainbow-me/rainbowkit';
-import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
+import { useDisconnect, useSignMessage } from 'wagmi';
 import { SiweMessage } from 'siwe';
 
 /** Hook */

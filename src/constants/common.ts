@@ -24,3 +24,6 @@ export const FOOTER_LINKS: Record<string, Record<string, string>> = {
     'zh-TW': '',
   },
 };
+
+// 交易时的预估的最小gas
+export const MIN_GAS = BigNumber(0.00001).times(10 ** 18);

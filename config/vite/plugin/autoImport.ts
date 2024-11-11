@@ -25,6 +25,7 @@ export const setAutoImport = () => {
           '@/utils/localCache': ['localCache'],
           '@/utils/ahooks/index.ts': ['ahooks'],
           '@/utils/yup.ts': [['default', 'yup']],
+          '@/hooks/useAccount.ts': ['useAccount'],
           '@/utils/notification': ['toast', 'msg'],
           '@config/constants/screen.ts': ['SCREEN'],
           '@/hooks/init/useRouterFun.ts': ['router'],

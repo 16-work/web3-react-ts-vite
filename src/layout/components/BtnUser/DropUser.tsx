@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 /** Props */
 interface Props {
   onClose?: () => void;

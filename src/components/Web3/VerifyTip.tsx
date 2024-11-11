@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 /** Component */
 export const VerifyTip = () => {
   /** Retrieval */

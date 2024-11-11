@@ -1,7 +1,6 @@
 import { Popover } from 'antd';
 import { BtnConnect } from '../BtnConnect';
 import { DropUser } from './DropUser';
-import { useAccount } from 'wagmi';
 
 /** Component */
 export const BtnUser = () => {

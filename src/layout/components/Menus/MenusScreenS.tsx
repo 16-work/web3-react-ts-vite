@@ -1,5 +1,4 @@
 import { useMenus } from '@/hooks/useMenus';
-import { useAccount } from 'wagmi';
 
 /** Props */
 interface Props {

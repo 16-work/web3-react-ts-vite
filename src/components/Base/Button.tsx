@@ -1,6 +1,5 @@
 import { Button as NButton, ButtonProps } from '@nextui-org/button';
 import { To } from 'react-router-dom';
-import { useAccount } from 'wagmi';
 
 enum BtnStatus {
   CORRECT = 1,

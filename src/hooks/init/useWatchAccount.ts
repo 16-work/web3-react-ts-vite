@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 /** Hook */
 export const useWatchAccount = () => {
   /** Retrieval */

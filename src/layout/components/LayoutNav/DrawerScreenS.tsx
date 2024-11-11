@@ -1,4 +1,3 @@
-import { useAccount } from 'wagmi';
 import { BtnConnect } from '../BtnConnect';
 import { MenusScreenS } from '../Menus/MenusScreenS';
 import { DropUser } from '../BtnUser/DropUser';

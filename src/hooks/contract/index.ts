@@ -1,5 +1,5 @@
 import { DEFAULT_CHAIN_CURRENT } from '@/constants/chain';
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
+import { usePublicClient, useWalletClient } from 'wagmi';
 import { readContract } from '@wagmi/core';
 import { WAGMI_CONFIG } from '@/constants/wagmi';
 import { Address } from 'viem';

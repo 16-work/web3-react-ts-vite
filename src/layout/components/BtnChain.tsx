@@ -1,5 +1,4 @@
 import { CHAINS_ICON } from '@/constants/chain';
-import { useAccount } from 'wagmi';
 
 /** Component */
 export const BtnChain = () => {
