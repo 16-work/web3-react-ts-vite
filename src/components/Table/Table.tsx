@@ -110,7 +110,7 @@ export const Table = (props: Props) => {
       )}
 
       {/* tbody */}
-      <BoxFill className={classNames.tbody}>
+      <div className={classNames.tbody}>
         {/* rows */}
         {props.state.list.map((rowNode, rowIndex) => (
           <div key={rowIndex}>
@@ -166,7 +166,7 @@ export const Table = (props: Props) => {
 
         {/* no data */}
         {props.state.list.length === 0 && !props.state.isLoading && <NoData />}
-      </BoxFill>
+      </div>
     </div>
   );
 };
