@@ -26,7 +26,7 @@ export const useInitGlobalData = () => {
   ahooks.request(
     async () => {
       /* main */
-      const res = await api.common.getUSDTUnitPrice();
+      const res = await api.common.fetchUSDTUnitPrice();
 
       /* success */
       setUsdtUnitPrice(String(res));

@@ -10,13 +10,16 @@
 pnpm i
 ```
 
-```
-// 如需使用turbo，请执行本命令
+```cmd
+# 如需使用turbo，请执行本命令
 pnpm build:packages 
 ```
 
-```
+```cmd
 pnpm dev
+
+# 如果不知道怎么改接口（见[二.2]），换用pnpm mock，里面有一些虚拟接口
+pnpm mock
 ```
 
 **安装包：**
@@ -103,51 +106,24 @@ src
 
 
 
-#### 2.1 定义通用类型
-
-**举例：**
-
-```ts
-// src/api/types.ts
-export interface Paging {
-    /** 页数 */
-    page: number;
-    /** 页长 */
-    pageSize: number;
-}
-```
-
-
-
-#### 2.2 定义模块api
+#### 2.1 定义模块api
 
 **定义类型：**
 
 ```ts
-// src/api/user/index.ts
-import { Paging } from '../types';
-
-export interface Item {
-    id: number;
-    name: string;
-}
-
-// Paging: { page: number; pageSize: number; }
-export interface DTOGetList extends Paging {
-    keyword?: string;
+// src/api/模块名/index.ts
+export interface DTO方法名 {
+    ...
 }
 ```
 
 **编写接口：**
 
 ```ts
-// src/api/user/index.ts
-import { RDList } from '../types';
-import { DTOGetList, Item } from './types';
-
+// src/api/模块名/index.ts
 export default {
-    getList: (dto: DTOGetList) => {
-        return http.post<RDList<Item>>('/list', { ...dto });
+    方法名: (dto: DTO方法名) => {
+        return http.[method]<响应数据类型>(url, { ...dto });
     },
 };
 ```
@@ -156,24 +132,24 @@ export default {
 
 ```ts
 // src/api/index.ts
-import user from './user';
+import 模块名 from './模块名';
 
-export const api = { user };
+export const api = { 模块名 };
 ```
 
 **调用：**
 
 ```ts
-const res = await api.user.getList('tom');
-// res: {
-//     count: 1,
-//     list: [{id:1, name: 'tom'},...]
-// }
+const res = await api.模块名.方法名(参数);
 ```
 
+**举例：**
+
+示例见`@/api`目录下的common和token模块内容
 
 
-#### 2.3 编写虚拟数据
+
+#### 2.2 编写虚拟数据
 
 ```
 --mock
@@ -188,19 +164,9 @@ VITE_API_URL = '/api'
 ```
 
 ```ts
-// mock/user.mock.ts
+// mock/模块名.mock.ts
 export default [
-    mockAPI(
-        'get',
-        '/login',
-        {
-            token: 'Bearer xxxxxxxxx',
-        },
-        {
-            status: 200,
-            message: 'success',
-        }
-    ),
+    mockAPI(method, url, data, otherInfo?),
 ] as MockMethod[];
 ```
 
@@ -210,19 +176,9 @@ export default [
 pnpm mock
 ```
 
-**使用：**
+**举例：**
 
-```ts
-// src/api/user/index.ts
-import { RDList } from '../types';
-import { DTOGetList, Item } from './types';
-
-export default {
-    login: () => {
-        return http.post<string>('/login', { ...dto });
-    },
-};
-```
+示例见源码`mock`目录下的内容，和`@/api`下的内容是一一对应的。
 
 
 
