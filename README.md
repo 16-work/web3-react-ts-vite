@@ -63,14 +63,14 @@ config
 
 ```ts
 // config/env/.env.dev
-VITE_ENV = 'dev'
+VITE_ENV = 'dev' // 这个值最好不要删掉(除非你知道要改什么)
 VITE_PORT = 8888
 VITE_API_URL = 'http://dev-net.com/api'
 ```
 
 ```ts
 declare interface MetaEnv {
-    VITE_ENV: 'dev' | 'production' | 'mock';
+    VITE_ENV: 'dev' | 'production' | 'mock'; // 这个值最好不要删掉(除非你知道要改什么)
     VITE_PORT: number;
     VITE_API_URL: string;
 }
