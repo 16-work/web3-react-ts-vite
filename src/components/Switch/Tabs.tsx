@@ -5,6 +5,8 @@ interface Props {
   value: any;
   options: Option[];
   onSwitch: (tab: any) => void;
+
+  itemClassname?: string;
 }
 
 /** Component */
@@ -52,6 +54,7 @@ export const Tabs = (props: Props) => {
             key={index}
             ref={index === 0 ? colItemRef : null}
             className={`flex-align-x justify-center px-26 py-4 rounded-8 xs:text-20 md:text-18 duration-300 cursor-pointer whitespace-nowrap
+              ${props.itemClassname}
               ${item.value === props.value ? 'text-common-1' : 'text-tip-1'}    
             `}
             onClick={() => props.onSwitch(item.value)}
