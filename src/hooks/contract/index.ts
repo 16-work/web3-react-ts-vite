@@ -112,16 +112,7 @@ export default () => {
         return res;
       } catch (e) {
         console.log(e);
-
-        handleContractError(e, (error) => {
-          if (error === 'Chain not configured.') {
-            msg.warning(t('tip.switchNetwork'));
-            hooks.wallet.switchChain();
-          } else {
-            if (env.VITE_ENV !== 'production') console.log(args);
-            msg.error(error);
-          }
-        });
+        if (env.VITE_ENV !== 'production') console.log(args);
 
         return undefined;
       }
