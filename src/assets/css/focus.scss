@@ -4,17 +4,12 @@
 }
 
 .hover-primary {
-  @apply base-hover text-common-1 hover:text-primary-2;
+  @apply base-hover hover:text-primary-2;
 }
 
-.hover-second {
-  @apply base-hover text-tip-1 hover:text-common-1;
+.hover-second-1 {
+  @apply base-hover hover:text-common-1;
 }
-
-.hover-info {
-  @apply base-hover text-info-1 hover:text-info-2;
-}
-
 
 
 /* 链接 */
