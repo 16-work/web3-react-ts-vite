@@ -12,7 +12,7 @@ export const useInitGlobalData = () => {
 
   // 初始化token icons
   ahooks.asyncEffect(async () => {
-    const res = await api.common.getTokenList({ page: 1, pageSize: 9999 });
+    const res = await api.token.fetchList({ page: 1, pageSize: 9999 });
 
     const list: Record<string, string> = {};
     for (let i = 0; i < res.list.length; i++) {

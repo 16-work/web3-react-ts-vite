@@ -30,7 +30,7 @@ export const TokenIcon = (props: Props) => {
     if (!props.contract || tokenIconList[props.contract] === '' || tokenIconList[props.contract]) return;
 
     // token不存在缓存列表中，则从接口读取
-    const res = await api.common.getTokenList({ page: 1, pageSize: 1, contracts: [props.contract] });
+    const res = await api.token.fetchList({ page: 1, pageSize: 1, contracts: [props.contract] });
 
     const list: Record<string, string> = {};
     if (res.list.length === 0) {
