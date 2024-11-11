@@ -19,7 +19,11 @@ export const FieldSort = (props: Props) => {
       }}
     >
       {/* label */}
-      <span className={`select-none whitespace-nowrap ${props.isShowSortIcon ? 'cursor-pointer' : ''}`}>{props.label}</span>
+      {typeof props.label === 'string' ? (
+        <span className={`select-none whitespace-nowrap ${props.isShowSortIcon ? 'cursor-pointer' : ''}`}>{props.label}</span>
+      ) : (
+        props.label
+      )}
 
       {/* icon: sort */}
       {props.isShowSortIcon && (
