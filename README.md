@@ -1065,11 +1065,11 @@ const { run: 方法名, isLoading, task } = ahooks.lockFn(async () => {
 
 ```ts
 // @/constants/demo.ts
-export const contextInitValue: TypeContextDemo = {
+export const contextInitValue: TypeContext = {
   属性名: 默认值,
 };
 
-export type TypeContextDemo = {
+export type TypeContext = {
   属性名: 类型;
 };
 
