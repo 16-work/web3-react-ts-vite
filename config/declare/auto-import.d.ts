@@ -45,6 +45,7 @@ declare global {
   const PagerSimple: typeof import('../../src/components/Pager/PagerSimple')['PagerSimple']
   const PopoverText: typeof import('../../src/components/Popover/PopoverText')['PopoverText']
   const PopoverTip: typeof import('../../src/components/Popover/PopoverTip')['PopoverTip']
+  const Progress: typeof import('../../src/components/Base/Progress')['Progress']
   const Radio: typeof import('../../src/components/Switch/Radio')['Radio']
   const Route: typeof import('react-router-dom')['Route']
   const Routes: typeof import('react-router-dom')['Routes']

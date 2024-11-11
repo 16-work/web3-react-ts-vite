@@ -29,7 +29,7 @@
       color: rgb(var(--text-common-1));
       transition: border-color 0.3s ease; /* 添加这个属性 */
     }
-    
+
     // 页数按钮(hover状态)
     a:hover {
       border-color: rgb(var(--cus-gray-900));
@@ -233,22 +233,31 @@
 
 /* 进度条 */ 
 .ant-progress {
+  .ant-progress-outer{
+    display: block !important;
+    margin-inline-end:0 !important;
+    padding-inline-end: 0 !important;
+
+    .ant-progress-inner {
+      position: absolute;
+      top:0;
+      left:0;
+    }
+  }
+
   .ant-progress-inner {
-    height: 10px;
     overflow: visible !important;
 
+    // 进度条高度
+    height: 10px;
+
+    // 进度条边框
     border: 2px solid #000 !important;
 
     @media screen and (max-width: 750px) {
       border-width: 1px !important;
     }
     
-    // 进度文本
-    .ant-progress-text {
-      color: transparent !important;
-      @apply text-title-1;
-    }
-
     // 进度背景
     .ant-progress-bg {
       height: 100% !important;
