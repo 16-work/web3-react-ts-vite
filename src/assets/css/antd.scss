@@ -21,6 +21,7 @@
     border: none;
     background: transparent !important;
 
+    // 页数按钮(未激活)
     a {
       border-radius: 8px;
       border: 2px solid;
@@ -28,6 +29,8 @@
       color: rgb(var(--text-common-1));
       transition: border-color 0.3s ease; /* 添加这个属性 */
     }
+    
+    // 页数按钮(hover状态)
     a:hover {
       border-color: rgb(var(--cus-gray-900));
     }
@@ -35,12 +38,11 @@
 
   // 页数按钮(激活)
   .ant-pagination-item-active {
-    background: rgb(var(--cus-primary-1)) !important;
-
     a {
       border: 2px solid;
       border-color: rgb(var(--cus-gray-900));
       color: rgb(var(--text-common-1)) !important;
+      background: rgb(var(--cus-primary-1)) !important;
     }
   }
 
