@@ -42,7 +42,9 @@ interface Props {
     type?: keyof typeof tableStyleType; // 指定基础样式类型
     table?: string;
     thead?: string;
+    tbody?: string;
     row?: string;
+    hr?: string;
   };
 
   // 排序相关
@@ -68,9 +70,12 @@ export const Table = (props: Props) => {
   const styleType = props.classNames.type ?? 'base';
   const classNames = {
     type: props.classNames.type ?? 'base',
+    table: `${tableStyleType[styleType].table} ${props.classNames.table}`,
     thead: `${tableStyleType[styleType].thead} ${props.classNames.gridCols} ${props.classNames.thead}`,
+    tbody: `${tableStyleType[styleType].tbody} ${props.classNames.tbody}`,
     row: `${tableStyleType[styleType].row} ${props.classNames.row} ${props.classNames.gridCols}`,
     col: props.classNames.cols ?? {},
+    hr: `${tableStyleType[styleType].hr} ${props.classNames.hr}`,
   };
 
   const state = ahooks.reactive({
@@ -80,7 +85,7 @@ export const Table = (props: Props) => {
 
   /** Template */
   return (
-    <div className={`h-full flex flex-col overflow-hidden ${props.classNames.table}`}>
+    <div className={`h-full flex flex-col overflow-hidden ${classNames.table}`}>
       {/* thead */}
       {screenType >= SCREEN.MD && (
         <>
@@ -105,12 +110,12 @@ export const Table = (props: Props) => {
       )}
 
       {/* tbody */}
-      <BoxFill className={tableStyleType[styleType].tbody}>
+      <BoxFill className={classNames.tbody}>
         {/* rows */}
         {props.state.list.map((rowNode, rowIndex) => (
           <div key={rowIndex}>
             {/* hr */}
-            {rowIndex !== 0 && <div className={tableStyleType[styleType].hr}></div>}
+            {rowIndex !== 0 && <div className={classNames.hr}></div>}
 
             {/* row: common */}
             {!props.other?.rowTo && (
@@ -143,7 +148,7 @@ export const Table = (props: Props) => {
           Array.from({ length: screenType >= SCREEN.MD ? 4 : 2 }).map((_, index) => (
             <div key={index}>
               {/* hr */}
-              {index !== 0 && <div className={tableStyleType[styleType].hr}></div>}
+              {index !== 0 && <div className={classNames.hr}></div>}
 
               {/* skeleton */}
               <div className={classNames.row}>
