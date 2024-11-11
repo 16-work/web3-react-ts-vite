@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "commitlint": "commitlint --config commitlint.config.cjs -e -V",
     "build:packages": "turbo run build --filter=./packages/*",
-    "createi18n": "node src/constants/i18n/script/excelToLang.js"
+    "i18n": "node src/constants/i18n/script/excelToLang.js"
   },
   "dependencies": {
     "@binance/w3w-utils": "^1.1.4",

@@ -673,7 +673,7 @@ html {
 - 生成语言文件
 
   ```
-  pnpm createi18n
+  pnpm i18n
   ```
 
 **调用：**
