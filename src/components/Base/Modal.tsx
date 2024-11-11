@@ -31,6 +31,7 @@ export const Modal = (props: Props) => {
       {/* modal box */}
       <div
         className={`
+          bg-white rounded-16 shadow-xl
           ${props.hideBodyPadding ? 'pt-30' : 'p-30'}
         `}
       >

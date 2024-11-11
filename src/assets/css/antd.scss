@@ -145,8 +145,8 @@
 .ant-modal {
   .ant-modal-content {
     padding: 0 !important;
-    border-radius: 1rem !important;
-    // overflow: hidden;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 }
 
