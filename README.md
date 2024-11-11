@@ -32,6 +32,13 @@ pnpm add -w 包名
 
 
 
+> **备注：**
+>
+> - 第二、三部分的大部分内容，在源码里都有示例。
+> - 如果没有示例，且文档写的确实太模糊，可以提醒我补充下。
+
+
+
 ## 一、技术栈
 
 **基础：** React、typescript、vite
@@ -319,6 +326,14 @@ router.query.del('查询参数名')
 
 ### 4. 样式相关
 
+> **备注：**
+>
+> - 本项目绝大多数地方使用了tailwindcss来编写样式。
+> - 如果实在不爱用tailwindcss，可以换用styles，示例见`@/components/CountDown`目录内容。
+> - 用styles的话，可以不用管color.ts、sizes.ts，但SCREEN相关的部分要记得自己再调整下。
+
+
+
 #### 4.1 屏幕类型
 
 ```
@@ -512,12 +527,6 @@ html {
   ```
 
   
-
-**扩展：**
-
-实在不爱用tailwindcss，可以用styles，示例见`@/components/CountDown`目录内容。
-
-
 
 
 

@@ -1,6 +1,7 @@
 /** tailwind快捷变量(eg. bg-primary-1)
  * text属性会收录下列除second外的其它色彩
  * 其它属性(bg、border...)会收录下列所有色彩
+ * other的颜色一般不用放进来，除非你要用在tailwindcss里
  */
 
 export const cusColors = {
@@ -8,7 +9,7 @@ export const cusColors = {
     'primary-1': 'rgb(var(--cus-primary-1) , <alpha-value>)',
     'primary-2': 'rgb(var(--cus-primary-2) , <alpha-value>)',
   },
-  // second、gray、other都放这里
+  // second、gray都放这里
   second: {
     'second-1': 'rgb(var(--cus-second-1) , <alpha-value>)',
 
