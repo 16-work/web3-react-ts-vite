@@ -58,6 +58,7 @@ interface Props {
   other?: {
     rowTo?: (index: number) => To; // 行链接
     hideLoading?: boolean; // 隐藏加载图标（频繁轮询的表格使用）
+    alwaysFullyDisplay?: boolean; // 可以理解为: 是否一直展示为PC端样式
   };
 }
 
@@ -87,7 +88,7 @@ export const Table = (props: Props) => {
   return (
     <div className={`h-full flex flex-col overflow-hidden ${classNames.table}`}>
       {/* thead */}
-      {screenType >= SCREEN.MD && (
+      {(screenType >= SCREEN.MD || props.other?.alwaysFullyDisplay) && (
         <>
           <div className={classNames.thead}>
             {props.elements.labels.map((label, index) => (
@@ -121,7 +122,7 @@ export const Table = (props: Props) => {
             {!props.other?.rowTo && (
               <div className={classNames.row}>
                 {props.elements.cols(rowNode, rowIndex).map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]}>
+                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
                     {col}
                   </TCol>
                 ))}
@@ -132,7 +133,7 @@ export const Table = (props: Props) => {
             {props.other?.rowTo && (
               <Link to={props.other?.rowTo(rowIndex)} className={`${classNames.row} cursor-pointer`}>
                 {props.elements.cols(rowNode, rowIndex).map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]}>
+                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
                     {col}
                   </TCol>
                 ))}
@@ -153,7 +154,7 @@ export const Table = (props: Props) => {
               {/* skeleton */}
               <div className={classNames.row}>
                 {props.elements.skeletons.map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]}>
+                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
                     {col}
                   </TCol>
                 ))}
