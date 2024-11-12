@@ -24,7 +24,7 @@ export const VerifyTip = () => {
   /** Template */
   return (
     <div ref={componentRef}>
-      <span className="font-2xl text-common-1">{t('tip.unauthorized')}</span>
+      <span className="text-common-1 font-2xl">{t('tip.unauthorized')}</span>
       {hooks.wallet.verify && (
         <Button
           fullWidth

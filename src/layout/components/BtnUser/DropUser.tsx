@@ -65,7 +65,7 @@ interface ItemProps {
 const Item = (props: ItemProps) => {
   /** Template */
   return (
-    <div className={`hover-primary flex-align-x py-6 text-18 text-tip-1 ${props.className}`} onClick={props.onClick}>
+    <div className={`flex-align-x py-6 text-18 text-tip-1 hover-primary ${props.className}`} onClick={props.onClick}>
       {/* icon */}
       <Svg name={props.icon} className="w-20" />
       {/* label */}

@@ -34,7 +34,7 @@ export const Tabs = (props: Props) => {
 
   /** Template */
   return (
-    <div className="relative w-fit p-6 rounded-8">
+    <div className="w-fit relative p-6 rounded-8">
       {/* active bg */}
       <div
         className="absolute position-center-v z-0 bg-primary-1 rounded-8 duration-300"

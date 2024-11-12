@@ -51,7 +51,7 @@ export const TokenIcon = (props: Props) => {
   /** Template */
   return (
     <Img
-      className={`${className} rounded-full`}
+      className={`${className}`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}
       defaultImg="token"

@@ -29,7 +29,7 @@ export const BtnChain = () => {
           {!account.chain && (
             <>
               {/* icon */}
-              <Svg name="wrong-network" className="w-28 text-stress-1 mr-8" />
+              <Svg name="wrong-network" className="w-28 mr-8 text-stress-1" />
 
               {/* name */}
               <span className="xs:max-w-100 md:max-w-fit text-stress-1 font-xl ellipsis-1">{t('account.wrongNetwork')}</span>

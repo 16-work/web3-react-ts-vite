@@ -5,17 +5,19 @@ import { To } from 'react-router-dom';
 const tableStyleType = {
   // 基础表格样式
   base: {
-    table: `rounded-20`,
+    table: `h-full flex flex-col overflow-hidden 
+            rounded-20`,
     thead: `grid 
             gap-x-20 py-15 
             border-b-2 border-black 
             text-common-1 font-lg`,
-    tbody: `relative xs:min-h-200 md:min-h-250
+    tbody: `xs:min-h-200 md:min-h-250 relative 
             `,
-    row: `grid xs:items-start md:items-center overflow-hidden duration-300 
+    row: `grid xs:items-start md:items-center overflow-hidden
           gap-x-20 gap-y-10 xs:py-25 md:py-15 
           md:hover:bg-black/10 
-          text-common-1 font-lg text-center`,
+          text-common-1 font-lg text-center 
+          duration-300`,
     hr: `hr-1`,
   },
 };
@@ -86,7 +88,7 @@ export const Table = (props: Props) => {
 
   /** Template */
   return (
-    <div className={`h-full flex flex-col overflow-hidden ${classNames.table}`}>
+    <div className={`${classNames.table}`}>
       {/* thead */}
       {(screenType >= SCREEN.MD || props.other?.alwaysFullyDisplay) && (
         <>

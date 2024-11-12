@@ -32,12 +32,12 @@ export const Drawer = (props: Props) => {
         ${placement === 'bottom' ? 'rounded-t-20' : ''}
       `}
     >
-      <div className={`flex flex-col h-full ${props.hidePadding ? '' : 'p-30'}`}>
+      <div className={`h-full flex flex-col ${props.hidePadding ? '' : 'p-30'}`}>
         {/* header */}
         {!props.hideHeader && (
           <div
             className={`flex items-center justify-between mb-30 text-28
-            ${props.hidePadding ? 'mx-30 mt-30' : ''}
+            ${props.hidePadding ? 'mt-30 mx-30' : ''}
           `}
           >
             {/* title */}

@@ -32,13 +32,13 @@ export const CountDownFlip = (props: Props) => {
         <div className="absolute position-center flex-align-x text-common-1 font-2xl">
           {/* h */}
           <FlipUnit time={d * 24 + h} type="h" />
-          <span className="-mb-4 ml-10 mr-20 font-4xl">{t('common.h')}</span>
+          <span className="-mb-4 ml-10 mr-20 font-2xl">{t('common.h')}</span>
           {/* m */}
           <FlipUnit time={m} type="m" />
-          <span className="-mb-4 ml-10 mr-20 font-4xl">{t('common.m')}</span>
+          <span className="-mb-4 ml-10 mr-20 font-2xl">{t('common.m')}</span>
           {/* s */}
           <FlipUnit time={s} type="s" />
-          <span className="-mb-4 ml-10 font-4xl">{t('common.s')}</span>
+          <span className="-mb-4 ml-10 font-2xl">{t('common.s')}</span>
         </div>
       )}
     />
@@ -107,7 +107,7 @@ const FlipUnit = (props: FlipUnitProps) => {
       </div>
 
       {/* line */}
-      <span className="inline-block w-full h-2 bg-black absolute position-center"></span>
+      <span className="inline-block w-full h-1 absolute position-center bg-black"></span>
 
       {/* point: left */}
       <span className="inline-block w-4 h-8 absolute position-center-v -left-2 bg-second-300 rounded-10 shadow-2xl"></span>

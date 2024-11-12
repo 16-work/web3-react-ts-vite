@@ -25,7 +25,7 @@ export const Copy = (props: Props) => {
 
       <Svg
         name="copy"
-        className={`hover-primary -mt-2 ${iconClassName}`}
+        className={`-mt-2 hover-primary ${iconClassName}`}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

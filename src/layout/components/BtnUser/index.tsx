@@ -15,7 +15,7 @@ export const BtnUser = () => {
       {account.address && (
         <Popover placement="bottomRight" trigger={[isPC ? 'hover' : 'contextMenu']} content={<DropUser />}>
           <Button
-            className="btn-primary xs:w-full md:w-fit layout-nav-btn-h px-16 rounded-8 font-base"
+            className="btn-primary layout-nav-btn-h xs:w-full md:w-fit px-16 rounded-8 font-base"
             onClick={() => {
               if (screenType < SCREEN.MD && account.address) tools.copy(account.address);
             }}

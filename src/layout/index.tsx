@@ -18,7 +18,7 @@ export const Layout = () => {
         {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
 
         <div id="drawer-root" className="relative flex-1 overflow-hidden">
-          <Scrollbar autoHeight={false} className="scroll-box absolute w-full h-full" onHitBottom={(v) => setIsHitBottom(v)}>
+          <Scrollbar autoHeight={false} className="scroll-box w-full h-full absolute" onHitBottom={(v) => setIsHitBottom(v)}>
             {/* animation */}
             <div className="page-min-h">
               <AnimationRoute>

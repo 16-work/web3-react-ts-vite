@@ -4,7 +4,7 @@
 export const Loading = () => {
   /** Template */
   return (
-    <span className="position-center absolute">
+    <span className="absolute position-center">
       <Svg name="spin" className="w-28 text-primary-1 animate-spin origin-center" />
     </span>
   );

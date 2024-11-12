@@ -6,7 +6,7 @@ import { DrawerScreenS } from './DrawerScreenS';
 export const NavScreenS = () => {
   /** Template */
   return (
-    <div className="layout-nav-w h-60 !mt-20 !mb-40 z-[5] flex-align-x justify-between">
+    <div className="layout-nav-w h-60 relative top-0 z-[5] flex-align-x justify-between mt-20 mb-40">
       {/* logo */}
       <BoxLogo />
 

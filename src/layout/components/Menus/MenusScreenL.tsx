@@ -11,7 +11,7 @@ export const MenusScreenL = () => {
       {menus.map((item) => (
         <Link
           key={item.id}
-          className={`hover-primary relative duration-300 cursor-pointer font-xl
+          className={`relative hover-primary font-xl duration-300 cursor-pointer 
             ${item.id === state.activeMenuId ? '!text-primary-1' : ''}
           `}
           to={item.path}

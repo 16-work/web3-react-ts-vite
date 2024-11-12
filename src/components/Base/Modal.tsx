@@ -55,10 +55,10 @@ export const Modal = (props: Props) => {
         {props.footer ? (
           props.footer
         ) : (
-          <div className="grid grid-cols-2 gap-x-20 text-20">
+          <div className="grid grid-cols-2 gap-x-20">
             {/* btn: cancel */}
             {props.cancelText && (
-              <Button className="btn-second px-10 py-8 rounded-full font-2xl" onClick={props.onClose}>
+              <Button className="btn-second-1 px-10 py-8 rounded-full font-2xl" onClick={props.onClose}>
                 {props.cancelText}
               </Button>
             )}

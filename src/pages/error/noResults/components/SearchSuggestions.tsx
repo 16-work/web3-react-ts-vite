@@ -10,7 +10,7 @@ export const SearchSuggestions = () => {
   return (
     <div className="w-full flex flex-col mt-100">
       {/* title */}
-      <h3 className="text-common-1 font-2xl text-title-1">
+      <h3 className="text-title-1 font-2xl">
         {t('common.search')}
         {t('common.suggestions')}
       </h3>

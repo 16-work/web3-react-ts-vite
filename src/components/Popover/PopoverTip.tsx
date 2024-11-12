@@ -26,7 +26,7 @@ export const PopoverTip = (props: Props) => {
         <div className="inline-block xs:max-w-300 md:max-w-600 max-h-300 px-10 pt-10 text-common-1 font-base break-words overflow-auto">{props.tip}</div>
       }
     >
-      <span className="hover-primary inline-block cursor-pointer">
+      <span className="inline-block text-tip-1 hover-primary cursor-pointer">
         <Svg
           name="tip"
           className={`${iconClassName}`}

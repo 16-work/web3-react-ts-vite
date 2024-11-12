@@ -20,7 +20,7 @@ export const AllDataScrollLoad = (props: Props) => {
 
   /** Params */
   const rowClassName = `
-    relative grid  items-center 
+    relative grid items-center 
     px-20 py-10 md:hover:bg-black/10 duration-300 
     text-common-1 font-lg text-center`;
 

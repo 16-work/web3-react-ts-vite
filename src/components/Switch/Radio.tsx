@@ -16,12 +16,12 @@ export const Radio = (props: Props) => {
     <span className={`flex items-center cursor-pointer select-none ${props.className}`} onClick={() => props.setValue(!props.value)}>
       {/* icon */}
       <span
-        className={`relative w-18 h-18 -mt-3 border rounded-full duration-300
+        className={`w-18 h-18 relative -mt-3 border rounded-full duration-300
           ${props.value ? 'border-second-300' : 'border-gray-100'}
         `}
       >
         <span
-          className={`absolute position-center w-10 h-10 rounded-full duration-300
+          className={`w-10 h-10 absolute position-center rounded-full duration-300
             ${props.value ? 'bg-second-300' : 'bg-transparent'}
           `}
         ></span>

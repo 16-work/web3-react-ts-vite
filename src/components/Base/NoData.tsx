@@ -14,7 +14,7 @@ export const NoData = (props: { tip?: string; extra?: ReactNode; className?: str
   return (
     <div className={`absolute z-0 position-center flex-align-y ${props.className}`}>
       {/* icon */}
-      <div className="relative inline-block xs:w-120 md:w-150 xs:h-100 md:h-120 overflow-hidden">
+      <div className="inline-block xs:w-120 md:w-150 xs:h-100 md:h-120 relative overflow-hidden">
         <Lottie name="no-data" className="w-full absolute position-center -mt-10" />
       </div>
 

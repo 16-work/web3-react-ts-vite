@@ -16,15 +16,15 @@ export const PageNoResults = () => {
       </div>
 
       {/* main */}
-      <div className="relative xs:w-full md:w-840 m-auto page-min-h flex-align-y justify-center mt-26">
+      <div className="page-min-h xs:w-full md:w-840 relative flex-align-y justify-center mx-auto mt-26">
         {/* title */}
-        <h3 className="xs:text-40 md:text-34 text-title-1 text-center mb-20">
+        <h3 className="mb-20 text-title-1 xs:text-40 md:text-34 text-center">
           {t('common.search')}
           {t('common.results')}
         </h3>
 
         {/* search bar */}
-        <InputSearch value="" onChange={() => {}} onSearch={() => {}} />
+        <InputSearch value="" onSearch={() => {}} />
 
         {/* no exists */}
         <p className="mt-30 text-tip-1 font-lg text-center">{t('tip.noFound', { keyword: router.query.get('keyword') })}</p>

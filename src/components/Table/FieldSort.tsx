@@ -27,7 +27,7 @@ export const FieldSort = (props: Props) => {
 
       {/* icon: sort */}
       {props.isShowSortIcon && (
-        <div className="relative h-18 ml-5">
+        <div className="h-18 relative ml-5">
           <Svg
             name="sort-asc"
             className={`w-10 absolute top-0 left-0 cursor-pointer ${props.sort === 'asc' ? 'text-primary-2' : 'text-common-1'}`}

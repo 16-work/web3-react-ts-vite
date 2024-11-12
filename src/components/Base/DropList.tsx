@@ -54,7 +54,7 @@ export const DropList = (props: Props) => {
       overlayStyle={{ minWidth: parentWidth }}
       content={
         props.options.length ? (
-          <div className="max-h-300 overflow-auto grid grid-cols-1">
+          <div className="max-h-300 grid grid-cols-1 overflow-auto">
             {props.options.map((option, index) => (
               <div
                 onClick={() => {
@@ -62,9 +62,8 @@ export const DropList = (props: Props) => {
                   setOpen(false);
                 }}
                 key={index}
-                className={`hover-primary px-20 font-base 
+                className={`px-20 text-common-1 hover-primary font-base 
                     ${props.value === option.value || props.value === option ? 'bg-primary-1 !text-common-1' : ''}
-
                     ${index === 0 ? '' : 'border-t-2 border-gray-900'}
                   `}
               >
@@ -72,12 +71,12 @@ export const DropList = (props: Props) => {
                 {/* {index !== 0 && <div className="hr-1"></div>} */}
 
                 {/* option */}
-                <span className={`block w-full group py-10`}>{(props.cusOption && props.cusOption(option, index)) ?? option.label}</span>
+                <span className={`group block w-full py-10`}>{(props.cusOption && props.cusOption(option, index)) ?? option.label}</span>
               </div>
             ))}
           </div>
         ) : (
-          <div className="relative h-150">
+          <div className="h-150 relative">
             <NoData />
           </div>
         )
@@ -87,7 +86,7 @@ export const DropList = (props: Props) => {
         ref={parentRef}
         id={props.triggerId}
         onClick={() => setOpen(true)}
-        className={`w-fit flex-align-x justify-between rounded-8 cursor-pointer hover:text-common-1 duration-300 ${props.triggerClassName}`}
+        className={`w-fit flex-align-x justify-between rounded-8 hover:text-common-1 cursor-pointer duration-300 ${props.triggerClassName}`}
       >
         {/* current value */}
         {props.children}

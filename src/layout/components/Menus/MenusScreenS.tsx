@@ -30,7 +30,7 @@ export const MenusScreenS = (props: Props) => {
       {menusHook.menus.map((item, index) => (
         <Link
           key={item.id}
-          className={`relative hover:text-primary-1 font-3xl duration-300 cursor-pointer
+          className={`relative hover-primary font-3xl
             ${item.id === menusHook.state.activeMenuId ? 'text-primary-1' : 'text-tip-1'}
             ${index === 0 ? 'mt-0' : 'mt-20'}
           `}

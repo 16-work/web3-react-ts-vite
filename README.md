@@ -623,6 +623,65 @@ html {
 
 
 
+#### 4.8 样式规范
+
+- 有多个尺寸时，按左小右大的顺序编写样式
+
+  ```ts
+  // 举例：正确
+  className="xs:w-100 md:w-50"
+  
+  // 举例：错误
+  className="md:w-50 xs:w-100"
+  ```
+
+- 非公共样式且内含变量的部分最好带一个标识类名，便于调试。公共样式如果希望不太容易被认出项目风格，可以不加标识类名。
+
+- className请尽量按照以下顺序编写（增加可读性）
+
+  ```tsx
+  className="标识类名 
+    不可改类名(无论如何该样式必须用到的类名)
+    公共类名
+    group 显示模式
+    宽高 
+    定位 translate
+    flex/grid
+    margin、pading（上、下、左、右）
+    边框 背景 圆角 阴影
+    文本(字色、字号、粗细、其它文本类)
+    其它
+    动态类名
+  "
+  
+  // 举例
+  className="page-home 
+    overflow-hidden 
+    box-1
+    group block
+    min-h-250 
+    relative translate-y-1/2
+    flex-align-y gap-y-10
+    mt-20 mb-20
+    border-1 group-hover:border-2 bg-black hover:bg-white round-20 shadow-lg
+    text-common-1 hover-primary
+    duration-300 
+    ${props.className}
+  "
+  ```
+
+- 尽量全部使用主题内的颜色（否则后续一旦有换主题的需求，又要改一遍）
+
+  ```scss
+  // 举例：建议
+  background: rgb(var(--cus-gray-900));
+  
+  // 举例：不建议
+  background: #333;
+  ```
+
+  
+
 ### 5. 多语言
 
 #### 5.1 基础使用

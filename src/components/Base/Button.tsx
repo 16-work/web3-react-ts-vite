@@ -63,7 +63,7 @@ export const Button = (props: Props) => {
           {...params}
           disabled={btnStatus === BtnStatus.CORRECT && props.disabled}
           className={`
-            flex-align-x h-fit px-0 outline-none 
+            h-fit flex-align-x px-0 outline-none 
             ${props.className} 
             ${btnStatus === BtnStatus.CORRECT && (props.disabled || props.isLoading) ? 'opacity-30 cursor-not-allowed' : ''} 
           `}
@@ -76,7 +76,7 @@ export const Button = (props: Props) => {
           {props.isLoading && <Svg name="spin" className="w-20 ml-10 animate-spin origin-center" />}
 
           {/* mask */}
-          <span className="absolute w-full h-full bg-transparent hover:bg-white/10 duration-300"></span>
+          <span className="w-full h-full absolute bg-transparent hover:bg-white/10 duration-300"></span>
         </NButton>
       )}
 
@@ -85,7 +85,7 @@ export const Button = (props: Props) => {
         <Link
           to={props.to}
           className={`
-            relative flex-align-x justify-center w-fit h-fit px-0 outline-none overflow-hidden
+            w-fit h-fit relative flex-align-x justify-center px-0 outline-none overflow-hidden
             ${props.className} 
             ${props.disabled || props.isLoading ? 'opacity-30 cursor-not-allowed' : ''} 
           `}
@@ -96,7 +96,7 @@ export const Button = (props: Props) => {
           {props.isLoading && <Svg name="spin" className="w-20 ml-10 animate-spin origin-center" />}
 
           {/* mask */}
-          <span className="absolute w-full h-full top-0 left-0 bg-transparent hover:bg-white/10 duration-300"></span>
+          <span className="w-full h-full absolute top-0 left-0 bg-transparent hover:bg-white/10 duration-300"></span>
         </Link>
       )}
     </>

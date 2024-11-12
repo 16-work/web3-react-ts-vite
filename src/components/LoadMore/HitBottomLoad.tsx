@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 /** Props */
 interface Props {
@@ -31,12 +31,12 @@ export const HitBottomLoad = (props: Props) => {
 
       {/* loading & no more */}
       {props.list.length > 0 && (
-        <div className="relative min-h-30">
+        <div className="min-h-30 relative">
           {/* loading */}
           {props.isLoading && <Loading />}
 
           {/* no more */}
-          {!props.isLoading && props.total <= props.list.length && <div className="mt-30 text-common-1 text-center">{t("tip.nothingMore")}</div>}
+          {!props.isLoading && props.total <= props.list.length && <div className="mt-30 text-common-1 text-center">{t('tip.nothingMore')}</div>}
         </div>
       )}
     </div>

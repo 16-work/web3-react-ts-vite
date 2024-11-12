@@ -53,13 +53,13 @@ export const LayoutFooter = () => {
         >
           {icons.map((item) => (
             <a key={item.label} href={item.href} target="_blank">
-              <Svg name={item.icon} className="xs:w-50 md:w-40 hover-primary text-common-1" />
+              <Svg name={item.icon} className="xs:w-50 md:w-40 text-common-1 hover-primary" />
             </a>
           ))}
         </div>
 
         {/* copyright */}
-        <p className="mt-10 text-tip-1 text-center">
+        <p className="mt-10 text-tip-1 font-base text-center">
           © 2024 {env.VITE_APPNAME}
           {t('common.allRightsReserved')}
         </p>
