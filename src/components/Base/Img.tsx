@@ -4,31 +4,33 @@ import IconDefaultToken from '@/assets/img/common/token-default.png';
 /** Props */
 interface Props {
   src: string;
-  className?: string;
-  preview?: boolean;
-  defaultImg?: 'empty' | 'token';
-  hideSkeleton?: boolean;
+  className: string;
+
+  preview?: boolean; // 是否预览
+  defaultImg?: string | 'empty' | 'token'; // 默认图片
+  hideSkeleton?: boolean; // 是否隐藏骨架屏
   alt?: string;
 }
 
 /** Component */
 export const Img = (props: Props) => {
   /** Params */
-  const { defaultImg: defaultImgType, hideSkeleton, className, ...aImgProps } = props;
+  const { defaultImg, hideSkeleton, className, ...aImgProps } = props;
 
   const state = ahooks.reactive({
     isLoading: true,
     isError: false,
   });
 
-  const defaultImg = useMemo(() => {
-    if (!props.defaultImg || props.defaultImg === 'empty') return 'empty';
+  const defaultImgURL = useMemo(() => {
+    if (!props.defaultImg || props.defaultImg === 'empty') return '';
     else if (props.defaultImg === 'token') return IconDefaultToken;
+    else return props.defaultImg;
   }, [props.defaultImg]);
 
   const sizeClassName = useMemo(() => {
     // 读取w、h、rounded相关属性
-    return props.className?.match(/\b(w|h|m|rounded)\S*/g)?.join(' ');
+    return props.className.match(/\b(w|h|m|rounded)\S*/g)?.join(' ');
   }, [props.className]);
 
   /** Template */
@@ -44,7 +46,7 @@ export const Img = (props: Props) => {
       )}
 
       {/* img: empty */}
-      {!state.isLoading && defaultImg === 'empty' && state.isError && (
+      {!state.isLoading && !defaultImgURL && state.isError && (
         <span
           className={`inline-block shrink-0 bg-transparent
             ${sizeClassName} 
@@ -53,18 +55,22 @@ export const Img = (props: Props) => {
       )}
 
       {/* img */}
-      <AImage
-        {...aImgProps}
-        rootClassName={state.isLoading ? 'w-0 h-0' : props.className}
-        className={state.isLoading ? 'hidden' : 'w-full !h-full'}
-        preview={props.preview ?? false}
-        fallback={defaultImg}
-        onLoad={() => (state.isLoading = false)}
-        onError={() => {
-          state.isLoading = false;
-          state.isError = true;
-        }}
-      />
+      {(!state.isError || (state.isError && defaultImgURL)) && (
+        <AImage
+          {...aImgProps}
+          rootClassName={state.isLoading ? 'w-0 h-0' : props.className}
+          className={state.isLoading ? 'hidden' : 'w-full !h-full'}
+          preview={props.preview ?? false}
+          fallback={defaultImgURL}
+          onLoad={() => {
+            state.isLoading = false;
+          }}
+          onError={() => {
+            state.isLoading = false;
+            state.isError = true;
+          }}
+        />
+      )}
     </>
   );
 };
