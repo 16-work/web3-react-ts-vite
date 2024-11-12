@@ -40,8 +40,9 @@ $theme-name: 'theme-light-blue';
   --text-tip-1: var(--cus-gray-500);
 }
 
-// 其它（这里的颜色如果不需要放在color.ts，可以不用写为r, g, b的格式）
+// 其它（这里的颜色如果不需要放在color.ts，颜色格式可随意）
 .other {
+  --cus-skeleton: 0, 0, 0;
   --cus-scrollbar: rgba(0, 0, 0, 0.15);
 }
 
