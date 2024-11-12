@@ -1369,6 +1369,8 @@ useEffect(() => {
 
 ### 1. 通用组件
 
+#### 1.1 公共组件概览
+
 ```ts
 --src
   --components // 该目录下的组件(除Feature内的)都会被收录到auto-import里
@@ -1441,7 +1443,59 @@ useEffect(() => {
 
 
 
-**Table组件示例：**
+#### 1.2 表格组件
+
+**简单示例：**
+
+```ts
+/* Constants*/
+const classNames = {
+  gridCols: 'xs:grid-cols-2 md:grid-cols-3',
+  cols: { 0: 'xs:col-span-2 md:col-span-1' },
+  thead: 'px-40',
+  row: 'px-40',
+};
+
+/** Component */
+export const TableSample = () => {
+  /** Retrieval */
+
+  /** Params */
+  const state = ahooks.reactive({
+    list: [
+      { id: 1, name: 'Tom', age: 18 },
+      { id: 2, name: 'Amy', age: 20 },
+    ],
+    isInit: false,
+    isLoading: false,
+  });
+
+  /** Actions */
+
+  /** Template */
+  return (
+    <Table
+      state={state}
+      elements={{
+        labels: ['Id', 'Name', 'Age'],
+        cols: (item) => [<span>{item.id}</span>, <span>{item.name}</span>, <span>{item.age}</span>],
+        skeletons: [<Skeleton className="w-100 h-25" />, <Skeleton className="w-100 h-25" />, <Skeleton className="w-100 h-25" />],
+      }}
+      sort={{
+        sortFields: { 0: 'id', 2: 'age' },
+        onSort: (field, sort) => {
+          state.list.sort(tools.compare(field, sort));
+        },
+      }}
+      classNames={classNames}
+    />
+  );
+};
+```
+
+**拆分示例：**
+
+如果表格内容比较复杂，不想挤一个文件里，可以类似下面这样拆分
 
 ```tsx
 // .../Table/index.tsx
