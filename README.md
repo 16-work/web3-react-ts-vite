@@ -1312,7 +1312,9 @@ useEffect(() => {
 
 ```ts
 --src
-  --components
+  --components // 该目录下的组件(除Feature内的)都会被收录到auto-import里
+    --Feature // 通用业务组件目录(该目录下的组件不会被收录到auto-import里)
+    
     --Animation // 动画组件
       --AnimationNum.tsx // 数字滚动
       --AnimationRoute.tsx // 路由动画
