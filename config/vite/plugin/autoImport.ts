@@ -37,7 +37,7 @@ export const setAutoImport = () => {
       ],
 
       // 需要自动引入的自定义组件位置(只自动引入公共组件)
-      dirs: ['src/components/**/**.tsx'],
+      dirs: ['src/components/**/**.tsx', '!src/components/Feature/**/**.tsx'],
 
       // 声明文件位置
       dts: 'config/declare/auto-import.d.ts',
