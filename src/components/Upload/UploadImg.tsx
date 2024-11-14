@@ -74,7 +74,7 @@ export const UploadImg = (props: Props) => {
         <Img src={props.img ?? ImgUpload} className="w-fit h-full" defaultImg="token" />
       ) : (
         // 无图
-        <div className="flex-align-y">
+        <div className="w-full h-full flex-align-y">
           <Img src={ImgUpload} className="xs:w-140 md:w-90 xs:h-140 md:h-90" />
           <span className="mt-12 text-common-1 font-lg">{t('tip.dragFile')}</span>
           <span className="text-tip-1 font-sm">{t('tip.fileType')}</span>
