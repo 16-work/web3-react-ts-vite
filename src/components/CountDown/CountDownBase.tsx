@@ -4,8 +4,8 @@ import { ReactNode } from 'react';
 /** Props */
 interface Props {
   time: { start: number; end: number };
-  onLive: () => void;
-  onEnd: () => void;
+  onLive?: () => void;
+  onEnd?: () => void;
   children?: (d: number, h: number, m: number, s: number) => ReactNode;
 }
 
