@@ -1,17 +1,16 @@
 import { DEFAULT_CHAIN_CURRENT } from '@/constants/chain';
-import { usePublicClient, useWalletClient } from 'wagmi';
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 import { readContract } from '@wagmi/core';
 import { WAGMI_CONFIG } from '@/constants/wagmi';
 import { Address } from 'viem';
 import { ContractFunctionRevertedError, TransactionExecutionError } from 'viem';
 import { t } from 'i18next';
 import { Task } from '@/store/global/types';
+import { multicall as wagmiMulticall } from '@wagmi/core';
 
 interface BaseParams {
-  contractConfig: {
-    address: Addresses;
-    abi: any[];
-  };
+  address: Address | Addresses;
+  abi: any[];
   functionName: string;
   args: any[];
 }
@@ -42,18 +41,15 @@ export default () => {
         callback?: () => void;
       }
     ) => {
-      const { contractConfig, functionName, args, value, message, callback } = params;
+      const { message, callback, ...otherParams } = params;
 
       try {
         task.status = 0;
 
         const res = await publicClient?.simulateContract({
-          address: getContractAddress(contractConfig.address, account.chainId),
-          abi: contractConfig.abi,
+          ...otherParams,
+          address: typeof params.address === 'string' ? params.address : getContractAddress(params.address, account.chainId),
           account: account.address as `0x${string}`,
-          functionName,
-          args,
-          value,
         });
 
         let hash;
@@ -85,7 +81,7 @@ export default () => {
             msg.warning(t('tip.switchNetwork'));
             hooks.wallet.switchChain();
           } else {
-            if (env.VITE_ENV !== 'production') console.log(args);
+            if (env.VITE_ENV !== 'production') console.log(otherParams);
             msg.error(error);
           }
         });
@@ -99,20 +95,16 @@ export default () => {
   // 读合约
   const read = useCallback(
     async (params: BaseParams) => {
-      const { contractConfig, functionName, args } = params;
-
       try {
         const res = await readContract(WAGMI_CONFIG, {
-          address: getContractAddress(contractConfig.address, account.chainId),
-          abi: contractConfig.abi,
-          functionName,
-          args,
+          ...params,
+          address: typeof params.address === 'string' ? params.address : getContractAddress(params.address, account.chainId),
         });
 
-        return res;
+        return res as any;
       } catch (e) {
         console.log(e);
-        if (env.VITE_ENV !== 'production') console.log(args);
+        if (env.VITE_ENV !== 'production') console.log(params);
 
         return undefined;
       }
@@ -120,8 +112,33 @@ export default () => {
     [publicClient, account.address, walletClient, submitTransaction, account.chainId]
   );
 
+  // 批量请求
+  const multicall = useCallback(
+    async (params: BaseParams[]) => {
+      const contracts = params.map((param) => {
+        return {
+          ...param,
+          address: typeof param.address === 'string' ? param.address : getContractAddress(param.address, account.chainId),
+        };
+      });
+
+      try {
+        const res: any[] = await wagmiMulticall(WAGMI_CONFIG, {
+          contracts,
+        });
+
+        return res.map((i) => i.result);
+      } catch (e) {
+        console.log(e);
+
+        return [];
+      }
+    },
+    [publicClient, account.address, walletClient, submitTransaction, account.chainId]
+  );
+
   /** Return */
-  return { write, read };
+  return { write, read, multicall };
 };
 
 /** Functions */

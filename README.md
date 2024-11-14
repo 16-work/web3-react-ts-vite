@@ -449,7 +449,7 @@ html {
 ```scss
 // 版心(这里最好别加margin-y，防止有些奇怪的地方要用w时还得!my)
 .w {
-  @apply pc-min-w xs:w-full relative z-[1] mx-auto 
+  @apply xs:w-full pc-min-w relative z-[1] mx-auto 
          md:max-w-??? xs:px-??? md:px-???;
 }
 // 顶部导航版心
@@ -1257,7 +1257,7 @@ import { contracts } from '@/constants/contracts';
 export const use合约名 = () => {
   /** Params */
   const contractConfig = {
-    address: contracts.合约名,
+    address: contracts.合约名 | Address, // address也可以传普通的合约地址(不会根据chainId变化)
     abi: ABI名,
   };
 
@@ -1278,9 +1278,9 @@ export const use合约名 = () => {
   
   /** Actions */
   // 写合约 (stateMutability = 'nonpayable' | 'payable')
-  const writeFunc = (params: { 参数1: any, 参数n: any }, value?: bigint) => {
-    return hooks.contract.write({
-      contractConfig,
+  const writeFunc = (task: Task, params: { 参数1: any, 参数n: any }, value?: bigint) => {
+    return hooks.contract.write(task, {
+      ...contractConfig,
       functionName: 'functionName', // 见合约方法的name
       args: [params.参数1, params.参数n], // 见inputs
       value, // stateMutability: 'payable' 时需要传入该参数
@@ -1290,16 +1290,36 @@ export const use合约名 = () => {
   // 读合约 (stateMutability = 'view')
   const readFunc = async (params: { 参数1: any, 参数n: any }) => {
     const res = await hooks.contract.read({
-      contractConfig,
+      ...contractConfig,
       functionName: 'functionName', // 见合约方法的name
       args: [params.参数1, params.参数n], // 见inputs
     });
 
     return res;
   };
+    
+  // 批量请求
+  const multicallFunc = async (args: any[]) => {
+    const res = await hooks.contract.multicall([
+      {
+        ...contractConfig,
+        functionName: 'functionName1',
+        args,
+      },
+      // 下面的address就是普通的合约地址
+      {
+        address: '0x...',
+        abi: ABIDemo,
+        functionName: 'functionName2',
+        args,
+      },
+    ]);
+
+    return res;
+  };
 
   /** Return */
-  return { writeFunc, readFunc };
+  return { writeFunc, readFunc, multicallFunc };
 };
 ```
 
@@ -1315,14 +1335,14 @@ await 合约方法()
 ```tsx
 const { 写合约方法名 } = use合约名();
 const { run, task } = ahooks.lockFn(async () => {
-    await 写合约方法名(task);
+    await 写合约方法名(task, { 参数1: 1, 参数n: 'n' });
 });
 ```
 
 ```ts
 const 写合约方法名 = (task: Task, params: { 参数1: any, 参数n: any }, value?: bigint) => {
   return hooks.contract.write(task, {
-    contractConfig,
+    ...contractConfig,
     functionName: 'functionName',
     args: [params.参数1, params.参数n],
     value,

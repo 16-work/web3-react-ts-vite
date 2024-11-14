@@ -1,6 +1,7 @@
 import { ABIDemo } from '@/constants/abi/demo';
 import { contracts } from '@/constants/contracts';
 import { Task } from '@/store/global/types';
+import { Address } from 'viem';
 
 /** Hook */
 export const useABIDemo = () => {
@@ -13,7 +14,7 @@ export const useABIDemo = () => {
   /** Actions */
   const writeFunc = (task: Task, args: any[], value?: bigint) => {
     return hooks.contract.write(task, {
-      contractConfig,
+      ...contractConfig,
       functionName: 'functionName',
       args,
       value,
@@ -22,7 +23,7 @@ export const useABIDemo = () => {
 
   const readFunc = async (args: any[]) => {
     const res = await hooks.contract.read({
-      contractConfig,
+      ...contractConfig,
       functionName: 'functionName',
       args,
     });
@@ -30,6 +31,21 @@ export const useABIDemo = () => {
     return res;
   };
 
+  const multicallFunc = async (addresses: Address[]) => {
+    const params = addresses.map((address) => {
+      return {
+        address: address,
+        abi: ABIDemo,
+        functionName: 'functionName',
+        args: [],
+      };
+    });
+
+    const res = await hooks.contract.multicall(params);
+
+    return res;
+  };
+
   /** Return */
-  return { writeFunc, readFunc };
+  return { writeFunc, readFunc, multicallFunc };
 };
