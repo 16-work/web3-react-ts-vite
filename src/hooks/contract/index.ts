@@ -10,7 +10,7 @@ import { multicall as wagmiMulticall } from '@wagmi/core';
 
 interface BaseParams {
   address: Address | Addresses;
-  abi: any[];
+  abi: any;
   functionName: string;
   args: any[];
 }
