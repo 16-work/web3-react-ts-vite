@@ -10,7 +10,7 @@ export const BoxLogo = () => {
   return (
     <Link to={path.home} className="flex-align-x cursor-pointer">
       {/* logo */}
-      <Svg name={'logo'} className="w-40" />
+      <Svg name={'logo'} className="xs:w-60 md:w-40" />
     </Link>
   );
 };

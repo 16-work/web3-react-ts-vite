@@ -53,7 +53,7 @@ export const LayoutFooter = () => {
         >
           {icons.map((item) => (
             <a key={item.label} href={item.href} target="_blank">
-              <Svg name={item.icon} className="xs:w-50 md:w-40 text-common-1 hover-primary" />
+              <Svg name={item.icon} className="xs:w-60 md:w-40 text-common-1 hover-primary" />
             </a>
           ))}
         </div>

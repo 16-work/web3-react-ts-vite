@@ -21,7 +21,7 @@ export const BtnChain = () => {
             <>
               <Svg name={CHAINS_ICON[account.chain.id]} className="w-28 mr-8" />
 
-              <span className="xs:max-w-100 md:max-w-fit text-title-1 font-base ellipsis-1">{account.chain.name}</span>
+              <span className="xs:max-w-150 md:max-w-fit text-title-1 font-base ellipsis-1">{account.chain.name}</span>
             </>
           )}
 

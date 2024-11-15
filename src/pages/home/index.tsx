@@ -7,5 +7,9 @@ export const PageHome = () => {
   /** Actions */
 
   /** Template */
-  return <div className="flex-align-x">Home</div>;
+  return (
+    <div className="flex-align-x">
+      <h1 className="font-lg">Home</h1>
+    </div>
+  );
 };

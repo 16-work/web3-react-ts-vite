@@ -7,27 +7,27 @@
 
 
 
-/** 字体大小 */
+/** 字体大小 (2倍图所以xs*2) */
 .font-3xl {
-  @apply xs:text-24 md:text-24;
+  @apply xs:text-48 md:text-24;
 }
 .font-2xl {
-  @apply xs:text-22 md:text-22;
+  @apply xs:text-44 md:text-22;
 }
 .font-xl {
-  @apply xs:text-20 md:text-20;
+  @apply xs:text-40 md:text-20;
 }
 .font-lg {
-  @apply xs:text-18 md:text-18;
+  @apply xs:text-36 md:text-18;
 }
 .font-base {
-  @apply xs:text-16 md:text-16;
+  @apply xs:text-32 md:text-16;
 }
 .font-sm {
-  @apply xs:text-12 md:text-14;
+  @apply xs:text-28 md:text-14;
 }
 .font-xs {
-  @apply xs:text-12 md:text-12;
+  @apply xs:text-24 md:text-12;
 }
 
 

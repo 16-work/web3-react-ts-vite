@@ -113,13 +113,13 @@
 
 /* 气泡框 */
 .ant-popover {
-  // 背景
+  // 盒子
   .ant-popover-inner {
     padding: 0;
     background: #fff !important;
     overflow: hidden;
-    border: 2px solid rgb(var(--cus-gray-900));
   }
+  // 箭头
   .ant-popover-arrow::before {
     background: transparent !important;
   }

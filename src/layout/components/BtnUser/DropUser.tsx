@@ -8,6 +8,7 @@ export const DropUser = (props: Props) => {
   /** Retrieval */
   const account = useAccount();
   const { t } = useTranslation();
+  const { screenType } = store.global();
 
   /** Params */
   const list = ahooks.creation(() => {
@@ -26,8 +27,10 @@ export const DropUser = (props: Props) => {
       },
     ];
 
+    if (screenType < SCREEN.MD) arr.pop();
+
     return arr;
-  }, [t]);
+  }, [t, screenType]);
 
   /** Template */
   return (
@@ -65,11 +68,12 @@ interface ItemProps {
 const Item = (props: ItemProps) => {
   /** Template */
   return (
-    <div className={`flex-align-x py-6 text-18 text-tip-1 hover-primary ${props.className}`} onClick={props.onClick}>
+    <div className={`flex-align-x py-6 text-18 text-common-1 hover-primary ${props.className}`} onClick={props.onClick}>
       {/* icon */}
-      <Svg name={props.icon} className="w-20" />
+      <Svg name={props.icon} className="xs:w-40 md:w-20 mr-10" />
+
       {/* label */}
-      <span className="ml-10 font-base">{props.label}</span>
+      <span className="font-base">{props.label}</span>
     </div>
   );
 };

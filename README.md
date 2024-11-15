@@ -369,7 +369,7 @@ console.log(screenType >= SCREEN.MD);
 
 ```html
 <!-- tailwind使用 -->
-<div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+<div className="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 ```
 
 
@@ -394,7 +394,8 @@ html {
   font-size: 16px;
 
   @media screen and (max-width: 750px) {
-    font-size: 8px;
+    font-size: 8px; // 移动端设计稿为2倍图(w-750)
+    // font-size: 16px; // 移动端设计稿为1倍图(w-375)
   }
 }
 ```
@@ -462,6 +463,8 @@ html {
 
 
 **页面最小高度：**
+
+请根据页首和页尾高度自行调整???值
 
 ```scss
 .page-min-h {

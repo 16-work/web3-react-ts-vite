@@ -5,12 +5,13 @@ import { Drawer as ADrawer } from 'antd';
 interface Props {
   isShow: boolean;
   title?: React.ReactNode; // 输入字符串时会用默认样式
-  hideHeader?: boolean; // 隐藏顶部
   children: ReactNode;
   onClose: () => void;
 
   placement?: 'right' | 'bottom' | 'left';
+  hideHeader?: boolean; // 隐藏顶部
   hidePadding?: boolean; // 隐藏边距
+  hideCloseIcon?: boolean; // 隐藏关闭按钮
 }
 
 /** Component */
@@ -36,15 +37,17 @@ export const Drawer = (props: Props) => {
         {/* header */}
         {!props.hideHeader && (
           <div
-            className={`flex items-center justify-between mb-30 text-28
+            className={`flex items-center justify-between gap-x-20 mb-30 text-28
             ${props.hidePadding ? 'mt-30 mx-30' : ''}
           `}
           >
             {/* title */}
-            <div className={typeof props.title === 'string' ? 'text-common-1' : ''}>{props.title}</div>
+            <div className={`flex-1 ${typeof props.title === 'string' ? 'text-common-1' : ''}`}>{props.title}</div>
 
             {/* icon: close */}
-            <Svg name="close" className="w-32 text-common-1 hover:text-primary-1 cursor-pointer duration-300" onClick={props.onClose} />
+            {!props.hideCloseIcon && (
+              <Svg name="close" className="w-32 text-common-1 hover:text-primary-1 cursor-pointer duration-300" onClick={props.onClose} />
+            )}
           </div>
         )}
 

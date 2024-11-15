@@ -11,7 +11,7 @@ export const NavScreenS = () => {
       <BoxLogo />
 
       {/* right */}
-      <div className="flex-align-x xs:gap-x-14 md:gap-x-20">
+      <div className="flex-align-x xs:gap-x-30 md:gap-x-20">
         {/* current chain */}
         <BtnChain />
 

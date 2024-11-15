@@ -11,7 +11,7 @@ export const PageNoResults = () => {
       {/* btn: back */}
       <div className="w-fit absolute z-[1] top-10 xs:left-20 md:left-0">
         <Link to={path.home}>
-          <Svg name="arrow-left" className="w-22 hover-primary" />
+          <Svg name="arrow-left" className="xs:w-40 md:w-22 hover-primary" />
         </Link>
       </div>
 

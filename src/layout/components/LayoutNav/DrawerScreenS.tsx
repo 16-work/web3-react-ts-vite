@@ -3,6 +3,7 @@ import { MenusScreenS } from '../Menus/MenusScreenS';
 import { DropUser } from '../BtnUser/DropUser';
 import { SwitchLanguage } from '../SwitchLanguage';
 import { SwitchTheme } from '../SwitchTheme';
+import { BtnUser } from '../BtnUser';
 
 /** Component */
 export const DrawerScreenS = () => {
@@ -18,32 +19,22 @@ export const DrawerScreenS = () => {
   return (
     <>
       {/* icon: more */}
-      <Button className="btn-second-1 w-50 h-50 rounded-8" onClick={() => (state.isShowDrawer = true)}>
-        <Svg name="more" className="w-36" />
-      </Button>
+      <Svg name="more" className="layout-nav-icon-w" onClick={() => (state.isShowDrawer = true)} />
 
       {/* drawer */}
       <Drawer
         isShow={state.isShowDrawer}
-        title={
-          // copy: address
-          <Copy text={account.address!} iconClassName="w-30">
-            <span className="text-common-1 mr-10">{format.address(account.address ?? '', 5, 5)}</span>
-          </Copy>
-        }
+        title={account.address ? <BtnUser /> : <BtnConnect />}
+        hideCloseIcon
         placement="right"
-        hideHeader={!account.address}
         onClose={() => (state.isShowDrawer = false)}
       >
         <div className="flex flex-col justify-between flex-1">
-          <div>
-            {/* user info || connect */}
-            {account.address ? <DropUser onClose={() => (state.isShowDrawer = false)} /> : <BtnConnect />}
+          <div className="flex flex-col gap-y-40">
+            {/* menus: user */}
+            {account.address && <DropUser onClose={() => (state.isShowDrawer = false)} />}
 
-            {/* hr */}
-            <div className="hr-1 my-30"></div>
-
-            {/* menus */}
+            {/* menus: common */}
             <MenusScreenS onClick={() => (state.isShowDrawer = false)} />
           </div>
 
