@@ -43,11 +43,13 @@ export const Scrollbar = (props: Props) => {
   );
 
   // 滚动条样式
-  const renderThumb = () => {
+  const renderThumb = (type: 'x' | 'y') => {
+    const baseClassName = type === 'y' ? 'w-4' : 'h-4';
+
     return (
       <div
-        className={`rounded-4 cursor-pointer
-          ${isPC ? 'bg-white/20' : 'bg-transparent'}
+        className={`${baseClassName} rounded-4 cursor-pointer
+          ${isPC ? 'bg-[var(--cus-scrollbar)]' : 'bg-transparent'}
         `}
       />
     );
@@ -76,11 +78,11 @@ export const Scrollbar = (props: Props) => {
       className={`${props.className} 
         ${props.static ? 'flex' : ''}
       `}
-      autoHeight={props.autoHeight ?? true}
+      autoHeight={props.autoHeight ?? false}
       autoHeightMin={minHeight ? tools.pxToRem(minHeight) : undefined}
       autoHeightMax={maxHeight ? tools.pxToRem(maxHeight) : undefined}
-      renderThumbVertical={renderThumb}
-      renderThumbHorizontal={renderThumb}
+      renderThumbVertical={() => renderThumb('y')}
+      renderThumbHorizontal={() => renderThumb('x')}
       renderView={renderView}
       renderTrackVertical={props.static && isPC ? renderThumbVertical : undefined}
       style={{ right: '-2px' }}

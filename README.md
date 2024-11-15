@@ -1592,6 +1592,22 @@ export const TRow = () => {
 
 
 
+#### 1.3 滚动条
+
+**举例：**
+
+```tsx
+<div className="box-father    w-400 h-400">
+  {/* ScrollBar 宽高会自动跟随box-father */}
+  <Scrollbar>
+    {/* box-children长宽超过box-father时会出现滚动条 */}
+    <div className="box-children    w-[2000px] h-[2000px]">Scroll Bar</div>
+  </Scrollbar>
+</div>
+```
+
+
+
 ### 2. 常用工具
 
 #### 2.1 本地存储

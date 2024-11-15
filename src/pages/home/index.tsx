@@ -8,7 +8,7 @@ export const PageHome = () => {
 
   /** Template */
   return (
-    <div className="flex-align-x">
+    <div className="page-home    w">
       <h1 className="font-lg">Home</h1>
     </div>
   );
