@@ -179,42 +179,42 @@ export const format = {
     common: (
       value: BigNumber | string | bigint | number,
       options?: {
-        decimal?: number; // 代币精度
-        bignumDecimal?: number; // 格式化后的小数位数
+        decimals?: number; // 精度(默认18)
+        bignumDecimals?: number; // 格式化后的小数位数
         abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
       }
     ) => {
       // before
-      const decimal = options?.decimal ?? 18;
+      const decimals = options?.decimals ?? 18;
 
       // main
       const str = BigNumber(value.toString())
-        .div(10 ** decimal)
+        .div(10 ** decimals)
         .toString();
-      return format.bignum(str, options?.bignumDecimal, options?.abbrOrigin);
+      return format.bignum(str, options?.bignumDecimals, options?.abbrOrigin);
     },
 
     /** 将币种价格转为美元价格 */
     usdt: (
       tokenPrice: BigNumber | string | bigint | number,
       options?: {
-        decimal?: number; // tokenPrice为wei的价格时默认18
-        bignumDecimal?: number; // 格式化后的小数位数
+        decimals?: number; // 精度(默认18)
+        bignumDecimals?: number; // 格式化后的小数位数
         abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
       }
     ) => {
       // before
-      const decimal = options?.decimal ?? 18;
-      const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例usdtUnitPrice的单位是(usdt/currency)。如果usdtUnitPrice的单位有变化，请自行修改decimal默认值
+      const decimals = options?.decimals ?? 18;
+      const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例currencyUsdtUnitPrice的单位是(usdt/currency)。如果currencyUsdtUnitPrice的单位有变化，可自行修改decimal默认值
 
       const value = BigNumber(tokenPrice.toString())
-        .div(10 ** decimal)
+        .div(10 ** decimals)
         .times(usdtUnitPrice);
 
       // main
       if (value.eq(0)) return `$0`;
       else if (options?.abbrOrigin && value.lt(0.0001)) return `<$0.0001`; // 开始缩写才显示此情况
-      return `$${format.bignum(value, options?.bignumDecimal, options?.abbrOrigin)}`;
+      return `$${format.bignum(value, options?.bignumDecimals, options?.abbrOrigin)}`;
     },
   },
 };

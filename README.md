@@ -1642,41 +1642,31 @@ format.bignum('12345678910', 2, "K"); // 12.35 B
 
 **代币格式化：**
 
-> format.token.usdt这个方法有点复杂，可以先阅读下方公式及示例分析后，再使用。
-> $$
-> \begin{flalign}
+> format.token.usdt这个方法有点复杂，可以先阅读下方公式、源码、及示例分析后，再使用。
+>
+> ```ts
+> /** 相关公式 */ 
 > 
-> &公式: 
+> /* 1.主货币常见单位换算 */ 
+> 1 (currency) = 10^decimal (wei) // eg. decimal(eth) = 18;  decimal(sol) = 9
 > 
-> \\
-> \\
+> /* 2.总价公式 */
+> TotalPrice(currency) 
+>     = Price(currency/token) * Amount(token) 
+>     = Price(currency/token) * Amount(wei) / 10^decimal
 > 
-> & 1 currency = 10^{decimal} wei
-> 
-> \\
-> \\
-> 
-> & TotalPrice(currency) 
-> \\& = Price(currency/token) \times Amount(token) 
-> \\& = Price(currency/token) \times Amount(wei) \div 10^{decimal}
-> 
-> \\
-> \\
-> 
-> & UsdtTotalPrice(usdt) 
-> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times  TotalPrice(currency) 
-> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times Price(currency/token) \times Amount(token) 
-> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times Price(currency/token) \times Amount(wei) \div 10^{decimal}
-> 
-> 
-> \end{flalign}
-> $$
+> /* 3.美元总价公式 */
+> UsdtPrice(currency) 
+>     = CurrencyUsdtUnitPrice(usdt/currency) * TotalPrice(currency)
+>     = CurrencyUsdtUnitPrice(usdt/currency) * Price(currency/token) * Amount(token) 
+>     = CurrencyUsdtUnitPrice(usdt/currency) * Price(currency/token) * Amount(wei) / 10^decimal
+> ```
 
 ```ts
-// 代币价格格式化（示例usdtUnitPrice的单位是(usdt/currency)）
+// 代币价格格式化（示例currencyUsdtUnitPrice的单位是(usdt/currency)）
 format.token.usdt(代币价格, {
-    decimal?: 代币精度(默认18), 
-    bignumDecimal?: 格式化后小数位数, 
+    decimals?: 精度(默认18), 
+    bignumDecimals?: 格式化后小数位数, 
     abbrOrigin?: 大于指定值后开始缩写
 })
 
@@ -1685,17 +1675,17 @@ format.token.usdt(代币价格, {
  * 设 实参price 的单位是(currency/token)
  * 套用上面公式(usdt/currency) * (currcncy/token) = (usdt/token)
  * 已知 目标price 的单位是(usdt/token)
- * 结果单位和目标单位正好匹配
- * 因此：decimal为0而不是18
+ * 计算结果的单位和目标单位正好匹配
+ * 因此：decimals为0
 */
-format.token.usdt(token.price, { decimal: 0 }) 
+format.token.usdt(token.price, { decimals: 0 }) 
 
 /** 示例分析2:
  * 设 实参price 的单位是(currency/token)、实参amount的单位是(wei)
  * 套用上面公式(usdt/currency) * (currcncy/token) * (wei)= (usdt / token * wei )
  * 已知 目标totalPrice 的单位是(usdt)
- * 结果单位还需要÷10^18后 才会和目标单位匹配
- * 因此：decimal为18(默认值)
+ * 计算结果的单位还需要÷10^18后 才会和目标单位匹配
+ * 因此：decimals为18(默认值)
 */
 format.token.usdt(BigNumber(total.price).times(token.amount), { abbrOrigin: "K" })
 ```
@@ -1703,14 +1693,14 @@ format.token.usdt(BigNumber(total.price).times(token.amount), { abbrOrigin: "K" 
 ```ts
 // 代币值精度格式化
 format.token.common(代币值(数量|价格...), {
-    decimal?: 代币精度(默认18), 
-    bignumDecimal?: 格式化后小数位数, 
+    decimals?: 精度(默认18), 
+    bignumDecimals?: 格式化后小数位数, 
     abbrOrigin?: 大于指定值后开始缩写
 })
 
 // eg. (分析略)
-format.token.common(token.balance, {abbrOrigin: "M"});
-format.token.common(BigNumber(token.amount).times(token.price));
+format.token.common(token.balance, { abbrOrigin: "M" }); 
+format.token.common(BigNumber(token.amount).times(token.price), { bignumDecimals: 6 });
 ```
 
 
