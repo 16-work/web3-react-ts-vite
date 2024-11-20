@@ -194,7 +194,7 @@ export const format = {
       return format.bignum(str, options?.bignumDecimals, options?.abbrOrigin);
     },
 
-    /** 将币种价格转为美元价格 */
+    /** 将币种价格转为美元价格(文档四、2.2.2附有相关公式及示例) */
     usdt: (
       tokenPrice: BigNumber | string | bigint | number,
       options?: {

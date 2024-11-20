@@ -1648,18 +1648,18 @@ format.bignum('12345678910', 2, "K"); // 12.35 B
 > /** 相关公式 */ 
 > 
 > /* 1.主货币常见单位换算 */ 
-> 1 (currency) = 10^decimal (wei) // eg. decimal(eth) = 18;  decimal(sol) = 9
+> 1 (currency) = 10^decimals (wei) // eg. decimals(eth) = 18;  decimals(sol) = 9
 > 
 > /* 2.总价公式 */
 > TotalPrice(currency) 
 >     = Price(currency/token) * Amount(token) 
->     = Price(currency/token) * Amount(wei) / 10^decimal
+>     = Price(currency/token) * Amount(wei) / 10^decimals
 > 
 > /* 3.美元总价公式 */
-> UsdtPrice(currency) 
+> UsdtPrice(usdt) 
 >     = CurrencyUsdtUnitPrice(usdt/currency) * TotalPrice(currency)
 >     = CurrencyUsdtUnitPrice(usdt/currency) * Price(currency/token) * Amount(token) 
->     = CurrencyUsdtUnitPrice(usdt/currency) * Price(currency/token) * Amount(wei) / 10^decimal
+>     = CurrencyUsdtUnitPrice(usdt/currency) * Price(currency/token) * Amount(wei) / 10^decimals
 > ```
 
 ```ts
