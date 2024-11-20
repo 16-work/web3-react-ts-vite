@@ -205,7 +205,7 @@ export const format = {
     ) => {
       // before
       const decimal = options?.decimal ?? 18;
-      const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例的usdtUnitPrice是1Token的USDT价格，不是1Wei的USDT价格。如果usdtUnitPrice含义有变化，请自行修改decimal默认值
+      const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例usdtUnitPrice的单位是(usdt/currency)。如果usdtUnitPrice的单位有变化，请自行修改decimal默认值
 
       const value = BigNumber(tokenPrice.toString())
         .div(10 ** decimal)

@@ -1626,6 +1626,8 @@ localCache.set('键名', 值) // 设值
 
 #### 2.2 格式化
 
+**数字格式化：**
+
 ```ts
 // 数字格式化(支持大数)
 format.bignum(数值, 小数位, 数字缩写)
@@ -1636,6 +1638,68 @@ format.bignum('123456.789', 2, "K"); // 123.46 K (从K位开始缩写)
 format.bignum('12345678910', 2, "K"); // 12.35 B
 ```
 
+
+
+**代币格式化：**
+
+> format.token.usdt这个方法有点复杂，可以先阅读下方公式及示例分析后，再使用。
+> $$
+> \begin{flalign}
+> 
+> &公式: 
+> 
+> \\
+> \\
+> 
+> & 1 currency = 10^{decimal} wei
+> 
+> \\
+> \\
+> 
+> & TotalPrice(currency) 
+> \\& = Price(currency/token) \times Amount(token) 
+> \\& = Price(currency/token) \times Amount(wei) \div 10^{decimal}
+> 
+> \\
+> \\
+> 
+> & UsdtTotalPrice(usdt) 
+> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times  TotalPrice(currency) 
+> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times Price(currency/token) \times Amount(token) 
+> \\& = CurrencyUsdtUnitPrice(usdt/currency) \times Price(currency/token) \times Amount(wei) \div 10^{decimal}
+> 
+> 
+> \end{flalign}
+> $$
+
+```ts
+// 代币价格格式化（示例usdtUnitPrice的单位是(usdt/currency)）
+format.token.usdt(代币价格, {
+    decimal?: 代币精度(默认18), 
+    bignumDecimal?: 格式化后小数位数, 
+    abbrOrigin?: 大于指定值后开始缩写
+})
+
+// eg.
+/** 示例分析1:
+ * 设 实参price 的单位是(currency/token)
+ * 套用上面公式(usdt/currency) * (currcncy/token) = (usdt/token)
+ * 已知 目标price 的单位是(usdt/token)
+ * 结果单位和目标单位正好匹配
+ * 因此：decimal为0而不是18
+*/
+format.token.usdt(token.price, { decimal: 0 }) 
+
+/** 示例分析2:
+ * 设 实参price 的单位是(currency/token)、实参amount的单位是(wei)
+ * 套用上面公式(usdt/currency) * (currcncy/token) * (wei)= (usdt / token * wei )
+ * 已知 目标totalPrice 的单位是(usdt)
+ * 结果单位还需要÷10^18后 才会和目标单位匹配
+ * 因此：decimal为18(默认值)
+*/
+format.token.usdt(BigNumber(total.price).times(token.amount), { abbrOrigin: "K" })
+```
+
 ```ts
 // 代币值精度格式化
 format.token.common(代币值(数量|价格...), {
@@ -1644,24 +1708,17 @@ format.token.common(代币值(数量|价格...), {
     abbrOrigin?: 大于指定值后开始缩写
 })
 
-// eg.
+// eg. (分析略)
 format.token.common(token.balance, {abbrOrigin: "M"});
 format.token.common(BigNumber(token.amount).times(token.price));
-
-// 代币价格格式化（这个请去看代码中的注释后再用）
-format.token.usdt(代币价格, {
-    decimal?: 代币精度(默认18), 
-    bignumDecimal?: 格式化后小数位数, 
-    abbrOrigin?: 大于指定值后开始缩写
-})
-
-// eg.
-format.token.usdt(token.price, { decimal: 0 }) // 请根据传入代币价格的精度变化decimal（示例price是1Token的价格，不是1Wei的价格，所以decimal为0而不是18）
-format.token.usdt(BigNumber(total.supply).times(token.price), { abbrOrigin: "K" }) // 这里supply精度是18，price精度0，所以decimal用默认值就行
 ```
 
+
+
+**其它格式化方法：**
+
 ```ts
-// 其它见@/utils/format.ts，用法都是format.xxx
+// 见@/utils/format.ts，用法都是format.xxx
 ```
 
 
