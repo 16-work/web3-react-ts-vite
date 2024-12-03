@@ -30,7 +30,7 @@ export const Img = (props: Props) => {
 
   const sizeClassName = useMemo(() => {
     // 读取w、h、rounded相关属性
-    return props.className.match(/\b(w|h|m|rounded)\S*/g)?.join(' ');
+    return props.className.match(/\b(w|h|m|rounded|shadow)\S*/g)?.join(' ');
   }, [props.className]);
 
   /** Template */
