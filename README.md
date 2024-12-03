@@ -1420,6 +1420,7 @@ useEffect(() => {
     --Box // 盒子
       --BoxCollapse.tsx // 可折叠盒子
       --FieldItem.tsx // 表单项
+      --BoxList.tsx // 翻页列表
 
     --CountDown //倒计时
       --CountDownBase.tsx // 无样式，只返回日时分秒值

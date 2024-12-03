@@ -13,6 +13,7 @@ declare global {
   const AntdProvider: typeof import('../../src/components/Base/AntdProvider')['AntdProvider']
   const BigNumber: typeof import('@/utils/bignumber.ts')['default']
   const BoxCollapse: typeof import('../../src/components/Box/BoxCollapse')['BoxCollapse']
+  const BoxList: typeof import('../../src/components/Box/BoxList')['BoxList']
   const BoxScrollLoad: (typeof import('../../src/components/ScrollLoad/ScrollLoadPage'))['BoxScrollLoad']
   const Button: typeof import('../../src/components/Base/Button')['Button']
   const CURRENCY_SYMBOL: typeof import('@/constants/chain/index.ts')['CURRENCY_SYMBOL']
