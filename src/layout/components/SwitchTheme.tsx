@@ -18,9 +18,15 @@ export const SwitchTheme = (props: { className?: string }) => {
   return (
     options.length > 1 && (
       <div className={props.className}>
-        <DropList value={theme} options={options} onSelect={setTheme} trigger={['hover']} arrow={true} hideDropArrow={true}>
-          <Svg name="theme" className="layout-nav-icon-w hover-primary" />
-        </DropList>
+        <DropList
+          value={theme}
+          options={options}
+          onSelect={setTheme}
+          trigger={['hover']}
+          arrow={true}
+          hideDropArrow={true}
+          children={() => <Svg name="theme" className="layout-nav-icon-w hover-primary" />}
+        />
       </div>
     )
   );

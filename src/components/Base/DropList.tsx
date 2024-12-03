@@ -4,8 +4,8 @@ import { TooltipPlacement } from 'antd/es/tooltip';
 import { ReactNode } from 'react';
 
 /** Props */
-interface Props extends PopoverProps {
-  children: JSX.Element;
+interface Props extends Omit<PopoverProps, 'children'> {
+  children: (option: Option) => ReactNode;
   value: any;
   options: Option[];
   onSelect: (value: any) => void;
@@ -64,14 +64,22 @@ export const DropList = (props: Props) => {
                 key={index}
                 className={`px-20 text-common-1 hover-primary font-base 
                     ${props.value === option.value || props.value === option ? 'bg-primary-1 !text-common-1' : ''}
-                    ${index === 0 ? '' : 'border-t-2 border-gray-900'}
+                    ${index === 0 ? '' : 'border-t border-black/50'}
                   `}
               >
                 {/* 下面是有左右边距的hr，上面是没有左右边距的hr */}
                 {/* {index !== 0 && <div className="hr-1"></div>} */}
 
                 {/* option */}
-                <span className={`group block w-full py-10`}>{(props.cusOption && props.cusOption(option, index)) ?? option.label}</span>
+                <div className={`group flex-align-x block w-full py-10`}>
+                  {(props.cusOption && props.cusOption(option, index)) ?? (
+                    <>
+                      {option.prefixIcon && option.prefixIcon}
+                      {option.label}
+                      {option.suffixIcon && option.suffixIcon}
+                    </>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -89,7 +97,7 @@ export const DropList = (props: Props) => {
         className={`w-fit flex-align-x justify-between rounded-8 hover:text-common-1 cursor-pointer duration-300 ${props.triggerClassName}`}
       >
         {/* current value */}
-        {props.children}
+        {props.children(props.options.find((item) => item.value === props.value)!)}
 
         {/* icon: arrow */}
         {!hideDropArrow && <Svg name="arrow-down" className={`${dropArrowClassName}`} />}

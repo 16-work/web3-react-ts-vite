@@ -1,6 +1,10 @@
+import { ReactNode } from 'react';
+
 export interface Option {
   label: string;
   value: any;
+  prefixIcon?: ReactNode;
+  suffixIcon?: ReactNode;
 }
 
 export enum ORDER {

@@ -59,7 +59,9 @@ export const Tabs = (props: Props) => {
             `}
             onClick={() => props.onSwitch(item.value)}
           >
+            {item.prefixIcon && item.prefixIcon}
             {item.label}
+            {item.suffixIcon && item.suffixIcon}
           </div>
         ))}
       </div>
