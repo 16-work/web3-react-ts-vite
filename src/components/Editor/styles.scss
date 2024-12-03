@@ -1,0 +1,14 @@
+.quill {
+  display: flex;
+  flex-direction: column;
+
+  .ql-toolbar {
+    display: none;
+  }
+
+  .ql-container {
+    flex: 1;
+    border: 1px solid #ccc !important;
+  }
+}
+

@@ -26,6 +26,7 @@ declare global {
   const Drawer: typeof import('../../src/components/Base/Drawer')['Drawer']
   const DropList: typeof import('../../src/components/Base/DropList')['DropList']
   const EVENTS: typeof import('@/constants/events')['EVENTS']
+  const Editor: typeof import('../../src/components/Editor/Editor')['Editor']
   const FieldItem: typeof import('../../src/components/Box/FieldItem')['FieldItem']
   const FieldSort: typeof import('../../src/components/Table/FieldSort')['FieldSort']
   const HitBottomLoad: typeof import('../../src/components/LoadMore/HitBottomLoad')['HitBottomLoad']
