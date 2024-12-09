@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
-export const contextInitValue: TypeContextDemo = {
+export const contextInitValue: TypeContext = {
   key: '',
 };
 
-export type TypeContextDemo = {
+export type TypeContext = {
   key: string;
 };
 
