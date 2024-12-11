@@ -158,11 +158,7 @@
   margin-right: 0 !important;
   border-radius: 8px;
   border: 2px solid rgb(var(--cus-gray-900));
-
-  // 底部条
-  .ant-slider-rail {
-    background: #fff !important;
-  }
+  background: #fff !important; // 底部背景
 
   // 激活条
   .ant-slider-track {
