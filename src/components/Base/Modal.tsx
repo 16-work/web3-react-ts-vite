@@ -23,7 +23,7 @@ interface Props {
 export const Modal = (props: Props) => {
   /** Params */
   const width = props.width ?? 550;
-  const okText = props.okText || 'Confirm';
+  const okText = props.okText ?? 'Confirm';
 
   /** Template */
   return (
@@ -42,10 +42,10 @@ export const Modal = (props: Props) => {
           `}
         >
           {/* title */}
-          <div className={typeof props.title === 'string' ? 'text-common-1 text-24' : ''}>{props.title}</div>
+          <div className={typeof props.title === 'string' ? 'text-common-1 font-xl' : ''}>{props.title}</div>
 
           {/* icon: close */}
-          <Svg name="close" className="w-24 text-common-1 hover:text-primary-1 cursor-pointer duration-300" onClick={props.onClose} />
+          <Svg name="close" className="w-24 text-common-1 hover-primary cursor-pointer duration-300" onClick={props.onClose} />
         </div>
 
         {/* body */}
