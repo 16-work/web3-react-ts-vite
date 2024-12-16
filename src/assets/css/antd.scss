@@ -135,15 +135,17 @@
 
 /* 气泡框 */
 .ant-popover {
+  $bg: #fff;
+
   // 盒子
   .ant-popover-inner {
     padding: 0;
-    background: #fff !important;
+    background: $bg !important;
     overflow: hidden;
   }
   // 箭头
   .ant-popover-arrow::before {
-    background: transparent !important;
+    background: $bg !important;
   }
 }
 

@@ -5,19 +5,18 @@ import { ReactNode } from 'react';
 interface Props {
   tip: ReactNode;
   triggerClassName?: string;
-  iconClassName?: string;
   onClick?: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 /** Component */
 export const PopoverTip = (props: Props) => {
   /** Params */
-  const iconClassName = useMemo(() => {
+  const triggerClassName = useMemo(() => {
     // 未设置width时使用默认size
     const regex = /\bw-(\d+|auto|full|screen)\b/;
-    if (regex.test(props.iconClassName + '')) return props.iconClassName;
-    else return props.iconClassName + ' xs:w-26 md:w-18';
-  }, [props.iconClassName]);
+    if (regex.test(props.triggerClassName + '')) return props.triggerClassName;
+    else return props.triggerClassName + ' xs:w-26 md:w-18';
+  }, [props.triggerClassName]);
 
   /** Template */
   return (
@@ -26,10 +25,10 @@ export const PopoverTip = (props: Props) => {
         <div className="inline-block xs:max-w-300 md:max-w-600 max-h-300 px-10 pt-10 text-common-1 font-base break-words overflow-auto">{props.tip}</div>
       }
     >
-      <span className="inline-block text-tip-1 hover-primary cursor-pointer">
+      <span className={`inline-block text-tip-1 hover-primary cursor-pointer ${triggerClassName}`}>
         <Svg
           name="tip"
-          className={`${iconClassName}`}
+          className={`w-full`}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
