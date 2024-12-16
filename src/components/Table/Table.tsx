@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { To } from 'react-router-dom';
 
 /** Constants */
-const tableStyleType = {
+const styleType = {
   // 基础表格样式
   base: {
     table: `h-full flex flex-col overflow-hidden 
@@ -39,9 +39,9 @@ interface Props {
 
   // 样式相关
   classNames: {
+    type?: keyof typeof styleType; // 指定基础样式类型
     gridCols: string;
     cols?: Record<number, string>;
-    type?: keyof typeof tableStyleType; // 指定基础样式类型
     table?: string;
     thead?: string;
     tbody?: string;
@@ -70,16 +70,17 @@ export const Table = (props: Props) => {
   const { screenType } = store.global();
 
   /** Params */
-  const styleType = props.classNames.type ?? 'base';
-  const classNames = {
-    type: props.classNames.type ?? 'base',
-    table: `${tableStyleType[styleType].table} ${props.classNames.table}`,
-    thead: `${tableStyleType[styleType].thead} ${props.classNames.gridCols} ${props.classNames.thead}`,
-    tbody: `${tableStyleType[styleType].tbody} ${props.classNames.tbody}`,
-    row: `${tableStyleType[styleType].row} ${props.classNames.row} ${props.classNames.gridCols}`,
-    col: props.classNames.cols ?? {},
-    hr: `${tableStyleType[styleType].hr} ${props.classNames.hr}`,
-  };
+  const classNames = useMemo(() => {
+    const type = styleType[props.classNames.type ?? 'base'];
+    return {
+      table: `${type.table} ${props.classNames.table}`,
+      thead: `${type.thead} ${props.classNames.gridCols} ${props.classNames.thead}`,
+      tbody: `${type.tbody} ${props.classNames.tbody}`,
+      row: `${type.row} ${props.classNames.row} ${props.classNames.gridCols}`,
+      col: props.classNames.cols ?? {},
+      hr: `${type.hr} ${props.classNames.hr}`,
+    };
+  }, [props.classNames.type]);
 
   const state = ahooks.reactive({
     activeSortIndex: props.sort?.defaultActiveSort?.index ?? -1,

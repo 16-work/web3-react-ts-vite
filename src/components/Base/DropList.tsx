@@ -3,75 +3,86 @@ import { Popover, PopoverProps } from 'antd';
 import { TooltipPlacement } from 'antd/es/tooltip';
 import { ReactNode } from 'react';
 
+const styleType = {
+  base: {
+    triggerBox: 'w-fit',
+    triggerArrow: 'xs:w-28 md:w-24',
+    list: 'max-h-300 ',
+    option: 'px-20 py-10 text-common-1 hover-primary font-base',
+    activeOption: 'bg-primary-1 !text-common-1',
+    hr: 'h-1 mx-0 bg-black',
+  },
+  second: {
+    triggerBox: '',
+    triggerArrow: '',
+    list: 'min-w-200 min-h-180 ',
+    option: '',
+    activeOption: '',
+    hr: '',
+  },
+};
+
 /** Props */
-interface Props extends Omit<PopoverProps, 'children'> {
+interface Props extends Omit<PopoverProps, 'children' | 'arrow'> {
+  type?: keyof typeof styleType;
   children: (option: Option) => ReactNode;
   value: any;
   options: Option[];
   onSelect: (value: any) => void;
 
+  cusOption?: (option: Option, index: number) => ReactNode;
   placement?: TooltipPlacement;
-  cusOption?: (option: any, index: number) => ReactNode;
-  triggerClassName?: string;
   triggerId?: string;
-  dropArrowClassName?: string;
-  hideDropArrow?: boolean;
 }
 
 /** Component */
 export const DropList = (props: Props) => {
   /** Params */
-  const isShowArrow = props.arrow ?? false;
   const trigger = props.trigger ?? ['click'];
-  const hideDropArrow = props.hideDropArrow ?? false;
+
+  const className = useMemo(() => {
+    return styleType[props.type ?? 'base'];
+  }, [props.type]);
+
   const [open, setOpen] = useState(false);
-
   const parentRef: any = useRef(null);
-  const handleOpenChange = (open: boolean) => {
-    setOpen(open);
-  };
-
   const parentWidth = useMemo(() => {
     return parentRef && parentRef.current?.offsetWidth;
   }, [parentRef, open]);
 
-  const dropArrowClassName = useMemo(() => {
-    // 未设置width时使用默认size
-    const regex = /\bw-(\d+|auto|full|screen)\b/;
-    if (regex.test(props.dropArrowClassName + '')) return props.dropArrowClassName;
-    else return props.dropArrowClassName + ' xs:w-28 md:w-24';
-  }, [props.dropArrowClassName]);
+  /** Actions */
+  const handleOpenChange = (open: boolean) => {
+    setOpen(open);
+  };
 
   /** Template */
   return (
     <Popover
       placement={props.placement}
       trigger={trigger}
-      arrow={isShowArrow}
+      arrow={false}
       open={open}
       onOpenChange={handleOpenChange}
       getPopupContainer={() => (props.triggerId ? document.getElementById(props.triggerId)! : document.body)}
       overlayStyle={{ minWidth: parentWidth }}
       content={
-        props.options.length ? (
-          <div className="max-h-300 grid grid-cols-1 overflow-auto">
-            {props.options.map((option, index) => (
+        <div className={`relative grid grid-cols-1 overflow-auto ${className.list}`}>
+          {props.options.map((option, index) => (
+            <div key={index}>
+              {/* hr */}
+              {index !== 0 && <div className={className.hr}></div>}
+
+              {/* option */}
               <div
                 onClick={() => {
                   props.onSelect(option.value);
                   setOpen(false);
                 }}
-                key={index}
-                className={`px-20 text-common-1 hover-primary font-base 
-                    ${props.value === option.value || props.value === option ? 'bg-primary-1 !text-common-1' : ''}
-                    ${index === 0 ? '' : 'border-t border-black/50'}
+                className={`${className.option}
+                    ${props.value === option.value ? className.activeOption : ''}
                   `}
               >
-                {/* 下面是有左右边距的hr，上面是没有左右边距的hr */}
-                {/* {index !== 0 && <div className="hr-1"></div>} */}
-
-                {/* option */}
-                <div className={`group flex-align-x block w-full py-10`}>
+                <div className={`group flex-align-x block w-full`}>
                   {(props.cusOption && props.cusOption(option, index)) ?? (
                     <>
                       {option.prefixIcon && option.prefixIcon}
@@ -81,26 +92,24 @@ export const DropList = (props: Props) => {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="h-150 relative">
-            <NoData />
-          </div>
-        )
+            </div>
+          ))}
+
+          {props.options.length === 0 && <NoData />}
+        </div>
       }
     >
       <div
         ref={parentRef}
         id={props.triggerId}
         onClick={() => setOpen(true)}
-        className={`w-fit flex-align-x justify-between rounded-8 hover:text-common-1 cursor-pointer duration-300 ${props.triggerClassName}`}
+        className={`flex-align-x justify-between cursor-pointer duration-300 ${className.triggerBox}`}
       >
         {/* current value */}
-        {props.children(props.options.find((item) => item.value === props.value)!)}
+        {props.children(props.options.find((item) => item.value === props.value) ?? { label: '', value: undefined })}
 
         {/* icon: arrow */}
-        {!hideDropArrow && <Svg name="arrow-down" className={`${dropArrowClassName}`} />}
+        <Svg name="arrow-down" className={`${className.triggerArrow}`} />
       </div>
     </Popover>
   );

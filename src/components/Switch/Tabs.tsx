@@ -25,14 +25,16 @@ interface Props {
   options: Option[];
   onSwitch: (tab: any) => void;
 
-  styleType?: keyof typeof styleType;
+  type?: keyof typeof styleType;
   itemClassname?: string;
 }
 
 /** Component */
 export const Tabs = (props: Props) => {
   /** Params */
-  const type = props.styleType ?? 'base';
+  const className = useMemo(() => {
+    return styleType[props.type ?? 'base'];
+  }, [props.type]);
 
   const state = ahooks.reactive({
     colWidth: 0,
@@ -56,16 +58,16 @@ export const Tabs = (props: Props) => {
 
   /** Template */
   return (
-    <div className={`w-fit relative ${styleType[type].box}`}>
+    <div className={`w-fit relative ${className.box}`}>
       {/* active bg */}
       <div
-        className={`absolute position-center-v z-0 duration-300 ${styleType[type].activeBg}`}
-        style={{ width: state.colWidth, height: state.colHeight, left: activeIndex * state.colWidth + styleType[type].initOffset }}
+        className={`absolute position-center-v z-0 duration-300 ${className.activeBg}`}
+        style={{ width: state.colWidth, height: state.colHeight, left: activeIndex * state.colWidth + className.initOffset }}
       ></div>
 
       {/* list */}
       <div
-        className={`relative z-[1] grid ${styleType[type].list}`}
+        className={`relative z-[1] grid ${className.list}`}
         style={{
           gridTemplateColumns: `repeat(${props.options.length}, minmax(0, 1fr))`,
         }}
@@ -76,9 +78,9 @@ export const Tabs = (props: Props) => {
             key={index}
             ref={index === 0 ? colItemRef : null}
             className={`flex-align-x justify-center duration-300 cursor-pointer whitespace-nowrap
-              ${styleType[type].tab}
+              ${className.tab}
               ${props.itemClassname}
-              ${item.value === props.value && styleType[type].activeTab}    
+              ${item.value === props.value && className.activeTab}    
             `}
             onClick={() => props.onSwitch(item.value)}
           >
