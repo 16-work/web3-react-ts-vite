@@ -9,55 +9,43 @@ import { BtnUser } from '../BtnUser';
 export const DrawerScreenS = () => {
   /** Retrieval */
   const account = useAccount();
+  const { isOpenDrawer, setIsOpenDrawer } = store.global();
 
   /** Params */
-  const state = ahooks.reactive({
-    isShowDrawer: false,
-  });
 
   /** Template */
   return (
-    <>
-      {/* icon: more */}
-      <Svg name="more" className="layout-nav-icon-w" onClick={() => (state.isShowDrawer = true)} />
+    <Drawer isShow={isOpenDrawer} placement="right" onClose={() => setIsOpenDrawer(false)}>
+      <div className="flex flex-col justify-between flex-1">
+        <div className="flex flex-col gap-y-40">
+          {account.address ? <BtnUser /> : <BtnConnect />}
 
-      {/* drawer */}
-      <Drawer
-        isShow={state.isShowDrawer}
-        title={account.address ? <BtnUser /> : <BtnConnect />}
-        hideCloseIcon
-        placement="right"
-        onClose={() => (state.isShowDrawer = false)}
-      >
-        <div className="flex flex-col justify-between flex-1">
-          <div className="flex flex-col gap-y-40">
-            {/* menus: user */}
-            {account.address && <DropUser onClose={() => (state.isShowDrawer = false)} />}
+          {/* menus: user */}
+          {account.address && <DropUser onClose={() => setIsOpenDrawer(false)} />}
 
-            {/* menus: common */}
-            <MenusScreenS onClick={() => (state.isShowDrawer = false)} />
-          </div>
-
-          {/* bottom */}
-          {account.address && (
-            <div className="flex-align-x justify-between pt-30 border-t-2 border-gray-900">
-              {/* left */}
-              <div className="flex-align-x gap-x-30">
-                {/* switch language */}
-                <SwitchLanguage />
-
-                {/* switch theme */}
-                <SwitchTheme />
-              </div>
-
-              {/* logout */}
-              <Button onClick={() => hooks.wallet.disconnect()}>
-                <Svg name="logout" className="w-50" />
-              </Button>
-            </div>
-          )}
+          {/* menus: common */}
+          <MenusScreenS onClick={() => setIsOpenDrawer(false)} />
         </div>
-      </Drawer>
-    </>
+
+        {/* bottom */}
+        {account.address && (
+          <div className="flex-align-x justify-between pt-30 border-t-2 border-gray-900">
+            {/* left */}
+            <div className="flex-align-x gap-x-30">
+              {/* switch language */}
+              <SwitchLanguage />
+
+              {/* switch theme */}
+              <SwitchTheme />
+            </div>
+
+            {/* logout */}
+            <Button onClick={() => hooks.wallet.disconnect()}>
+              <Svg name="logout" className="w-50" />
+            </Button>
+          </div>
+        )}
+      </div>
+    </Drawer>
   );
 };
