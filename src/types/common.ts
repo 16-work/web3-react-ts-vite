@@ -5,6 +5,8 @@ export interface Option {
   value: any;
   prefixIcon?: ReactNode;
   suffixIcon?: ReactNode;
+
+  [key: string]: any;
 }
 
 export enum ORDER {
