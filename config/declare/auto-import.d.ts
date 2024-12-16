@@ -7,6 +7,7 @@ export {}
 declare global {
   const AllDataLoad: (typeof import('../../src/components/LoadMore/AllDataLoad'))['AllDataLoad']
   const AllDataScrollLoad: typeof import('../../src/components/LoadMore/AllDataScrollLoad')['AllDataScrollLoad']
+  const AnimationBox: typeof import('../../src/components/Animation/AnimationBox')['AnimationBox']
   const AnimationDrop: typeof import('../../src/components/Animation/AnimationDrop')['AnimationDrop']
   const AnimationNum: typeof import('../../src/components/Animation/AnimationNum')['AnimationNum']
   const AnimationRoute: typeof import('../../src/components/Animation/AnimationRoute')['AnimationRoute']

@@ -1400,6 +1400,7 @@ useEffect(() => {
     --Feature // 通用业务组件目录(该目录下的组件不会被收录到auto-import里)
     
     --Animation // 动画组件
+      --AnimationBox.tsx // 动画盒子(让元素渐入渐出)
       --AnimationNum.tsx // 数字滚动
       --AnimationRoute.tsx // 路由动画
 
