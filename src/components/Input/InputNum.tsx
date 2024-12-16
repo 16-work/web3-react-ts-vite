@@ -15,6 +15,7 @@ export const InputNum = (props: Props) => {
   return (
     <input
       {...props}
+      className={`base-input ${props.className}`}
       value={debouncedValue}
       onChange={(e) => props.onChange && props.onChange(formatInputOnlyPositive(e.target.value.trim()))}
       onBlur={(e) => {
