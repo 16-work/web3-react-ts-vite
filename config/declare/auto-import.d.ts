@@ -56,6 +56,7 @@ declare global {
   const ScrollLoadList: (typeof import('../../src/components/ScrollLoad/ScrollLoadList'))['ScrollLoadList']
   const Scrollbar: typeof import('../../src/components/Base/Scrollbar')['Scrollbar']
   const Skeleton: typeof import('../../src/components/Base/Skeleton')['Skeleton']
+  const Slider: typeof import('../../src/components/Switch/Slider')['Slider']
   const Svg: typeof import('../../src/components/Icon/Svg')['Svg']
   const TCol: typeof import('../../src/components/Table/TCol')['TCol']
   const TabPanels: typeof import('../../src/components/Switch/TabPanels')['TabPanels']

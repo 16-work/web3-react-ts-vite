@@ -1420,8 +1420,8 @@ useEffect(() => {
 
     --Box // 盒子
       --BoxCollapse.tsx // 可折叠盒子
-      --FieldItem.tsx // 表单项
       --BoxList.tsx // 翻页列表
+      --FieldItem.tsx // 表单项
 
     --CountDown //倒计时
       --CountDownBase.tsx // 无样式，只返回日时分秒值
@@ -1453,8 +1453,8 @@ useEffect(() => {
     --Switch // 切换组件
       --CheckBox.tsx // 复选框
       --Radio.tsx // 单选框
+      --Slider.tsx // 滑动选择条
       --Tabs.tsx // Tabs切换
-      --TabPanels.tsx // Tab切换面板
 
     --Table // 表格
       --FieldSort.tsx // 表头项排序按钮
