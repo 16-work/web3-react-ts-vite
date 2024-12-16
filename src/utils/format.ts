@@ -59,14 +59,19 @@ export const format = {
       .join('');
   },
 
-  bignum: (value: BigNumber | string | bigint | number, decimals?: number, abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]) => {
+  bignum: (
+    value: BigNumber | string | bigint | number,
+    decimals?: number,
+    isAbbr: boolean = false,
+    abbrOrigin: number | (typeof NUMBER_ABBRS)[number] = 'K'
+  ) => {
     if (!value || value === '0') return '0';
     // 解析输入并转换为 BigNumber
     const strNumber = new BigNumber(parseFloat(BigNumber(value.toString()).toFixed(36))).toString();
     const [integralPart, decimalPart] = strNumber.split('.');
 
     // 缩写
-    if (abbrOrigin !== undefined) {
+    if (isAbbr) {
       const abbrs = NUMBER_ABBRS;
 
       // 是否达到缩写标准
@@ -181,6 +186,7 @@ export const format = {
       options?: {
         decimals?: number; // 精度(默认18)
         bignumDecimals?: number; // 格式化后的小数位数
+        isAbbr?: boolean; // 是否开启缩写
         abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
       }
     ) => {
@@ -191,7 +197,7 @@ export const format = {
       const str = BigNumber(value.toString())
         .div(10 ** decimals)
         .toString();
-      return format.bignum(str, options?.bignumDecimals, options?.abbrOrigin);
+      return format.bignum(str, options?.bignumDecimals, options?.isAbbr, options?.abbrOrigin);
     },
 
     /** 将币种价格转为美元价格(文档四、2.2.2附有相关公式及示例) */
@@ -200,6 +206,7 @@ export const format = {
       options?: {
         decimals?: number; // 精度(默认18)
         bignumDecimals?: number; // 格式化后的小数位数
+        isAbbr?: boolean; // 是否开启缩写
         abbrOrigin?: number | (typeof NUMBER_ABBRS)[number]; // 大于指定值后开始缩写
       }
     ) => {
@@ -214,7 +221,7 @@ export const format = {
       // main
       if (value.eq(0)) return `$0`;
       else if (options?.abbrOrigin && value.lt(0.0001)) return `<$0.0001`; // 开始缩写才显示此情况
-      return `$${format.bignum(value, options?.bignumDecimals, options?.abbrOrigin)}`;
+      return `$${format.bignum(value, options?.bignumDecimals, options?.isAbbr, options?.abbrOrigin)}`;
     },
   },
 };

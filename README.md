@@ -1634,12 +1634,12 @@ localCache.set('键名', 值) // 设值
 
 ```ts
 // 数字格式化(支持大数)
-format.bignum(数值, 小数位, 数字缩写)
+format.bignum(数值, 小数位, 是否开启数字缩写, 数字缩写起始位置)
 
 // eg.
 format.bignum('123456.789', 2); // 123,456.78
-format.bignum('123456.789', 2, "K"); // 123.46 K (从K位开始缩写)
-format.bignum('12345678910', 2, "K"); // 12.35 B
+format.bignum('123456.789', 2, true, "K"); // 123.46 K (从K位开始缩写)
+format.bignum('12345678910', 2, true, "K"); // 12.35 B
 ```
 
 
@@ -1671,6 +1671,7 @@ format.bignum('12345678910', 2, "K"); // 12.35 B
 format.token.usdt(代币价格, {
     decimals?: 精度(默认18), 
     bignumDecimals?: 格式化后小数位数, 
+    isAbbr?: 是否开启数字缩写,
     abbrOrigin?: 大于指定值后开始缩写
 })
 
@@ -1691,7 +1692,7 @@ format.token.usdt(token.price, { decimals: 0 })
  * 计算结果的单位还需要÷10^18后 才会和目标单位匹配
  * 因此：decimals为18(默认值)
 */
-format.token.usdt(BigNumber(total.price).times(token.amount), { abbrOrigin: "K" })
+format.token.usdt(BigNumber(total.price).times(token.amount), { isAbbr: true })
 ```
 
 ```ts
@@ -1699,11 +1700,12 @@ format.token.usdt(BigNumber(total.price).times(token.amount), { abbrOrigin: "K" 
 format.token.common(代币值(数量|价格...), {
     decimals?: 精度(默认18), 
     bignumDecimals?: 格式化后小数位数, 
+    isAbbr?: 是否开启数字缩写,
     abbrOrigin?: 大于指定值后开始缩写
 })
 
 // eg. (分析略)
-format.token.common(token.balance, { abbrOrigin: "M" }); 
+format.token.common(token.balance, { isAbbr: true, abbrOrigin: "M" }); 
 format.token.common(BigNumber(token.amount).times(token.price), { bignumDecimals: 6 });
 ```
 
