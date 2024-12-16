@@ -29,7 +29,7 @@ export const DrawerScreenS = () => {
 
         {/* bottom */}
         {account.address && (
-          <div className="flex-align-x justify-between pt-30 border-t-2 border-gray-900">
+          <div className="flex-align-x justify-between pt-30 border-t-2 border-black">
             {/* left */}
             <div className="flex-align-x gap-x-30">
               {/* switch language */}

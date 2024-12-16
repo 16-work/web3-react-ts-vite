@@ -21,6 +21,7 @@ export const cusColors = {
     'relax-1': 'rgb(var(--cus-relax-1) , <alpha-value>)',
     'info-1': 'rgb(var(--cus-info-1) , <alpha-value>)',
     'info-2': 'rgb(var(--cus-info-2) , <alpha-value>)',
+    'warning-1': 'rgb(var(--cus-warning-1) , <alpha-value>)',
     'stress-1': 'rgb(var(--cus-stress-1) , <alpha-value>)',
   },
   text: {

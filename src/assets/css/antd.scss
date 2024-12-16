@@ -30,7 +30,7 @@
 
   // 左右箭头
   .ant-pagination-item-link {
-    color: rgb(var(--cus-gray-900)) !important;
+    color: #000 !important;
     background: transparent !important;
   }
   .ant-pagination-item-link:hover {
@@ -49,20 +49,20 @@
       border: 2px solid;
       border-color: transparent;
       color: rgb(var(--text-common-1));
-      transition: border-color 0.3s ease; /* 添加这个属性 */
+      transition: border-color 0.3s ease;
     }
 
     // 页数按钮(hover状态)
     a:hover {
-      border-color: rgb(var(--cus-gray-900));
+      border-color: #000;
     }
   }
 
   // 页数按钮(激活)
   .ant-pagination-item-active {
     a {
-      border: 2px solid;
-      border-color: rgb(var(--cus-gray-900));
+      border: 1px solid;
+      border-color: #000;
       color: rgb(var(--text-common-1)) !important;
       background: rgb(var(--cus-primary-1)) !important;
     }
@@ -82,7 +82,7 @@
 
     input {
       background: transparent !important;
-      border: 2px solid rgb(var(--cus-gray-900)) !important;
+      border: 1px solid #000 !important;
       box-shadow: none !important;
       color: rgb(var(--text-common-1));
     }
@@ -116,7 +116,7 @@
       height: 100%;
       margin-top: -5px;
       background: transparent !important;
-      border: 2px solid rgb(var(--cus-gray-900)) !important;
+      border: 1px solid #000 !important;
       box-shadow: none;
 
       &:hover {
@@ -179,7 +179,7 @@
   margin-left: 0 !important;
   margin-right: 0 !important;
   border-radius: 8px;
-  border: 2px solid rgb(var(--cus-gray-900));
+  border: 2px solid #000;
   background: #fff !important; // 底部背景
 
   // 激活条
@@ -199,7 +199,7 @@
     height: 24px !important;
 
     background: #fff;
-    border: 2px solid rgb(var(--cus-gray-900));
+    border: 2px solid #000;
     border-radius: 50% !important;
 
     @media screen and (max-width: 750px) {
@@ -272,7 +272,7 @@
       &::before {
         content: '';
 
-        @apply absolute position-center-v right-0 translate-x-1/2 xs:w-26 xs:h-26 md:w-14 md:h-14 border-2 border-gray-900 bg-white rounded-full;
+        @apply absolute position-center-v right-0 translate-x-1/2 xs:w-26 xs:h-26 md:w-14 md:h-14 border-2 border-black bg-white rounded-full;
       }
 
       &::after {

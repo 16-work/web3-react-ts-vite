@@ -23,14 +23,17 @@ $theme-name: 'theme-light-green';
 
 // 功能色
 .feature {
-  // 绿
+  // 轻松型
   --cus-relax-1: 126, 187, 146; // #7EBB92
 
-  // 蓝
+  // 信息型
   --cus-info-1: 115, 171, 250; // #73ABFA
   --cus-info-2: 31, 125, 226; // #1F7DE2
 
-  // 红
+  // 警告型
+  --cus-warning-1: 251, 218, 69; // #FBDA45
+
+  // 压力型
   --cus-stress-1: 226, 92, 85; // #E25C55
 }
 
