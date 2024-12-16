@@ -23,7 +23,7 @@ export const Drawer = (props: Props) => {
   /** Template */
   return (
     <ADrawer
-      open={screenType < SCREEN.MD && props.isShow}
+      open={screenType <= SCREEN.MD && props.isShow}
       onClose={props.onClose}
       placement={placement}
       width={placement === 'bottom' ? 'auto' : '80%'}

@@ -27,7 +27,7 @@ export const DropUser = (props: Props) => {
       },
     ];
 
-    if (screenType < SCREEN.MD) arr.pop();
+    if (screenType <= SCREEN.MD) arr.pop();
 
     return arr;
   }, [t, screenType]);

@@ -353,7 +353,7 @@ export enum SCREEN {
 
 export const screenMinSize = {
   [SCREEN.XS]: 0,
-  [SCREEN.MD]: 750,
+  [SCREEN.MD]: 750, // 750px一般属于移动屏
   [SCREEN.LG]: 1340,
 };
 ```
@@ -364,7 +364,7 @@ export const screenMinSize = {
 // ts使用
 const { screenType } = store.global();
 
-console.log(screenType >= SCREEN.MD);
+console.log(screenType > SCREEN.MD);
 ```
 
 ```html
@@ -387,7 +387,7 @@ console.log(screenType >= SCREEN.MD);
 
 **固定尺寸：**
 
-一般用于你有各端详细设计稿，且设计稿尺寸正常时
+每个屏宽一种固定的根字号。
 
 ```
 html {
@@ -404,16 +404,42 @@ html {
 
 **动态尺寸：**
 
-一般用于你没有各端详细设计稿，或设计稿尺寸不正常时。基础尺寸会随页面宽度变化。
+根字号随屏宽动态变化。
 
 ```scss
-$minFontSize: 12.8px;
-$maxFontSize: 17.829px;
-$minScreen: 430px;
-$maxScreen: 1536px;
+$MDMinFontSize: 12px;  // 中屏最小根字号
+$MDMaxFontSize: 16px; // 中屏最大根字号
+$MDMinScreen: 750px; // 中屏最小屏幕宽度
+$MDMaxScreen: 1920px; // 中屏最大屏幕宽度
+
+$XSMinFontSize: 8px;  // 小屏最小根字号
+$XSMaxFontSize: 16px; // 小屏最大根字号
+$XSMinScreen: 375px; // 小屏最小屏幕宽度
+$XSMaxScreen: 750px; // 小屏最大屏幕宽度
 
 html {
-  font-size: clamp($minFontSize, calc(7px + (($maxFontSize - $minFontSize) / ($maxScreen - $minScreen) * 100vw)), $maxFontSize);
+  // 大于最大范围时的默认根字号
+  font-size: 16px; 
+ 
+  // 小于最小范围时的默认根字号
+  @media screen and (max-width: $XSMinScreen) {
+    font-size: 8px; // 移动端设计稿为2倍图(w-750)
+    // font-size: 16px; // 移动端设计稿为1倍图(w-375)
+  }
+
+  // 中屏动态根字号
+  @media screen and (min-width: $MDMinScreen) and (max-width: $MDMaxScreen) {
+    font-size: calc(
+      $MDMinFontSize + (($MDMaxFontSize - $MDMinFontSize) / ($MDMaxScreen - $MDMinScreen)) * (100vw - $MDMinScreen)
+    );
+  }
+
+  // 小屏动态根字号
+  @media screen and (min-width: $XSMinScreen) and (max-width: $XSMaxScreen) {
+    font-size: calc(
+      $XSMinFontSize + (($XSMaxFontSize - $XSMinFontSize) / ($XSMaxScreen - $XSMinScreen)) * (100vw - $XSMinScreen)
+      ) ;
+  }
 }
 ```
 

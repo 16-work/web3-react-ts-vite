@@ -15,7 +15,7 @@ export const Layout = () => {
       {/* 上下布局 */}
       <div className="pc-min-w h-screen flex flex-col overflow-hidden">
         {/* layout-nav */}
-        {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
+        {screenType > SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
 
         <div id="drawer-root" className="relative flex-1 overflow-hidden">
           <Scrollbar autoHeight={false} className="scroll-box w-full h-full absolute" onHitBottom={(v) => setIsHitBottom(v)}>

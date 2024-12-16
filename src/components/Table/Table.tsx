@@ -91,7 +91,7 @@ export const Table = (props: Props) => {
   return (
     <div className={`${classNames.table}`}>
       {/* thead */}
-      {(screenType >= SCREEN.MD || props.other?.alwaysFullyDisplay) && (
+      {(screenType > SCREEN.MD || props.other?.alwaysFullyDisplay) && (
         <>
           <div className={classNames.thead}>
             {props.elements.labels.map((label, index) => (
@@ -149,7 +149,7 @@ export const Table = (props: Props) => {
         {props.elements.skeletons &&
           !props.state.isInit &&
           props.state.isLoading &&
-          Array.from({ length: screenType >= SCREEN.MD ? 4 : 2 }).map((_, index) => (
+          Array.from({ length: screenType > SCREEN.MD ? 4 : 2 }).map((_, index) => (
             <div key={index}>
               {/* hr */}
               {index !== 0 && <div className={classNames.hr}></div>}

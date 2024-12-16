@@ -25,7 +25,7 @@ export const useMenus = () => {
       },
     ];
 
-    if (screenType < SCREEN.MD) {
+    if (screenType <= SCREEN.MD) {
       list.push(...[]);
     }
 
