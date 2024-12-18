@@ -1,10 +1,10 @@
-import _ from 'lodash';
 import path from 'path';
 import { loadEnv } from 'vite';
+import { cloneDeep } from 'lodash-es';
 import { MethodType } from 'vite-plugin-mock';
 
 export const parseEnv = (env: Record<string, any>): MetaEnv => {
-  const envs: any = _.cloneDeep(env);
+  const envs: any = cloneDeep(env);
 
   Object.entries(env).forEach(([key, value]) => {
     if (value == 'true' || value == 'false') envs[key] = value == 'true' ? true : false;
