@@ -23,8 +23,6 @@ export const SwitchTheme = (props: { className?: string }) => {
           options={options}
           onSelect={setTheme}
           trigger={['hover']}
-          arrow={true}
-          hideDropArrow={true}
           children={() => <Svg name="theme" className="layout-nav-icon-w hover-primary" />}
         />
       </div>

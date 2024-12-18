@@ -20,8 +20,6 @@ export const SwitchLanguage = () => {
       value={language}
       options={languageOptions}
       onSelect={(value) => onChangeLanguage(value)}
-      arrow={true}
-      hideDropArrow={true}
       trigger={['hover']}
       children={() => <Svg name="language" className="layout-nav-icon-w hover-primary" />}
     />
