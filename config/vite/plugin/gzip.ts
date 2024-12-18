@@ -1,7 +1,7 @@
-import viteCompression from 'vite-plugin-compression';
+import { compression } from 'vite-plugin-compression2';
 
 export const setCompression = () => {
-  return viteCompression({
+  return compression({
     threshold: 102400,
   });
 };
