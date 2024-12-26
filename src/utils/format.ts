@@ -60,7 +60,7 @@ export const format = {
   },
 
   bignum: (
-    value: BigNumber | string | bigint | number,
+    value?: BigNumber | string | bigint | number,
     decimals?: number,
     isAbbr: boolean = false,
     abbrOrigin: number | (typeof NUMBER_ABBRS)[number] = 'K'
@@ -182,7 +182,7 @@ export const format = {
   token: {
     /** 将原始值转为易读值: eg. 1500000000000000000 wei -> 1.50 ether */
     common: (
-      value: BigNumber | string | bigint | number,
+      value?: BigNumber | string | bigint | number,
       options?: {
         decimals?: number; // 精度(默认18)
         bignumDecimals?: number; // 格式化后的小数位数
@@ -194,7 +194,7 @@ export const format = {
       const decimals = options?.decimals ?? 18;
 
       // main
-      const str = BigNumber(value.toString())
+      const str = BigNumber((value ?? 0).toString())
         .div(10 ** decimals)
         .toString();
       return format.bignum(str, options?.bignumDecimals, options?.isAbbr, options?.abbrOrigin);
@@ -202,7 +202,7 @@ export const format = {
 
     /** 将币种价格转为美元价格(文档四、2.2.2附有相关公式及示例) */
     usdt: (
-      tokenPrice: BigNumber | string | bigint | number,
+      tokenPrice?: BigNumber | string | bigint | number,
       options?: {
         decimals?: number; // 精度(默认18)
         bignumDecimals?: number; // 格式化后的小数位数
@@ -214,7 +214,7 @@ export const format = {
       const decimals = options?.decimals ?? 18;
       const usdtUnitPrice = localCache.get('usdtUnitPrice', '0'); // 注意：示例currencyUsdtUnitPrice的单位是(usdt/currency)。如果currencyUsdtUnitPrice的单位有变化，可自行修改decimal默认值
 
-      const value = BigNumber(tokenPrice.toString())
+      const value = BigNumber((tokenPrice ?? 0).toString())
         .div(10 ** decimals)
         .times(usdtUnitPrice);
 
