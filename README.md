@@ -22,13 +22,15 @@ pnpm dev
 pnpm mock
 ```
 
-**安装包：**
+**使用Turbo：**
 
-由于使用了Turbo的缘故，装包需要`-w`
+- 把`pnpm-workspace.demoyaml`改为`pnpm-workspace.yaml`
 
-```
-pnpm add -w 包名
-```
+- 使用Turbo后，装包需要`-w`
+
+  ```
+  pnpm add -w 包名
+  ```
 
 
 
