@@ -5,6 +5,7 @@ import { setAutoImport } from './autoImport';
 import { setSvg } from './svg';
 import { setCompression } from './gzip.ts';
 import { visualizer } from 'rollup-plugin-visualizer';
+import nodePolyfills from 'vite-plugin-node-stdlib-browser';
 
 export const setPlugins = (env: MetaEnv) => {
   let plugins: PluginOption[] = [react()];
@@ -14,6 +15,7 @@ export const setPlugins = (env: MetaEnv) => {
   plugins.push(...setAutoImport());
   plugins.push(setSvg());
   plugins.push(setCompression());
+  plugins.push(nodePolyfills());
 
   return plugins;
 };

@@ -51,6 +51,7 @@
     "siwe": "^2.3.2",
     "use-immer": "^0.9.0",
     "viem": "2.x",
+    "vite-plugin-node-stdlib-browser": "^0.2.1",
     "wagmi": "^2.8.1",
     "xlsx": "^0.18.5",
     "yup": "^1.4.0",
