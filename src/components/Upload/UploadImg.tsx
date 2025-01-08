@@ -9,6 +9,7 @@ interface Props {
   uploadType?: 'single' | 'multi';
   accept?: { [p: string]: any };
   className?: string;
+  maxSize?: number;
 }
 
 /** Component */
@@ -26,6 +27,7 @@ export const UploadImg = (props: Props) => {
       'image/webp': ['.webp'],
       'image/svg': ['.svg'],
     },
+    maxSize: maxSize = 10 * 1024 * 1024,
   } = props;
 
   const state = useReactive({
@@ -38,7 +40,15 @@ export const UploadImg = (props: Props) => {
 
     try {
       if (uploadType === 'single') {
-        getBase64(acceptedFiles[0])
+        const file = acceptedFiles[0];
+
+        if (file.size > maxSize) {
+          msg.error(`${t('tip.maxFileSize')} ${format.bytesSize(maxSize)}`);
+          state.isLoading = false;
+          return;
+        }
+
+        getBase64(file)
           .then(async (base64: string) => {
             if (!(await hooks.wallet.verify())) return;
 
