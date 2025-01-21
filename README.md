@@ -506,27 +506,29 @@ html {
 
 ```
 --src
+  --constants
+    --common.ts // 里面有设置默认主题的变量DEFAULT_THEME
   --assets
     --theme
-      --default.scss // 设置默认主题
-      --index.css // 导入除默认主题外的其它主题文件
       --主题文件名a.scss // 主题文件a
       --主题文件名b.scss // 主题文件b
+
+	  // 下面两个文件不用管，会自动生成
+      --default.scss
+      --index.css
 ```
+
+
 
 **新建主题：**
 
-在`@/assets/theme`下，新建`主题文件名.scss`
+- 在`@/assets/theme`下，新建`主题文件名.scss`
 
-> 推荐命名：`theme-[light/dark]-主题色.scss`。
->
-> [light/dark]是因为有些第三方组件是用light/dark来配置亮暗的。
->
-> -主题色.scss是因为<SwitchTheme>会自动读取`主题色`作为需要显示的主题列表项。
-
-
-
-**编写主题内容：**
+  > 推荐命名：`theme-[light/dark]-主题色.scss`。
+  >
+  > [light/dark]是因为有些第三方组件是用light/dark来配置亮暗的。
+  >
+  > -主题色.scss是因为<SwitchTheme>会自动读取`主题色`作为需要显示的主题列表项。
 
 - 在`@/assets/theme/主题文件名.scss`设置相关变量
 
@@ -534,30 +536,31 @@ html {
 
   > 在此文件下配置的颜色，仅能以scss变量的颜色使用，如：`color: rgb(var(--cus-primary-1))`
 
-- 在`config/tailwindcss/color.ts`设置相关变量
-
-  > 示例见`config/tailwindcss/color.ts`默认内容
-  
-  > 在此文件下配置的颜色，可供tailwindcs使用，如`bg-primary-1`
+- 执行`pnpm theme`
 
 
 
-**设置默认主题：**
+**修改默认主题：**
 
-- 在`@/assets/theme/default.scss`导入默认主题文件
+- 修改`@/constants/common.ts`的`DEFAULT_THEME`
 
-  ```scss
-  @import './主题文件名.scss';
+  ```ts
+  export const DEFAULT_THEME = '主题文件名';
   ```
 
-- 在`@/assets/theme/index.css`导入除默认主题外的其它主题文件
+- 执行`pnpm theme`
 
-  ```scss
-  @import '@/assets/theme/主题文件名a.scss';
-  @import '@/assets/theme/主题文件名b.scss';
-  ```
 
-  
+
+**重要：**
+
+如果修改了`DEFAULT_THEME`，或改动`theme-xxx.scss`结构，需执行以下命令才会生效
+
+```
+pnpm theme
+```
+
+
 
 
 

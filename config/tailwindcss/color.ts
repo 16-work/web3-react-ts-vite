@@ -9,10 +9,8 @@ export const cusColors = {
     'primary-1': 'rgb(var(--cus-primary-1) , <alpha-value>)',
     'primary-2': 'rgb(var(--cus-primary-2) , <alpha-value>)',
   },
-  // second、gray都放这里
   second: {
     'second-1': 'rgb(var(--cus-second-1) , <alpha-value>)',
-
     'gray-100': 'rgb(var(--cus-gray-100) , <alpha-value>)',
     'gray-500': 'rgb(var(--cus-gray-500) , <alpha-value>)',
     'gray-900': 'rgb(var(--cus-gray-900) , <alpha-value>)',
@@ -29,8 +27,8 @@ export const cusColors = {
     'tip-1': 'rgb(var(--text-tip-1) , <alpha-value>)',
   },
   base: {
-    black: '#000',
-    white: '#fff',
-    transparent: 'transparent',
+    'black': '#000',
+    'white': '#fff',
+    'transparent': 'transparent',
   },
 };

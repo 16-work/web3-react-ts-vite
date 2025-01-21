@@ -1,5 +1,5 @@
 // 默认主题
-export const DEFAULT_THEME = getComputedStyle(document.documentElement).getPropertyValue('--default-theme').trim();
+export const DEFAULT_THEME = 'theme-light-blue';
 
 // 页脚链接
 export const FOOTER_LINKS: Record<string, Record<string, string>> = {
