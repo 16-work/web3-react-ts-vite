@@ -44,7 +44,7 @@ export const Scrollbar = (props: Props) => {
 
   // 滚动条样式
   const renderThumb = (type: 'x' | 'y') => {
-    const baseClassName = type === 'y' ? 'w-4' : 'h-4';
+    const baseClassName = type === 'y' ? 'w-4 !right-0' : 'h-4';
 
     return (
       <div
@@ -85,7 +85,6 @@ export const Scrollbar = (props: Props) => {
       renderThumbHorizontal={() => renderThumb('x')}
       renderView={renderView}
       renderTrackVertical={props.static && isPC ? renderThumbVertical : undefined}
-      style={{ right: '-2px' }}
       autoHide={props.autoHide ?? !isPC} // 移动端滚完就隐藏
       ref={refScrollBar}
       onScroll={(e) => {

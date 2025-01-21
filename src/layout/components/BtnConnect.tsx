@@ -12,10 +12,10 @@ export const BtnConnect = () => {
       className="btn-primary layout-nav-btn-h xs:w-full md:w-fit flex-align-x px-16 rounded-8"
     >
       {/* icon */}
-      <Svg name="user" className="w-28" />
+      <Svg name="user" className="w-28 mr-6" />
 
       {/* text */}
-      <span className="ml-6 font-base">{t('account.connect')}</span>
+      <span className="font-base">{t('account.connect')}</span>
     </Button>
   );
 };

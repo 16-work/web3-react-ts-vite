@@ -135,10 +135,13 @@
 
 /* 气泡框 */
 .ant-popover {
-  $bg: #fff;
+  // popover背景/圆角写这里,除非不要箭头了
+  $bg: #fff; 
 
   // 盒子
   .ant-popover-inner {
+    border-radius: 10px !important;
+
     padding: 0;
     background: $bg !important;
     overflow: hidden;
