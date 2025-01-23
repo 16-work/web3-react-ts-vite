@@ -312,7 +312,7 @@
 
   // 隐藏头部
   .ant-drawer-header {
-    display: none;
+    display: none !important;
   }
 
   .ant-drawer-body {
