@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 /** Props */
 interface Props {
-  type: 'fadeInDown' | 'slideInUp' | 'slideInDown' | string;
+  type?: 'fadeInDown' | 'slideInUp' | 'slideInDown' | string;
   children: ReactNode;
 
   duration?: number;

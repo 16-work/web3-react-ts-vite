@@ -9,20 +9,11 @@ interface Props {
 export const MenusScreenS = (props: Props) => {
   /** Retrieval */
   const menusHook = useMenus();
-  const account = useAccount();
-  const { usersToken } = store.user();
-  const { isOpenDrawer, setIsOpenDrawer } = store.global();
+  const { setIsOpenDrawer } = store.global();
 
   /** Params */
-  const state = ahooks.reactive({
-    isVerify: Boolean(account.address && usersToken[account.address]),
-    isShowModalWithdrawRecords: false,
-  });
 
   /** Actions */
-  useEffect(() => {
-    if (isOpenDrawer && account.address) state.isVerify = Boolean(usersToken[account.address]);
-  }, [isOpenDrawer, account.address, usersToken]);
 
   /** Template */
   return (
