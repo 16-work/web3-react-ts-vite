@@ -4,4 +4,7 @@ export interface UserStore {
 
   usersToken: Record<string, string>;
   setUsersToken: (address: string, token: string) => void;
+
+  balance: string;
+  setBalance: (balance: string) => void;
 }

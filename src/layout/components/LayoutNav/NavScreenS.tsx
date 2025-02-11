@@ -1,4 +1,3 @@
-import { SwitchChain } from '../LayoutActions/SwitchChain';
 import { LayoutDrawer } from '../LayoutDrawer';
 import { BoxLogo } from './BoxLogo';
 
@@ -15,8 +14,6 @@ export const NavScreenS = () => {
 
       {/* right */}
       <div className="flex-align-x gap-20">
-        <SwitchChain />
-
         <>
           <Svg name="more" className="w-50" onClick={() => setIsOpenDrawer(true)} />
           <LayoutDrawer />

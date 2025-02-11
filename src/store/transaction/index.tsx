@@ -1,10 +1,8 @@
-import { waitForTransactionReceipt } from '@wagmi/core';
-import { WAGMI_CONFIG } from '@/constants/wagmi';
-import { toast } from 'react-toastify';
 import { events } from '@/utils/events';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Transaction, TransactionStore } from '@/store/transaction/types';
+import { connection } from '@/components/Providers/ProviderWallet';
 
 export default create<TransactionStore>()(
   devtools(
@@ -12,35 +10,69 @@ export default create<TransactionStore>()(
       (set, get) => ({
         transactions: [],
 
-        submitTransaction: async ({ hash, chainId, title, description, timestamp }: Transaction) => {
-          try {
-            get().addTransaction({ hash, chainId, description, title, timestamp });
+        submitTransaction: async ({ hash, title, description, timestamp }: Transaction) => {
+          get().addTransaction({ hash, description, title, timestamp });
 
-            const receipt = await toast.promise(waitForTransactionReceipt(WAGMI_CONFIG, { hash: hash as `0x${string}`, chainId }), {
-              pending: title,
-              success: {
-                render() {
-                  return (
-                    <>
-                      <div className="text-success font-lg">{description}</div>
-                      <a href={`${tools.getScan(chainId)}/tx/${hash}`} target="_blank" className="link-1 mt-8 font-base underline cursor-pointer">
-                        View on Scan
-                      </a>
-                    </>
-                  );
-                },
-              },
-              error: title,
+          // 初始化交易为 pending 状态
+          const toastId = toast.loading(title);
+
+          try {
+            const checkTransactionStatus = async (): Promise<any> => {
+              return await connection.getTransaction(hash, {
+                commitment: 'confirmed',
+                maxSupportedTransactionVersion: 0,
+              });
+            };
+
+            let receipt = null;
+            while (!receipt) {
+              receipt = await checkTransactionStatus();
+              if (!receipt) {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+              }
+            }
+
+            toast.update(toastId, {
+              render: (
+                <>
+                  <div className="text-success font-lg">{description}</div>
+                  <div className="link-1 mt-8 font-base underline cursor-pointer" onClick={() => tools.gotoScan(hash)}>
+                    View on Scan
+                  </div>
+                </>
+              ),
+              type: 'success',
+              isLoading: false,
+              closeButton: true,
+              autoClose: 3000,
             });
 
-            if (receipt.status === 'success') {
-              // 交易成功，更新状态
-              get().updateTransaction({ chainId, hash, title, timestamp, status: 'success' });
-              events.emit(EVENTS.TRANSACTION_SUCCESS, { hash, status: 'success' });
+            get().updateTransaction({ hash, title, timestamp, status: 'success' });
+            events.emit(EVENTS.TRANSACTION_SUCCESS, { hash, status: 'success' });
+
+            const checkTransactionStatus2 = async (): Promise<any> => {
+              return await connection.getTransaction(hash, {
+                commitment: 'finalized',
+                maxSupportedTransactionVersion: 0,
+              });
+            };
+            let receipt2 = null;
+            while (!receipt2) {
+              receipt2 = await checkTransactionStatus2();
+              if (!receipt2) {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+              }
             }
+            events.emit(EVENTS.TRANSACTION_SUCCESS, { hash, status: 'finalized' });
           } catch (error) {
-            // 交易失败，更新状态
-            get().updateTransaction({ chainId, hash, title, timestamp, status: 'error' });
+            toast.update(toastId, {
+              render: title,
+              type: 'error',
+              isLoading: false,
+              closeButton: true,
+              autoClose: 3000,
+            });
+            get().updateTransaction({ hash, title, timestamp, status: 'error' });
             throw error;
           }
         },
@@ -50,7 +82,6 @@ export default create<TransactionStore>()(
             state.transactions.push({
               hash: transaction.hash,
               status: 'pending',
-              chainId: transaction.chainId,
               description: transaction.description,
               title: transaction.title,
               timestamp: transaction.timestamp,

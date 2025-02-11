@@ -59,6 +59,7 @@ declare global {
   const UploadImg: typeof import('../../src/components/Upload/UploadImg')['UploadImg']
   const VerifyTip: typeof import('../../src/components/Web3/VerifyTip')['VerifyTip']
   const api: typeof import('@/api')['api']
+  const connection: typeof import('../../src/components/Providers/ProviderWallet')['connection']
   const createRef: typeof import('react')['createRef']
   const env: typeof import('@/utils/env')['env']
   const events: typeof import('@/utils/events')['events']

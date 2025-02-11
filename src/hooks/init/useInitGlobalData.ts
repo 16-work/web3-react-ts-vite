@@ -1,7 +1,11 @@
+import { useWallet } from '@solana/wallet-adapter-react';
+
 /** Hook */
 export const useInitGlobalData = () => {
   /** Retrieval */
   const { theme } = store.global();
+  const { publicKey } = useWallet();
+  const { setBalance } = store.user();
   const { setUsdtUnitPrice, setTokenIconList } = store.global();
 
   /** Actions */
@@ -36,4 +40,14 @@ export const useInitGlobalData = () => {
       pollingInterval: 1000 * 60 * 1, // 1min 刷新美元单价
     }
   );
+
+  // address变动刷新sol可用余额
+  useAsyncEffect(async () => {
+    if (publicKey) {
+      const balance = await hooks.wallet.getSolBalance();
+      setBalance(balance);
+    } else {
+      setBalance('0');
+    }
+  }, [publicKey]);
 };

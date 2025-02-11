@@ -1,6 +1,5 @@
 import { useMenus } from '@/hooks/useMenus';
 import { ActionUser } from '../LayoutActions/ActionUser';
-import { SwitchChain } from '../LayoutActions/SwitchChain';
 import { SwitchLanguage } from '../LayoutActions/SwitchLanguage';
 import { SwitchTheme } from '../LayoutActions/SwitchTheme';
 import { BoxLogo } from './BoxLogo';
@@ -21,8 +20,6 @@ export const NavScreenL = () => {
         <SwitchTheme />
 
         <SwitchLanguage />
-
-        <SwitchChain />
 
         <ActionUser />
       </div>

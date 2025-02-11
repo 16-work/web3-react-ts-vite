@@ -17,6 +17,9 @@ export default create<UserStore>()(
               [address]: token,
             },
           })),
+
+        balance: '0',
+        setBalance: (balance: string) => set(() => ({ balance: balance })),
       }),
       { name: 'user' }
     )
