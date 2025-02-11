@@ -3,14 +3,19 @@ import fs from 'fs';
 import path from 'path';
 import xlsx from 'xlsx';
 
-// 需要生成文件的语言列表
-const generateList = ['en', 'zh-TW'];
+const commonFilePath = path.resolve('./', 'src/constants/i18n/config.ts');
+const commonFileContent = fs.readFileSync(commonFilePath, 'utf8');
 
 
 
-const excelFileName = 'i18n.xlsx'; // excel文件名
+// 读取需要生成的语言列表
+const match = commonFileContent.match(/supportLanguages\s*=\s*({[\s\S]*?});/);
+const languageOptions = new Function(`return ${match[1]}`)();
+const languageType = Object.keys(languageOptions);
+
+
+const excelFileName = 'i18n.xlsx';
 const currentDirPath = '/src/constants/i18n/script'; // 当前目录路径
-
 const __dirname = path.resolve(`${process.cwd()}${currentDirPath}`);
 let workbook = xlsx.readFile(path.join(__dirname, excelFileName));
 
@@ -88,7 +93,7 @@ theadLangs.map((langName, langIndex) => {
 })
 
 // 生成繁中表
-if (generateList.find(item => item === 'zh-TW')) {
+if (languageType.find(item => item === 'zh-TW')) {
   const table = {}
   Object.keys(lang['zh-CN']).map(sheetName => {
     const sheet = {};
@@ -100,8 +105,16 @@ if (generateList.find(item => item === 'zh-TW')) {
   lang['zh-TW'] = table
 }
 
+// 只导出需要的语言
+const filteredLang = Object.keys(lang).reduce((acc, key) => {
+  if (languageType.includes(key)) {
+    acc[key] = lang[key];
+  }
+  return acc;
+}, {});
+
 // 生成其它语言文件
-generateList.map(key => {
+Object.keys(filteredLang).map(key => {
   fs.writeFile(path.resolve(__dirname, `../language/${key}.ts`), 'export default' + JSON.stringify(lang[key]), (err) => {
     if (err) {
       console.error(err);
@@ -109,3 +122,20 @@ generateList.map(key => {
     console.log(`----------新增${key}.ts成功-------------`);
   });
 })
+
+
+// 删除不需要的语言文件
+const languageDirPath = path.resolve(__dirname, '../language');
+const filesInLanguageDir = fs.readdirSync(languageDirPath);
+filesInLanguageDir.forEach(file => {
+  const filePath = path.join(languageDirPath, file);
+
+  // 获取文件名（不包含扩展名）
+  const fileNameWithoutExt = path.parse(file).name;
+
+  // 如果文件名不在 key 中，则删除文件
+  if (!Object.keys(filteredLang).includes(fileNameWithoutExt)) {
+    fs.unlinkSync(filePath);
+    console.log(`删除文件: ${file}`);
+  }
+});

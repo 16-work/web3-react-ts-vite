@@ -1,3 +1,4 @@
+import { useDebounceFn } from 'ahooks';
 import { CSSProperties } from 'react';
 import { Scrollbars, ScrollbarProps } from 'react-custom-scrollbars-2';
 
@@ -20,7 +21,7 @@ export const Scrollbar = (props: Props) => {
 
   /** Actions */
   // 触底检测
-  const { run: onScroll } = ahooks.debounceFn(
+  const { run: onScroll } = useDebounceFn(
     () => {
       if (onHitBottom) {
         const scrollTop = refScrollBar.current.getScrollTop();
@@ -44,11 +45,11 @@ export const Scrollbar = (props: Props) => {
 
   // 滚动条样式
   const renderThumb = (type: 'x' | 'y') => {
-    const baseClassName = type === 'y' ? 'w-4 !right-0' : 'h-4';
+    const baseClassName = type === 'y' ? 'w-4 !-right-4' : 'h-4 !-bottom-4';
 
     return (
       <div
-        className={`${baseClassName} rounded-4 cursor-pointer
+        className={`${baseClassName} relative rounded-4 cursor-pointer 
           ${isPC ? 'bg-[var(--cus-scrollbar)]' : 'bg-transparent'}
         `}
       />
@@ -75,6 +76,7 @@ export const Scrollbar = (props: Props) => {
   return (
     <Scrollbars
       {...scrollbarProps}
+      universal={true}
       className={`${props.className} 
         ${props.static ? 'flex' : ''}
       `}

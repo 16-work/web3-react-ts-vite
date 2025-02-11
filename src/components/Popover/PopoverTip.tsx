@@ -20,11 +20,7 @@ export const PopoverTip = (props: Props) => {
 
   /** Template */
   return (
-    <Popover
-      content={
-        <div className="inline-block xs:max-w-300 md:max-w-600 max-h-300 px-10 pt-10 text-common-1 font-base break-words overflow-auto">{props.tip}</div>
-      }
-    >
+    <Popover content={<div className="inline-block xs:max-w-300 md:max-w-600 max-h-300 px-10 py-5 text-common-1 font-base break-words">{props.tip}</div>}>
       <span className={`inline-block text-tip-1 hover-primary cursor-pointer ${triggerClassName}`}>
         <Svg
           name="tip"

@@ -3,7 +3,7 @@
 self.onmessage = function (e: MessageEvent) {
   const { start, end } = e.data;
 
-  let intervalId = setInterval(() => {
+  const intervalId = setInterval(() => {
     const now = Date.now();
     let milliseconds: number;
     let status: 'Upcoming' | 'Live' | 'Ended';

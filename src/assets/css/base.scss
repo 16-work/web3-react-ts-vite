@@ -1,5 +1,4 @@
 @import '../font/index.scss';
-@import './common.scss';
 
 * {
   @apply normal;
@@ -75,10 +74,6 @@ html {
 
 
 /* 滚动条相关 */
-html {
-  overflow-y: hidden;
-}
-
 #root {
   height: 100vh;
 }

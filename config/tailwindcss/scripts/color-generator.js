@@ -128,32 +128,26 @@ export const cusColors = {\n`;
   });
 
 
-  /** 生成index.css */
+  /** 生成index.ts */
   fs.readdir(themeDirPath, (err, files) => {
     const scssFiles = files.filter(file => file.endsWith('.scss') && file !== 'default.scss' && file != `${DEFAULT_THEME}.scss`);
 
     var importText = '';
     scssFiles.forEach(file => {
-      importText += `@import '@/assets/theme/${file}';\n`;
+      importText += `import './${file}';\n`;
     });
 
-    const indexCssFileContent = `@import '@/assets/theme/default.scss';
+    const indexCssFileContent = `import './default.scss';
 
 /* 导入除默认主题外的其它主题 */
 ${importText}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* index.css这个文件必须是.css后缀 */
     `
 
-    fs.writeFile(`${themeDirPath}/index.css`, indexCssFileContent, (err) => {
+    fs.writeFile(`${themeDirPath}/index.ts`, indexCssFileContent, (err) => {
       if (err) {
         console.error('Error writing TypeScript file:', err);
       } else {
-        console.log('index.css generated successfully!');
+        console.log('index.ts generated successfully!');
       }
     });
   })

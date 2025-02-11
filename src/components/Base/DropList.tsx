@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 const styleType = {
   base: {
     triggerBox: 'w-fit',
-    triggerArrow: 'xs:w-28 md:w-24',
+    triggerArrow: 'hidden',
     list: 'max-h-300 ',
     option: 'px-20 py-10 text-common-1 hover-primary font-base',
     activeOption: 'bg-primary-1 !text-common-1',
@@ -14,7 +14,7 @@ const styleType = {
   },
   second: {
     triggerBox: '',
-    triggerArrow: '',
+    triggerArrow: 'xs:w-28 md:w-24',
     list: 'min-w-200 min-h-180 ',
     option: '',
     activeOption: '',
@@ -38,7 +38,7 @@ interface Props extends Omit<PopoverProps, 'children' | 'arrow'> {
 /** Component */
 export const DropList = (props: Props) => {
   /** Params */
-  const trigger = props.trigger ?? ['click'];
+  const trigger = props.trigger ?? ['hover'];
 
   const className = useMemo(() => {
     return styleType[props.type ?? 'base'];

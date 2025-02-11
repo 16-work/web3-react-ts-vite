@@ -1,39 +1,56 @@
 /* 支持的语言 */
-export const languageType = ['zh-CN', 'zh-TW', 'en'];
-
-/* 可选的语言 */
-export const languageOptions = [
-  { label: 'English', value: 'en' },
-  { label: '中文', value: 'zh-TW' },
-];
-
-/* 需要转换的语言 */
-export const convertLanguageMap: Record<string, string> = {
-  'zh-CN': 'zh-TW', // 部分项目会要求将简中转为繁中
+export const supportLanguages = {
+  en: 'English',
+  'zh-CN': '简体中文',
+  // 'zh-TW': '繁体中文',
 };
 
-/* 默认语言方案 */
-const plan: number = 2;
+export const languageConfig = {
+  /* 初始语言 */
+  initLanguage: 'en',
 
-/* 系统语言不在支持列表内时，默认显示的语言 */
-const finishLanguage = 'en';
+  /* 默认语言: 必定支持的语言 */
+  defaultLanguage: 'en',
 
-// 获取默认语言方案
-const getDefaultLanguage = (): string => {
-  switch (plan) {
-    /* 方案1：默认指定语言 */
-    case 1:
-      return localCache.get('language', finishLanguage);
-    /* 方案2: 默认跟随浏览器语言（支持语言自动转换） */
+  /** 默认语言方案
+   * 方案1：默认为指定语言
+   * 方案2: 默认跟随浏览器语言（支持语言自动转换）
+   */
+  plan: 1,
+
+  /* 需要转换的语言 */
+  convertLanguageMap: {
+    // 'zh-CN': 'zh-TW', // 部分项目会要求将简中转为繁中
+  } as Record<string, string>,
+};
+
+// 初始化默认语言
+export const initDefaultLanguage = () => {
+  let language = '';
+
+  switch (languageConfig.plan) {
     case 2:
-      const systemLanguage = localCache.get('language', navigator.language); // 系统语言
-      return languageType.includes(systemLanguage)
-        ? convertLanguageMap[systemLanguage]
-          ? convertLanguageMap[systemLanguage]
-          : localCache.get('language', navigator.language)
-        : finishLanguage;
+      // 仅在浏览器环境中访问 navigator
+      if (typeof window !== 'undefined') {
+        language = localCache.get('language', navigator.language);
+      } else {
+        language = localCache.get('language', languageConfig.initLanguage);
+      }
+      break;
     default:
-      return finishLanguage;
+      language = localCache.get('language', languageConfig.initLanguage);
   }
+
+  return filterLanguage(language);
 };
-export const LANGUAGE = getDefaultLanguage();
+
+// 过滤掉需转换和不支持的语言
+export const filterLanguage = (language: string) => {
+  return languageConfig.convertLanguageMap[language]
+    ? languageConfig.convertLanguageMap[language]
+    : Object.keys(supportLanguages).includes(language)
+      ? language
+      : languageConfig.initLanguage;
+};
+
+export const LANGUAGE = initDefaultLanguage();

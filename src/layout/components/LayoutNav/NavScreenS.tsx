@@ -1,6 +1,6 @@
-import { BoxLogo } from '../BoxLogo';
-import { BtnChain } from '../BtnChain';
-import { DrawerScreenS } from './DrawerScreenS';
+import { SwitchChain } from '../LayoutActions/SwitchChain';
+import { LayoutDrawer } from '../LayoutDrawer';
+import { BoxLogo } from './BoxLogo';
 
 /** Component */
 export const NavScreenS = () => {
@@ -9,21 +9,19 @@ export const NavScreenS = () => {
 
   /** Template */
   return (
-    <div className="layout-nav-w h-60 relative top-0 z-[5] flex-align-x justify-between mt-20 mb-40">
-      {/* logo */}
+    <>
+      {/* left */}
       <BoxLogo />
 
       {/* right */}
-      <div className="flex-align-x xs:gap-x-30 md:gap-x-20">
-        {/* current chain */}
-        <BtnChain />
+      <div className="flex-align-x gap-20">
+        <SwitchChain />
 
-        {/* btn: more */}
-        <Svg name="more" className="layout-nav-icon-w" onClick={() => setIsOpenDrawer(true)} />
-
-        {/* drawer */}
-        <DrawerScreenS />
+        <>
+          <Svg name="more" className="w-50" onClick={() => setIsOpenDrawer(true)} />
+          <LayoutDrawer />
+        </>
       </div>
-    </div>
+    </>
   );
 };

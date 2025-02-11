@@ -10,7 +10,7 @@ interface Props {
 /** Component */
 export const AnimationNum = (props: Props) => {
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     isInit: false,
   });
 

@@ -5,7 +5,7 @@ export const useMenus = () => {
   const { screenType } = store.global();
 
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     activeMenuId: '1',
   });
 

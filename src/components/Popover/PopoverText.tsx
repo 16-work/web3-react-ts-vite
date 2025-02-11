@@ -12,7 +12,7 @@ export const PopoverText = (props: Props) => {
   return props.tip ? (
     <APopover
       {...props}
-      content={<span className={`inline-block xs:max-w-300 md:max-w-600 px-10 py-5 text-common-1 thin ${props.tipClassName}`}>{props.tip}</span>}
+      content={<span className={`inline-block xs:max-w-300 md:max-w-600 px-10 py-5 text-common-1 thin break-words ${props.tipClassName}`}>{props.tip}</span>}
     >
       {/* 不套一层span的话，children为SvgIcon时会有警告 */}
       <span>{props.children}</span>

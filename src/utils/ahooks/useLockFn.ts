@@ -3,7 +3,7 @@ import { useReactive } from 'ahooks';
 import { TaskStatus } from '@/store/global/types';
 
 /* useLockFn: 新增返回isLoading和onError处理 */
-export const newUseLockFn = <P extends any[] = any[], V = any>(fn: (...args: P) => Promise<V>, onError?: (error: any) => void) => {
+export const useCusLockFn = <P extends any[] = any[], V = any>(fn: (...args: P) => Promise<V>, onError?: (error: any) => void) => {
   /** Retrieval */
   const { tasks, setTask } = store.global();
 

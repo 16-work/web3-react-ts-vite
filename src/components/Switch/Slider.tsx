@@ -1,9 +1,18 @@
 import { Slider as ASlider } from 'antd';
 import { SliderBaseProps } from 'antd/es/slider';
 
+const styleType = {
+  base: {
+    track: 'h-12 border-2 bg-white rounded-full',
+    handle: '!w-24 !h-24 border-2 bg-white rounded-full',
+    activeArea: '!bg-primary-1',
+  },
+};
+
 /** Props */
 interface Props extends Omit<SliderBaseProps, 'type'> {
-  type?: 'default' | 'percentage';
+  styleType?: keyof typeof styleType;
+  valueType?: 'default' | 'percentage';
 }
 
 /** Component */
@@ -11,11 +20,12 @@ export const Slider = (props: Props) => {
   /** Retrieval */
 
   /** Params */
-  const type = props.type ?? 'default';
+  const type = props.styleType ?? 'base';
+  const valueType = props.valueType ?? 'default';
 
   /** Actions */
   const formatter = (v?: number) => {
-    switch (type) {
+    switch (valueType) {
       case 'percentage':
         return `${v ?? 0}%`;
       default:
@@ -29,6 +39,11 @@ export const Slider = (props: Props) => {
       {...props}
       tooltip={{
         formatter,
+      }}
+      classNames={{
+        root: styleType[type].track,
+        handle: styleType[type].handle,
+        track: styleType[type].activeArea,
       }}
     />
   );

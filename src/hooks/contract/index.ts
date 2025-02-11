@@ -81,7 +81,7 @@ export default () => {
             msg.warning(t('tip.switchNetwork'));
             hooks.wallet.switchChain();
           } else {
-            if (env.VITE_ENV !== 'production') console.log(otherParams);
+            if (env.VITE_ENV !== 'prod') console.log(otherParams);
             msg.error(error);
           }
         });
@@ -104,7 +104,7 @@ export default () => {
         return res as any;
       } catch (e) {
         console.log(e);
-        if (env.VITE_ENV !== 'production') console.log(params);
+        if (env.VITE_ENV !== 'prod') console.log(params);
 
         return undefined;
       }

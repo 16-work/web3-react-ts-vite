@@ -1,3 +1,5 @@
+import { useDebounce } from 'ahooks';
+
 /** Props */
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur' | 'onFocus'> {
   value: string | number;
@@ -9,7 +11,7 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCha
 /** Component */
 export const InputNum = (props: Props) => {
   /** Params */
-  const debouncedValue = ahooks.debounce(formatInputLocaleString(props.value ?? ''), { wait: 10 }); // 防止中/日/韩输入法下，onChange多次触发导致格式化多次
+  const debouncedValue = useDebounce(formatInputLocaleString(props.value ?? ''), { wait: 10 }); // 防止中/日/韩输入法下，onChange多次触发导致格式化多次
 
   /* Template */
   return (

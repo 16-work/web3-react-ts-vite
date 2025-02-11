@@ -1,44 +1,35 @@
 import { useInit } from '@/hooks/init';
 import { LayoutFooter } from './components/LayoutFooter';
-import { NavScreenL } from './components/LayoutNav/NavScreenL';
-import { NavScreenS } from './components/LayoutNav/NavScreenS';
+import { LayoutNav } from './components/LayoutNav';
 
 /** Component */
 export const Layout = () => {
   /** Retrieval */
+  const { setIsHitBottom } = store.global();
+
+  /** Params */
+
+  /** Actions */
   useInit();
-  const { screenType, setIsHitBottom } = store.global();
 
   /** Template */
   return (
-    <>
-      {/* 上下布局 */}
-      <div className="pc-min-w h-screen flex flex-col overflow-hidden">
-        {/* layout-nav */}
-        {screenType >= SCREEN.MD ? <NavScreenL /> : <NavScreenS />}
+    <div id="layout">
+      <Scrollbar id="layout-scroll" autoHeight={false} onHitBottom={(v) => setIsHitBottom(v)}>
+        {/* nav */}
+        <LayoutNav />
 
-        <div id="drawer-root" className="relative flex-1 overflow-hidden">
-          <Scrollbar autoHeight={false} className="scroll-box w-full h-full absolute" onHitBottom={(v) => setIsHitBottom(v)}>
-            {/* animation */}
-            <div className="page-min-h">
-              <AnimationRoute>
-                {/* routes */}
-                <Outlet />
-              </AnimationRoute>
-            </div>
-
-            {/* footer */}
-            <LayoutFooter />
-          </Scrollbar>
+        {/* main */}
+        <div id="layout-main">
+          <AnimationRoute>
+            {/* routes */}
+            <Outlet />
+          </AnimationRoute>
         </div>
-      </div>
 
-      {/* 左右布局 */}
-      {/* <div className="h-screen flex overflow-hidden">
-        <AnimationRoute>
-          <Outlet />
-        </AnimationRoute>
-      </div> */}
-    </>
+        {/* footer */}
+        <LayoutFooter />
+      </Scrollbar>
+    </div>
   );
 };

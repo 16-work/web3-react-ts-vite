@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 const theme = { accentColor: 'rgb(var(--cus-primary-1))' }; // 主题
 
 /** Component */
-export const WalletProvider = (props: { children: ReactNode }) => {
+export const ProviderWallet = (props: { children: ReactNode }) => {
   /** Retrieval */
   const { i18n } = useTranslation();
 

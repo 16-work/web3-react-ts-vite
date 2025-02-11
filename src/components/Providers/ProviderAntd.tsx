@@ -9,7 +9,7 @@ interface Props {
 }
 
 /** Component */
-export const AntdProvider = (props: Props) => {
+export const ProviderAntd = (props: Props) => {
   /** Retrieval */
   const { i18n } = useTranslation();
 

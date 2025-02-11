@@ -21,7 +21,7 @@ export const PagerSimple = (props: Props) => {
         </Button>
 
         {/* page */}
-        <span className="-mb-4 mx-20 text-common-1 font-xl">{props.page}</span>
+        <span className="mx-20 text-common-1 font-xl">{props.page}</span>
 
         {/* btn: next */}
         <Button className="group inline-block p-6 rounded-8 duration-300" disabled={!props.hasMore} onClick={() => props.onChange(props.page + 1)}>

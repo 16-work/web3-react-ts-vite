@@ -10,7 +10,7 @@ interface Props {
 /** Component */
 export const InputSearch = (props: Props) => {
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     isFocus: false,
     value: props.value,
   });
@@ -22,7 +22,7 @@ export const InputSearch = (props: Props) => {
   }, [props.value]);
 
   // 聚焦时按回车键时搜索
-  ahooks.updateEffect(() => {
+  useUpdateEffect(() => {
     const onEnterPress = (event: KeyboardEvent) => {
       if (event.key === 'Enter') props.onSearch && props.onSearch(state.value);
     };

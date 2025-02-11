@@ -13,7 +13,7 @@ export const CountDownFlip = (props: Props) => {
   const { t } = useTranslation();
 
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     status: '' as ActiveStatus,
   });
 
@@ -29,7 +29,7 @@ export const CountDownFlip = (props: Props) => {
       onLive={() => (state.status = 'Live')}
       onEnd={() => (state.status = 'Ended')}
       children={(d, h, m, s) => (
-        <div className="absolute position-center flex-align-x text-common-1 font-2xl">
+        <div className="flex-align-x text-common-1 font-2xl">
           {/* h */}
           <FlipUnit time={d * 24 + h} type="h" />
           <span className="-mb-4 ml-10 mr-20 font-2xl">{t('common.h')}</span>
@@ -56,7 +56,7 @@ interface FlipUnitProps {
 const FlipUnit = (props: FlipUnitProps) => {
   /** Params */
   const flipBoxRef = useRef<HTMLDivElement>(null);
-  const state = ahooks.reactive({
+  const state = useReactive({
     isInit: false,
   });
 
@@ -71,7 +71,7 @@ const FlipUnit = (props: FlipUnitProps) => {
   }, [props.time]);
 
   /** Actions */
-  ahooks.updateEffect(() => {
+  useUpdateEffect(() => {
     state.isInit = true;
 
     if (flipBoxRef.current) {

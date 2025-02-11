@@ -17,7 +17,7 @@ export const Img = (props: Props) => {
   /** Params */
   const { defaultImg, hideSkeleton, className, ...aImgProps } = props;
 
-  const state = ahooks.reactive({
+  const state = useReactive({
     isLoading: true,
     isError: false,
   });

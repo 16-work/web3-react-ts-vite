@@ -82,7 +82,7 @@ export const Table = (props: Props) => {
     };
   }, [props.classNames.type]);
 
-  const state = ahooks.reactive({
+  const state = useReactive({
     activeSortIndex: props.sort?.defaultActiveSort?.index ?? -1,
     sort: props.sort?.defaultActiveSort?.sort as 'asc' | 'desc' | '',
   });
@@ -91,7 +91,7 @@ export const Table = (props: Props) => {
   return (
     <div className={`${classNames.table}`}>
       {/* thead */}
-      {(screenType > SCREEN.MD || props.other?.alwaysFullyDisplay) && (
+      {(screenType >= SCREEN.MD || props.other?.alwaysFullyDisplay) && (
         <>
           <div className={classNames.thead}>
             {props.elements.labels.map((label, index) => (
@@ -125,7 +125,12 @@ export const Table = (props: Props) => {
             {!props.other?.rowTo && (
               <div className={classNames.row}>
                 {props.elements.cols(rowNode, rowIndex).map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
+                  <TCol
+                    key={colIndex}
+                    label={props.elements.labels[colIndex]}
+                    className={classNames.col[colIndex]}
+                    alwaysFullyDisplay={props.other?.alwaysFullyDisplay}
+                  >
                     {col}
                   </TCol>
                 ))}
@@ -149,7 +154,7 @@ export const Table = (props: Props) => {
         {props.elements.skeletons &&
           !props.state.isInit &&
           props.state.isLoading &&
-          Array.from({ length: screenType > SCREEN.MD ? 4 : 2 }).map((_, index) => (
+          Array.from({ length: screenType >= SCREEN.MD ? 4 : 2 }).map((_, index) => (
             <div key={index}>
               {/* hr */}
               {index !== 0 && <div className={classNames.hr}></div>}

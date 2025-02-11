@@ -3,7 +3,7 @@ import { useReactive } from 'ahooks';
 import { Options, Service, Result } from 'ahooks/lib/useRequest/src/types';
 
 /* loading -> isLoading & 调整onError位置 */
-export function newUseRequest<TData, TParams extends any[]>(
+export function useCusRequest<TData, TParams extends any[]>(
   service: Service<TData, TParams>,
   onError: Options<TData, TParams> | ((e: Error, params: any) => void) = {},
   options: Options<TData, TParams> = {}

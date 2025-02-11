@@ -17,7 +17,7 @@ export const VerifyTip = () => {
   }, []);
 
   // 更新token关闭
-  ahooks.updateEffect(() => {
+  useUpdateEffect(() => {
     if (usersToken[account.address?.toLowerCase() ?? ''] && isInit) toast.dismiss?.();
   }, [usersToken, account.address]);
 

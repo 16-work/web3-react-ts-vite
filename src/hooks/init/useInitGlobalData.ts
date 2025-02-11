@@ -11,7 +11,7 @@ export const useInitGlobalData = () => {
   }, []);
 
   // 初始化token icons
-  ahooks.asyncEffect(async () => {
+  useAsyncEffect(async () => {
     const res = await api.token.fetchList({ page: 1, pageSize: 9999 });
 
     const list: Record<string, string> = {};
@@ -23,7 +23,7 @@ export const useInitGlobalData = () => {
   }, []);
 
   // 轮询美元单价
-  ahooks.request(
+  useRequest(
     async () => {
       /* main */
       const res = await api.common.fetchUSDTUnitPrice();

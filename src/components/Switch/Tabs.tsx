@@ -36,7 +36,7 @@ export const Tabs = (props: Props) => {
     return styleType[props.type ?? 'base'];
   }, [props.type]);
 
-  const state = ahooks.reactive({
+  const state = useReactive({
     colWidth: 0,
     colHeight: 0,
   });

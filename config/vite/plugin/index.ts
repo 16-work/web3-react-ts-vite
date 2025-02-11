@@ -15,7 +15,7 @@ export const setPlugins = (env: MetaEnv) => {
   plugins.push(...setAutoImport());
   plugins.push(setSvg());
   plugins.push(setCompression());
-  if (env.VITE_ENV === 'production') plugins.push(nodePolyfills());
+  if (env.VITE_ENV === 'prod') plugins.push(nodePolyfills());
 
   return plugins;
 };

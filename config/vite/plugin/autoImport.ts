@@ -23,7 +23,6 @@ export const setAutoImport = () => {
           '@/hooks/useForm.ts': ['useForm'],
           'react-i18next': ['useTranslation'],
           '@/utils/localCache': ['localCache'],
-          '@/utils/ahooks/index.ts': ['ahooks'],
           '@/utils/yup.ts': [['default', 'yup']],
           '@/hooks/useAccount.ts': ['useAccount'],
           '@/utils/notification': ['toast', 'msg'],
@@ -33,6 +32,7 @@ export const setAutoImport = () => {
           '@/utils/parseLocaleToken': ['parseLocaleToken'],
           '@/constants/chain/index.ts': ['CURRENCY_SYMBOL'],
           '@/utils/bignumber.ts': [['default', 'BigNumber']],
+          '@/utils/ahooks/index.ts': ['useReactive', 'useRequest', 'useLockFn', 'useAsyncEffect', 'useUpdateEffect'],
         },
       ],
 

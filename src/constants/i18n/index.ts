@@ -1,12 +1,12 @@
 import i18n from 'i18next';
-import { LANGUAGE, languageOptions } from './config.ts';
+import { LANGUAGE, supportLanguages } from './config.ts';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // 定义一个空对象来存储导入的模块
 const resources: { [key: string]: any } = {};
-languageOptions.map((item) => {
-  resources[item.value] = { translation: {} };
+Object.keys(supportLanguages).map((key) => {
+  resources[key] = { translation: {} };
 });
 
 // 动态导入 ./language 目录下的所有 .ts 文件

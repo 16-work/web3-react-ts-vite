@@ -33,8 +33,25 @@ export const useForm = <T extends Record<string, any>>(schema: Record<string, yu
 
   /** Actions */
   // 语言变化时刷新错误信息
-  ahooks.updateEffect(() => {
-    trigger();
+  useUpdateEffect(() => {
+    yup.setLocale({
+      mixed: {
+        required: ({ label }) => t('tip.enter', { label }),
+        notType: ({ label, type }) => t('tip.type', { label, type }),
+      },
+      number: {
+        positive: ({ label }) => t('tip.positive', { label }),
+        integer: ({ label }) => t('tip.integer', { label }),
+      },
+      string: {
+        max: ({ max }) => t('tip.maxCharacters', { max }),
+        min: ({ min }) => t('tip.minCharacters', { min }),
+      },
+    });
+
+    setTimeout(() => {
+      trigger();
+    }, 0);
   }, [t]);
 
   // 修改值

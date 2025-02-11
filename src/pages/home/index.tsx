@@ -7,9 +7,5 @@ export const PageHome = () => {
   /** Actions */
 
   /** Template */
-  return (
-    <div className="page-home    w">
-      <h1 className="font-lg">Home</h1>
-    </div>
-  );
+  return <div className="page-home w">home</div>;
 };

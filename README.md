@@ -62,8 +62,8 @@ config
   --env
     --env.d.ts // 声明环境变量类型
     --.env.dev // 开发环境变量
-    --.env.devProd // 测试环境变量
-    --.env.production // 生产环境变量
+    --.env.test // 测试环境变量
+    --.env.prod // 生产环境变量
     --.env.mock // 虚拟环境变量(无接口时用)
 ```
 
@@ -82,7 +82,7 @@ VITE_API_URL = 'http://dev-net.com/api'
 
 ```ts
 declare interface MetaEnv {
-    VITE_ENV: 'dev' | 'production' | 'mock'; // 这个值最好不要删掉(除非你知道要改什么)
+    VITE_ENV: 'dev' | 'test' | 'prod' | 'mock'; // 这个值最好不要删掉(除非你知道要改什么)
     VITE_PORT: number;
     VITE_API_URL: string;
 }
@@ -376,11 +376,11 @@ console.log(screenType > SCREEN.MD);
 
 
 
-#### 4.2 尺寸适配
+#### 4.2 响应式方案
 
 ```
 --src
-  --asset
+  --assets
     --css
       --base.scss
 ```
@@ -454,49 +454,34 @@ html {
 
 
 
-#### 4.3 安全区间
-
-> 相关配置在`@/assets/css/common.scss`
->
-> ???处请自行调整为需要的尺寸
-
-
-
-**横向滚动条区间：**
+#### 4.3 布局配置
 
 ```scss
-// PC端屏幕最小宽度（防止x轴出现双重滚动条）
-.pc-min-w {
-  @apply md:min-w-???; 
+// @/assets/css/layout.scss
+/* 顶部导航配置 */
+#layout-nav {
+  @apply max-w-1650  /* 最大宽 */
+  xs:h-80 md:h-60  /* 导航高度(修改后,需要同步修改第11行) */
+  xs:px-20 md:px-40;  /* 安全边距 */
 }
-```
 
+/* 页面主体配置 */
+#layout-main {
+  @apply xs:min-h-[calc(100vh-50px)] md:min-h-[calc(100vh-80px)] /* 最小高度 = 100vh - 页脚高度 (移动端用了2倍图，这里计算要/2；别用ts设置,否则开始时会屏闪) */
+  xs:pt-100 md:pt-80;  /* 距离顶部的距离 = 导航高度 + 距离顶部的边距 */
 
-
-**版心：**
-
-```scss
-// 版心(这里最好别加margin-y，防止有些奇怪的地方要用w时还得!my)
-.w {
-  @apply xs:w-full pc-min-w relative z-[1] mx-auto 
-         md:max-w-??? xs:px-??? md:px-???;
+  // 版心
+  .w {
+    @apply max-w-1340  /* 最大宽 */
+    xs:px-20 md:px-40;  /* 安全边距 */
+  }
 }
-// 顶部导航版心
-.layout-nav-w {
-  @apply w-full mx-auto 
-         max-w-??? xs:px-??? md:px-???;
-}
-```
 
-
-
-**页面最小高度：**
-
-请根据页首和页尾高度自行调整???值
-
-```scss
-.page-min-h {
-  @apply xs:min-h-[calc(100vh-???px)] md:min-h-[calc(100vh-???px)];
+/* 页脚配置 */
+#layout-footer {
+  @apply max-w-1340  /* 最大宽 */
+  xs:h-100 md:h-80  /* 页脚高度(修改后,需要同步修改第10行) */
+  pt-20 xs:px-20 md:px-40;  /* 安全边距 */
 }
 ```
 
@@ -515,7 +500,7 @@ html {
 
 	  // 下面两个文件不用管，会自动生成
       --default.scss
-      --index.css
+      --index.ts
 ```
 
 
@@ -755,57 +740,57 @@ t('工作表名.变量名')
 ```ts
 // @/constants/i18n/config.ts
 /* 支持的语言 */
-export const languageType = ['zh-CN', 'zh-TW', 'en'];
-
-/* 可选的语言 */
-export const languageOptions = [
-  { label: 'English', value: 'en' },
-  { label: '中文', value: 'zh-TW' },
-];
-
-/* 需要转换的语言 */
-export const convertLanguageMap: Record<string, string> = {
-  'zh-CN': 'zh-TW', // 部分项目会要求将简中转为繁中
+export const supportLanguages = {
+  en: 'English',
+  'zh-CN': '简体中文',
+  // 'zh-TW': '繁体中文',
 };
 
-/* 默认语言方案 */
-const plan: number = 1;
+export const languageConfig = {
+  /* 初始语言 */
+  initLanguage: 'en',
 
-/* 系统语言不在支持列表内时，默认显示的语言 */
-const finishLanguage = 'en';
+  /* 默认语言: 必定支持的语言 */
+  defaultLanguage: 'en',
+
+  /** 默认语言方案
+   * 方案1：默认为指定语言
+   * 方案2: 默认跟随浏览器语言（支持语言自动转换）
+   */
+  plan: 1,
+
+  /* 需要转换的语言 */
+  convertLanguageMap: {
+    // 'zh-CN': 'zh-TW', // 部分项目会要求将简中转为繁中
+  } as Record<string, string>,
+};
 ```
 
 
 
 #### 5.3 语言转换
 
-项目示例开启了zh-CN转zh-TW，如果希望关闭该设置，需要进行以下操作：
+**举例：**zh-CN转zh-TW
 
-- 启用简中可选
-
-  ```ts
-  // @/constants/i18n/config.ts
-  export const languageOptions = [
-    { label: 'English', value: 'en' },
-    { label: '简中', value: 'zh-CN' },
-    { label: '繁中', value: 'zh-TW' },
-  ];
-  ```
-
-- 注释转换项
+- 支持zh-TW
 
   ```ts
   // @/constants/i18n/config.ts
-  export const convertLanguageMap: Record<string, string> = {
-    // 'zh-CN': 'zh-TW', // 部分项目会要求将简中转为繁中
+  export const supportLanguages = {
+    'zh-TW': '繁体中文',
   };
   ```
 
-- 开启zh-CN文件生成
+- 添加转换项
 
   ```ts
-  // @/constants/i18n/script/excelToLang.js
-  const generateList = ['en', 'zh-CN', 'zh-TW'];
+  // @/constants/i18n/config.ts
+  export const languageConfig = {
+    // ...
+    convertLanguageMap: {
+      'zh-CN': 'zh-TW',
+    } as Record<string, string>,
+  };
   ```
 
 - 重新生成语言文件
@@ -818,10 +803,10 @@ const finishLanguage = 'en';
 
 #### 5.4 第三方组件语言
 
-一些第三方组件的语言需要单独配置，举例见`AntdProvider.tsx`和`WalletProvider.tsx`
+一些第三方组件的语言需要单独配置，举例见`ProviderAntd.tsx`和`ProviderWallet.tsx`
 
 ```ts
-// @/components/Base/AntdProvider.tsx
+// @/components/Providers/ProviderAntd.tsx
 import en from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import zhTW from 'antd/locale/zh_TW';
@@ -841,7 +826,7 @@ import zhTW from 'antd/locale/zh_TW';
 ```
 
 ```ts
-// @/components/Wbe3/WalletProvider.tsx
+// @/components/Providers/ProviderWallet.tsx
   const locale = useMemo(() => {
     switch (i18n.language) {
       case 'zh-CN':
@@ -1060,7 +1045,7 @@ usersToken & setUsersToken 用户token列表
 #### 8.1 响应式数据
 
 ```ts
-const state = ahooks.reactive({
+const state = useReactive({
   变量名: 值
 });
 
@@ -1073,7 +1058,7 @@ state.变量名 = 新值;
 #### 8.2 异步请求
 
 ```ts
-const { run: 方法名, isLoading } = ahooks.request(
+const { run: 方法名, isLoading } = useRequest(
     async () => {
         /* before */
     
@@ -1096,7 +1081,7 @@ const { run: 方法名, isLoading } = ahooks.request(
 
 ```ts
 // isLoading是局部加载状态，task是非局部加载状态(可外部控制)
-const { run: 方法名, isLoading, task } = ahooks.lockFn(async () => {
+const { run: 方法名, isLoading, task } = useLockFn(async () => {
     /* before */
     
 
@@ -1111,7 +1096,6 @@ const { run: 方法名, isLoading, task } = ahooks.lockFn(async () => {
 **其它：**
 
 - [文档](https://ahooks.js.org/zh-CN/hooks/use-request/index)
-- 使用时都是`ahooks.去掉use的hook名`
 
 
 
@@ -1143,7 +1127,7 @@ import { ContextDemo, contextInitValue } from '@/constants/context/demo';
 /** Component */
 export const Father = () => {
   /** Params */
-  const context = ahooks.reactive({ ...contextInitValue });
+  const context = useReactive({ ...contextInitValue });
 
   /** Template */
   return (
@@ -1225,7 +1209,7 @@ export const DEFAULT_CHAIN = {
 ...
 
 // 支持的链（不要直接用chain[]，因为contracts那里要用到id的类型提示）
-export const SUPPORT_CHAINS = env.VITE_ENV === 'production' ? [DEFAULT_CHAIN.PROD.id, chains.其它链n主网.id] : [DEFAULT_CHAIN.DEV.id, chains.其它链n测试网.id];
+export const SUPPORT_CHAINS = env.VITE_ENV === 'prod' ? [DEFAULT_CHAIN.PROD.id, chains.其它链n主网.id] : [DEFAULT_CHAIN.DEV.id, chains.其它链n测试网.id];
 
 // 链图标
 export const CHAINS_ICON: Record<number, string> = {
@@ -1368,7 +1352,7 @@ await 合约方法()
 
 ```tsx
 const { 写合约方法名 } = use合约名();
-const { run, task } = ahooks.lockFn(async () => {
+const { run, task } = useLockFn(async () => {
     await 写合约方法名(task, { 参数1: 1, 参数n: 'n' });
 });
 ```
@@ -1429,6 +1413,7 @@ useEffect(() => {
 --src
   --components // 该目录下的组件(除Feature内的)都会被收录到auto-import里
     --Feature // 通用业务组件目录(该目录下的组件不会被收录到auto-import里)
+      --FormDemo.tsx // 表单验证示例
     
     --Animation // 动画组件
       --AnimationBox.tsx // 动画盒子(让元素渐入渐出)
@@ -1436,7 +1421,6 @@ useEffect(() => {
       --AnimationRoute.tsx // 路由动画
 
     --Base // 基础组件
-      --AntdProvider.tsx // Antd全局配置
       --Button.tsx // 按钮
       --Copy.tsx // 复制
       --Drawer.tsx // 抽屉
@@ -1478,6 +1462,11 @@ useEffect(() => {
       --PopoverText.tsx // 文本弹出提示
       --PopoverTip.tsx // 解释弹出提示
 
+    --Providers
+      --index.tsx
+      --ProviderAntd.tsx // Antd配置
+      --ProviderWallet.tsx // 钱包配置
+
     --LoadMore // 加载更多
       --AllDataScrollLoad.tsx // 无限滚动(列表只取一次且超多条数据时可以考虑用)
 
@@ -1497,7 +1486,6 @@ useEffect(() => {
    
     --Web3 // Web3组件
       --VerifyTip // 验证提示
-      --WalletProvider.tsx // 钱包
 ```
 
 
@@ -1520,7 +1508,7 @@ export const TableSample = () => {
   /** Retrieval */
 
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     list: [
       { id: 1, name: 'Tom', age: 18 },
       { id: 2, name: 'Amy', age: 20 },
@@ -1574,7 +1562,7 @@ export const TableSample = () => {
   const { cols, skeletons } = TRow();
 
   /** Params */
-  const state = ahooks.reactive({
+  const state = useReactive({
     list: [
       { id: 1, name: 'Tom', age: 18 },
       { id: 2, name: 'Amy', age: 20 },
