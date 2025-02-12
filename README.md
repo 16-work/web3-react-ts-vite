@@ -1234,31 +1234,23 @@ hooks.wallet.switchChain()
 
 ### 3. 合约
 
-#### 3.1 导入合约
+#### 3.1 导入IDL
 
-- 往`@/constants/abi`目录下加入`合约名.ts`
-
-  ```ts
-  // @/constants/abi/合约名.ts
-  export const ABI名 = [...];
-  ```
-
-- 设置合约地址
+- 导入IDL
 
   ```ts
-  // @/constants/contracts.ts
-  export const contracts = {
-    合约名: {
-      [DEFAULT_CHAIN.PROD.id]: '主网合约地址',
-      [DEFAULT_CHAIN.DEV.id]: '测试网合约地址',
-        
-      [chains.其它链n主网.id]: '主网合约地址',
-      [chains.其它链n测试网.id]: '测试网合约地址',
-    },
-  } as const satisfies Record<string, Record<(typeof SUPPORT_CHAINS)[number], `0x${string}`>>;
+  // @/constants/idl/index.ts
+  export const IDL = {...};
   ```
 
+- 复制IDL的值作为类型
 
+  ```ts
+  // @/constants/idl/type.ts
+  export type IDLType = IDL的值;
+  ```
+  
+  
 
 #### 3.2 使用合约Hook
 
@@ -1268,22 +1260,27 @@ hooks.wallet.switchChain()
 
 ```ts
 // @/hooks/contract/use合约名.ts
-import { ABI名 } from '@/constants/abi/合约名';
-import { contracts } from '@/constants/contracts';
+import { useAnchorWallet } from '@solana/wallet-adapter-react';
+import { useAnchorProvider } from './useAnchorProvider';
+import { useProgram } from './useProgram';
+import { TransactionInstruction } from '@solana/web3.js';
+import { useContract } from '.';
+import { Task } from '@/store/global/types';
 
-/** Hook */
 export const use合约名 = () => {
+  /** Retrieval */
+  const { program } = useProgram();
+  const wallet = useAnchorWallet();
+  const { writeContract } = useContract();
+  const anchorPriovider = useAnchorProvider();
+
   /** Params */
-  const contractConfig = {
-    address: contracts.合约名 | Address, // address也可以传普通的合约地址(不会根据chainId变化)
-    abi: ABI名,
-  };
 
   /** Actions */
   
 
   /** Return */
-  return {  };
+  return { };
 };
 ```
 
@@ -1292,60 +1289,40 @@ export const use合约名 = () => {
 ```ts
 // @/hooks/contract/use合约名.ts
 export const use合约名 = () => {
-  ...
-  
+  // ...
+
   /** Actions */
-  // 写合约 (stateMutability = 'nonpayable' | 'payable')
-  const writeFunc = (task: Task, params: { 参数1: any, 参数n: any }, value?: bigint) => {
-    return hooks.contract.write(task, {
-      ...contractConfig,
-      functionName: 'functionName', // 见合约方法的name
-      args: [params.参数1, params.参数n], // 见inputs
-      value, // stateMutability: 'payable' 时需要传入该参数
-    });
-  };
+  const 写合约方法名 = useCallback(
+    async (task: Task, args: any, accountParams: any) => {
+      if (!anchorPriovider || !wallet || !program) return;
 
-  // 读合约 (stateMutability = 'view')
-  const readFunc = async (params: { 参数1: any, 参数n: any }) => {
-    const res = await hooks.contract.read({
-      ...contractConfig,
-      functionName: 'functionName', // 见合约方法的name
-      args: [params.参数1, params.参数n], // 见inputs
-    });
+      const instructions: TransactionInstruction[] = [];
+      instructions.push(
+        await program.methods
+          .functionName(...args)
+          .accounts({
+            ...accountParams,
+            signer: wallet.publicKey,
+            program: program.programId,
+          })
+          .instruction()
+      );
 
-    return res;
-  };
-    
-  // 批量请求
-  const multicallFunc = async (args: any[]) => {
-    const res = await hooks.contract.multicall([
-      {
-        ...contractConfig,
-        functionName: 'functionName1',
-        args,
-      },
-      // 下面的address就是普通的合约地址
-      {
-        address: '0x...',
-        abi: ABIDemo,
-        functionName: 'functionName2',
-        args,
-      },
-    ]);
-
-    return res;
-  };
+      return await writeContract(task, { instructions });
+    },
+    [anchorPriovider, program, wallet, writeContract]
+  );
 
   /** Return */
-  return { writeFunc, readFunc, multicallFunc };
+  return { 写合约方法名 };
 };
 ```
 
 **调用合约：**
 
 ```ts
-const { 合约方法 } = use合约名();
-await 合约方法()
+const { 合约方法名 } = use合约名();
+await 合约方法名()
 ```
 
 **配合task获取成功状态：**
@@ -1355,17 +1332,6 @@ const { 写合约方法名 } = use合约名();
 const { run, task } = useLockFn(async () => {
     await 写合约方法名(task, { 参数1: 1, 参数n: 'n' });
 });
-```
-
-```ts
-const 写合约方法名 = (task: Task, params: { 参数1: any, 参数n: any }, value?: bigint) => {
-  return hooks.contract.write(task, {
-    ...contractConfig,
-    functionName: 'functionName',
-    args: [params.参数1, params.参数n],
-    value,
-  });
-};
 ```
 
 ```tsx

@@ -2,9 +2,12 @@ import { AnchorProvider, Provider, getProvider, setProvider } from '@coral-xyz/a
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
 import { useMemo } from 'react';
 
-const useAnchorProvider = (withWallet = true) => {
-  const { connection } = useConnection();
+export const useAnchorProvider = (withWallet = true) => {
+  /** Retrieval */
   const wallet = useAnchorWallet();
+  const { connection } = useConnection();
+
+  /** Return */
   return useMemo(() => {
     let provider: Provider;
     if (!wallet) return;
@@ -23,5 +26,3 @@ const useAnchorProvider = (withWallet = true) => {
     return provider;
   }, [connection, wallet, withWallet]);
 };
-
-export default useAnchorProvider;

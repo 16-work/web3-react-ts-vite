@@ -1,14 +1,17 @@
-import useAnchorProvider from './useAnchorProvider';
+import { useAnchorProvider } from './useAnchorProvider';
 import { Task } from '@/store/global/types.ts';
 import { simulatePrepareTransaction } from '@/utils/transaction';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { TransactionInstruction } from '@solana/web3.js';
 
-export default function useContract() {
-  const anchorPriovider = useAnchorProvider();
-  const wallet = useAnchorWallet();
-  const { submitTransaction } = store.transaction();
+export const useContract = () => {
+  /** Retrieval */
   const { t } = useTranslation();
+  const wallet = useAnchorWallet();
+  const anchorPriovider = useAnchorProvider();
+  const { submitTransaction } = store.transaction();
+
+  /** Actions */
   const writeContract = useCallback(
     async (
       task: Task,
@@ -60,7 +63,8 @@ export default function useContract() {
     [anchorPriovider, submitTransaction, t, wallet]
   );
 
+  /** Return */
   return {
     writeContract,
   };
-}
+};
