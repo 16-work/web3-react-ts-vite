@@ -1689,7 +1689,7 @@ format.bignum('12345678910', 2, true, "K"); // 12.35 B
 ```ts
 // 代币价格格式化（示例currencyUsdtUnitPrice的单位是(usdt/currency)）
 format.token.usdt(代币价格, {
-    decimals?: 精度(默认18), 
+    decimals?: 精度(默认9), 
     bignumDecimals?: 格式化后小数位数, 
     isAbbr?: 是否开启数字缩写,
     abbrOrigin?: 大于指定值后开始缩写
@@ -1709,8 +1709,8 @@ format.token.usdt(token.price, { decimals: 0 })
  * 设 实参price 的单位是(currency/token)、实参amount的单位是(wei)
  * 套用上面公式(usdt/currency) * (currcncy/token) * (wei)= (usdt / token * wei )
  * 已知 目标totalPrice 的单位是(usdt)
- * 计算结果的单位还需要÷10^18后 才会和目标单位匹配
- * 因此：decimals为18(默认值)
+ * 计算结果的单位还需要÷10^9后 才会和目标单位匹配
+ * 因此：decimals为9(默认值)
 */
 format.token.usdt(BigNumber(total.price).times(token.amount), { isAbbr: true })
 ```
@@ -1718,7 +1718,7 @@ format.token.usdt(BigNumber(total.price).times(token.amount), { isAbbr: true })
 ```ts
 // 代币值精度格式化
 format.token.common(代币值(数量|价格...), {
-    decimals?: 精度(默认18), 
+    decimals?: 精度(默认9), 
     bignumDecimals?: 格式化后小数位数, 
     isAbbr?: 是否开启数字缩写,
     abbrOrigin?: 大于指定值后开始缩写
