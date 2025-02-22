@@ -1,3 +1,4 @@
+import { ORDER } from '@/types/common';
 import { ReactNode } from 'react';
 import { To } from 'react-router-dom';
 
@@ -52,8 +53,8 @@ interface Props {
   // 排序相关
   sort?: {
     sortFields: Record<number, string>; // 需要排序的字段 {index: field}
-    onSort: (field: string, sort: 'asc' | 'desc' | '') => void; // 切换排序
-    defaultActiveSort?: { index: number; sort: 'asc' | 'desc' }; // 默认激活的排序
+    onSort: (field: any, sort?: ORDER) => void; // 切换排序
+    defaultActiveSort?: { index: number; sort: ORDER }; // 默认激活的排序
   };
 
   // 其它
@@ -84,7 +85,7 @@ export const Table = (props: Props) => {
 
   const state = useReactive({
     activeSortIndex: props.sort?.defaultActiveSort?.index ?? -1,
-    sort: props.sort?.defaultActiveSort?.sort as 'asc' | 'desc' | '',
+    sort: props.sort?.defaultActiveSort?.sort,
   });
 
   /** Template */
@@ -100,7 +101,7 @@ export const Table = (props: Props) => {
                 <FieldSort
                   label={label}
                   isShowSortIcon={Boolean(props.sort && Object.entries(props.sort.sortFields).find((item) => Number(item[0]) === index))}
-                  sort={state.activeSortIndex === index ? state.sort : ''}
+                  sort={state.activeSortIndex === index ? state.sort : undefined}
                   onSort={(sort) => {
                     state.activeSortIndex = index;
                     state.sort = sort;
