@@ -13,10 +13,20 @@ export const Progress = (props: Props & Omit<ProgressProps, 'percent' | 'strokeC
   /** Retrieval */
 
   /** Params */
-  const { bgColor = 'rgba(255, 255, 255 , 0.2)', currentColor = 'rgb(var(--cus-primary-1))', ...params } = props;
+  const height = 'h-6';
+  const { className, bgColor = 'rgba(var(--cus-gray-900))', currentColor = 'rgb(var(--cus-primary-1))', ...params } = props;
 
   /** Actions */
 
   /** Template */
-  return <AProgress {...params} percent={Number(props.percent)} strokeColor={currentColor} trailColor={bgColor} showInfo={false} />;
+  return (
+    <AProgress
+      {...params}
+      className={`${height} ${className}`}
+      percent={Number(props.percent)}
+      strokeColor={currentColor}
+      trailColor={bgColor}
+      showInfo={false}
+    />
+  );
 };
