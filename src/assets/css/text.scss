@@ -34,7 +34,7 @@
 
 /* 超出省略 */
 .ellipsis-1 {
-  @apply overflow-ellipsis overflow-hidden whitespace-nowrap;
+  @apply inline-block overflow-ellipsis overflow-hidden whitespace-nowrap; // 作用元素没宽会失效
 }
 
 .ellipsis-2 {
