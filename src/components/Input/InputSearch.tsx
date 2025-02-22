@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 /** Props */
 interface Props {
   value: string;
@@ -14,6 +16,8 @@ export const InputSearch = (props: Props) => {
     isFocus: false,
     value: props.value,
   });
+
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
 
   /** Actions */
   // 同步值
@@ -33,27 +37,41 @@ export const InputSearch = (props: Props) => {
     return () => window.removeEventListener('keydown', onEnterPress);
   }, [state.isFocus]);
 
+  // 防抖
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    state.value = newValue;
+    props.onChange && props.onChange(newValue);
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(() => {
+        props.onSearch && props.onSearch(newValue);
+      }, 300)
+    );
+  };
+
   /** Template */
   return (
-    <div className={`relative ${props.className}`}>
-      {/* input */}
-      <input
-        className="input-1 w-full h-full pl-10 pr-40"
-        placeholder={props.placeholder}
-        value={state.value}
-        onChange={(e) => {
-          state.value = e.target.value;
-          props.onChange && props.onChange(e.target.value);
-        }}
-        onFocus={() => (state.isFocus = true)}
-        onBlur={() => (state.isFocus = false)}
-      />
-
+    <div className={`group relative flex-align-x gap-x-12 ${props.className}`}>
       {/* icon: search */}
       <Svg
         name="search"
-        className="w-20 absolute top-1/2 -translate-y-1/2 right-10 text-tip hover:text-primary cursor-pointer duration-300"
+        className="w-32 text-tip-1 group-hover:text-primary-1 cursor-pointer duration-300"
         onClick={() => props.onSearch && props.onSearch(state.value)}
+      />
+
+      {/* input */}
+      <input
+        className="base-input flex-1 h-full pr-40"
+        placeholder={props.placeholder}
+        value={state.value}
+        onChange={onChange}
+        onFocus={() => (state.isFocus = true)}
+        onBlur={() => (state.isFocus = false)}
       />
     </div>
   );
