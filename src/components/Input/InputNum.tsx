@@ -1,30 +1,42 @@
-import { useDebounce } from 'ahooks';
+import BigNumber from 'bignumber.js';
 
 /** Props */
-interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur' | 'onFocus'> {
+interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur' | 'onFocus' | 'max' | 'min'> {
   value: string | number;
   onChange: (newValue: string) => void;
   onBlur?: (newValue: string) => void;
   onFocus?: (newValue: string) => void;
+  max?: string | number | BigNumber;
+  min?: string | number | BigNumber;
 }
 
 /** Component */
 export const InputNum = (props: Props) => {
   /** Params */
-  const debouncedValue = useDebounce(formatInputLocaleString(props.value ?? ''), { wait: 10 }); // 防止中/日/韩输入法下，onChange多次触发导致格式化多次
+  const { max, min, ...params } = props;
+
+  /** Actions */
+  const getValue = (v: string) => {
+    let value = formatInputOnlyPositive(v.trim());
+    if (props.max && BigNumber(value).gt(props.max)) value = formatInputOnlyPositive(String(props.max));
+    if (props.min && BigNumber(value).lt(props.min)) value = formatInputOnlyPositive(String(props.min));
+    return value;
+  };
 
   /* Template */
   return (
     <input
-      {...props}
+      {...params}
       className={`base-input ${props.className}`}
-      value={debouncedValue}
-      onChange={(e) => props.onChange && props.onChange(formatInputOnlyPositive(e.target.value.trim()))}
+      value={formatInputLocaleString(props.value ?? '')}
+      onChange={(e) => {
+        props.onChange && props.onChange(getValue(e.target.value));
+      }}
       onBlur={(e) => {
-        props.onBlur && props.onBlur(formatInputOnlyPositive(e.target.value.trim()));
+        props.onBlur && props.onBlur(getValue(e.target.value));
       }}
       onFocus={(e) => {
-        props.onFocus && props.onFocus(formatInputOnlyPositive(e.target.value.trim()));
+        props.onFocus && props.onFocus(getValue(e.target.value));
       }}
     />
   );
