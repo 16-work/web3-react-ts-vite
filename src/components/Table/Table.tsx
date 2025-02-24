@@ -60,7 +60,7 @@ interface Props {
   // 其它
   other?: {
     rowTo?: (index: number) => To; // 行链接
-    hideLoading?: boolean; // 隐藏加载图标（频繁轮询的表格使用）
+    isFrequentPolling?: boolean; // 频繁轮询时隐藏加载图标
     alwaysFullyDisplay?: boolean; // 可以理解为: 是否一直展示为PC端样式
   };
 }
@@ -172,7 +172,7 @@ export const Table = (props: Props) => {
           ))}
 
         {/* load */}
-        {props.state.isLoading && props.state.isInit && !props.other?.hideLoading && <Loading />}
+        {props.state.isLoading && props.state.isInit && !props.other?.isFrequentPolling && <Loading />}
 
         {/* no data */}
         {props.state.list.length === 0 && !props.state.isLoading && <NoData />}
