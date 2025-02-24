@@ -460,7 +460,7 @@ html {
 // @/assets/css/layout.scss
 /* 顶部导航配置 */
 #layout-nav {
-  @apply max-w-1650  /* 最大宽 */
+  @apply max-w-1650  /* 导航最大宽 = 导航内容高度 + 左右安全边距 */
   xs:h-80 md:h-60  /* 导航高度(修改后,需要同步修改第11行) */
   xs:px-20 md:px-40;  /* 安全边距 */
 }
@@ -472,8 +472,8 @@ html {
 
   // 版心
   .w {
-    @apply max-w-1340  /* 最大宽 */
-    xs:px-20 md:px-40;  /* 安全边距 */
+    @apply max-w-1340  /* 页面最大宽 = 页面内容高度 + 左右安全边距 */
+    xs:px-20 md:px-40 pb-20;  /* 安全边距 */
   }
 }
 
@@ -481,7 +481,7 @@ html {
 #layout-footer {
   @apply max-w-1340  /* 最大宽 */
   xs:h-100 md:h-80  /* 页脚高度(修改后,需要同步修改第10行) */
-  pt-20 xs:px-20 md:px-40;  /* 安全边距 */
+  xs:px-20 md:px-40;  /* 安全边距 */
 }
 ```
 

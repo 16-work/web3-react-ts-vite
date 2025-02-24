@@ -60,7 +60,7 @@ export const Button = (props: Props) => {
           className={`
             h-fit flex-align-x px-0 outline-none 
             ${props.className} 
-            ${btnStatus === BtnStatus.CORRECT && (props.disabled || props.isLoading) ? 'opacity-30 cursor-not-allowed' : ''} 
+            ${btnStatus === BtnStatus.CORRECT && (props.disabled || props.isLoading) ? 'btn-disabled' : ''} 
           `}
           isLoading={false}
           onClick={btnClickFun}
@@ -82,7 +82,7 @@ export const Button = (props: Props) => {
           className={`
             w-fit h-fit relative flex-align-x justify-center px-0 outline-none overflow-hidden
             ${props.className} 
-            ${props.disabled || props.isLoading ? 'opacity-30 cursor-not-allowed' : ''} 
+            ${props.disabled || props.isLoading ? 'btn-disabled' : ''} 
           `}
         >
           {props.children}

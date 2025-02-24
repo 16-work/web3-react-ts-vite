@@ -18,5 +18,6 @@
 
 /* 禁用按钮 */ 
 .btn-disabled {
-  @apply base-btn border border-black bg-black/30 text-common-1;
+  @apply opacity-30;
+  cursor: not-allowed !important;
 }

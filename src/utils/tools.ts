@@ -58,6 +58,28 @@ export const tools = {
     };
   },
 
+  // 获取变化率颜色
+  getRadioInfo: (radio: string | number | BigNumber) => {
+    const value = BigNumber(radio);
+
+    if (value.lt(0))
+      return {
+        color: 'text-stress-1',
+        text: `${BigNumber(radio || 0).toFixed(2, 1)}%`,
+      };
+    else if (value.gt(0))
+      return {
+        color: 'text-relax-1',
+        text: `+${BigNumber(radio || 0).toFixed(2, 1)}%`,
+      };
+    else
+      return {
+        color: 'text-tip-1',
+        text: `${BigNumber(radio || 0).toFixed(2, 1)}%`,
+      };
+  },
+
+  // 安全除法
   safeDiv: (a: string | number, b: string | number): BigNumber => {
     if (new BigNumber(b).isEqualTo(0) || b === '0' || !b) {
       return new BigNumber(0);
