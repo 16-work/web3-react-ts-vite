@@ -16,7 +16,7 @@ export const FieldSort = (props: Props) => {
     <div
       className="flex-align-x"
       onClick={() => {
-        props.isShowSortIcon && props.onSort(props.sort === ORDER.ASC ? ORDER.DESC : props.sort === ORDER.DESC ? undefined : ORDER.ASC);
+        props.isShowSortIcon && props.onSort(props.sort === ORDER.ASC ? undefined : props.sort === ORDER.DESC ? ORDER.ASC : ORDER.DESC);
       }}
     >
       {/* label */}
