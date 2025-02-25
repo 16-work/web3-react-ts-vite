@@ -34,7 +34,7 @@
 
 /* 超出省略 */
 .ellipsis-1 {
-  @apply inline-block overflow-ellipsis overflow-hidden whitespace-nowrap; // 作用元素没宽会失效
+  @apply overflow-ellipsis overflow-hidden whitespace-nowrap; // 在多层grid/flex嵌套内如果省略失效，就给带有grid/flex的祖元素都加个min-w-0试下
 }
 
 .ellipsis-2 {
