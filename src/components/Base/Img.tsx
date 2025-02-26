@@ -18,7 +18,7 @@ interface Props {
 /** Component */
 export const Img = (props: Props) => {
   /** Params */
-  const { defaultImg, hideSkeleton, className, ...aImgProps } = props;
+  const { defaultImg, hideSkeleton, className, skeletonType, ...aImgProps } = props;
 
   const state = useReactive({
     isLoading: true,
@@ -36,7 +36,7 @@ export const Img = (props: Props) => {
     return props.className.match(/\b(w|h|absolute|reactive|fixed|m|rounded|shadow|aspect-square)\S*/g)?.join(' ');
   }, [props.className]);
 
-  const skeletonType = useMemo(() => {
+  const skeleton = useMemo(() => {
     const type = (props.skeletonType ?? DEFAULT_THEME.search('light') !== -1) ? 'dark' : 'light';
     return `skeleton-${type}`;
   }, [props.skeletonType]);
@@ -57,7 +57,7 @@ export const Img = (props: Props) => {
       {(!state.isError || (state.isError && defaultImgURL)) && (
         <AImage
           {...aImgProps}
-          rootClassName={state.isLoading ? `inline-block shrink-0 ${skeletonType} ${sizeClassName}` : props.className}
+          rootClassName={state.isLoading ? `inline-block shrink-0 ${skeleton} ${sizeClassName}` : props.className}
           className={state.isLoading ? 'hidden' : 'w-full !h-full'}
           preview={props.preview ?? false}
           fallback={defaultImgURL}
