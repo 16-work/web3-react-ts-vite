@@ -7,8 +7,8 @@ interface Props {
   // 显示图片：icon和contract 2选1
   icon?: string;
   contract?: string;
-
   preview?: boolean;
+  skeletonType?: 'light' | 'dark';
 }
 
 /** Component */
@@ -51,6 +51,7 @@ export const TokenIcon = (props: Props) => {
   /** Template */
   return (
     <Img
+      skeletonType={props.skeletonType}
       className={`${className}`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}
