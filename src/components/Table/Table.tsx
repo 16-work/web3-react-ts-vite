@@ -138,11 +138,18 @@ export const Table = (props: Props) => {
               </div>
             )}
 
-            {/* row: link */}
+            {/* row: link
+             * 里面有Button的话，Button要加上 e.preventDefault(); e.stopPropagation(); 否则Button会点不了
+             */}
             {props.other?.rowTo && (
               <Link to={props.other?.rowTo(rowIndex)} className={`${classNames.row} cursor-pointer`}>
                 {props.elements.cols(rowNode, rowIndex).map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
+                  <TCol
+                    key={colIndex}
+                    label={props.elements.labels[colIndex]}
+                    className={classNames.col[colIndex]}
+                    alwaysFullyDisplay={props.other?.alwaysFullyDisplay}
+                  >
                     {col}
                   </TCol>
                 ))}

@@ -1,4 +1,3 @@
-import { Popover } from 'antd';
 import { DropUser } from './DropUser';
 import { BtnUser } from './BtnUser';
 

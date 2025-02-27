@@ -7,7 +7,7 @@ interface Props {
   page: number;
   pageSize: number;
   total: number;
-  onSwitchPage: (page: number) => void;
+  onChangePage: (page: number) => void;
 
   isInit: boolean;
   isLoading: boolean;
@@ -30,13 +30,13 @@ export const BoxList = (props: Props) => {
       {props.children}
 
       {/* pager */}
-      <Pager page={props.page} pageSize={props.pageSize} total={props.total} onChange={props.onSwitchPage} className="py-20" />
+      <Pager page={props.page} pageSize={props.pageSize} total={props.total} onChange={props.onChangePage} className="py-20" />
 
       {/* loading */}
       {!props.isInit && props.isLoading && <Loading />}
 
       {/* no data */}
-      {props.isInit && !props.isLoading && props.total === 0 && <NoData />}
+      {props.isInit && props.total === 0 && <NoData />}
     </div>
   );
 };
