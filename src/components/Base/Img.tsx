@@ -5,11 +5,12 @@ import { Image as AImage } from 'antd';
 /** Props */
 interface Props {
   src: string;
+  /** 注：1.至少要有w；2.最好加上h或aspect属性，否则加载时高度会为0 */
   className: string;
 
   preview?: boolean; // 是否预览
   defaultImg?: string | 'empty' | 'token'; // 默认图片
-  skeletonType?: 'light' | 'dark';
+  skeletonType?: 'light' | 'dark'; // 骨架屏样式类型
   hideSkeleton?: boolean; // 是否隐藏骨架屏
   alt?: string;
 }
