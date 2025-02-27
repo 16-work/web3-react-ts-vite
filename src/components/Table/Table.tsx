@@ -12,7 +12,7 @@ const styleType = {
             gap-x-20 py-15 
             border-b-2 border-black 
             text-common-1 font-lg`,
-    tbody: `xs:min-h-200 md:min-h-250 relative 
+    tbody: `box-data relative 
             `,
     row: `grid xs:items-start md:items-center overflow-hidden
           gap-x-20 gap-y-10 xs:py-25 md:py-15 
@@ -182,7 +182,7 @@ export const Table = (props: Props) => {
         {props.state.isLoading && props.state.isInit && !props.other?.isFrequentPolling && <Loading />}
 
         {/* no data */}
-        {props.state.list.length === 0 && !props.state.isLoading && <NoData />}
+        {props.state.list.length === 0 && props.state.isInit && <NoData />}
       </div>
     </div>
   );

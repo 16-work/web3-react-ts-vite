@@ -20,7 +20,7 @@ export const Slider = (props: Props) => {
   /** Retrieval */
 
   /** Params */
-  const type = props.styleType ?? 'base';
+  const className = styleType[props.styleType ?? 'base'];
   const valueType = props.valueType ?? 'default';
 
   /** Actions */
@@ -41,9 +41,9 @@ export const Slider = (props: Props) => {
         formatter,
       }}
       classNames={{
-        root: styleType[type].track,
-        handle: styleType[type].handle,
-        track: styleType[type].activeArea,
+        root: className.track,
+        handle: className.handle,
+        track: className.activeArea,
       }}
     />
   );

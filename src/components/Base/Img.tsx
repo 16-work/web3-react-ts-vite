@@ -1,22 +1,25 @@
-import { Image as AImage } from 'antd';
 import IconDefaultToken from '@/assets/img/common/token-default.png';
 import { useReactive } from 'ahooks';
-import { DEFAULT_THEME } from '@/constants/common';
+import { Image as AImage } from 'antd';
 
 /** Props */
 interface Props {
   src: string;
+  /** 注：1.至少要有w；2.最好加上h或aspect属性，否则加载时高度会为0 */
   className: string;
 
   preview?: boolean; // 是否预览
   defaultImg?: string | 'empty' | 'token'; // 默认图片
-  skeletonType?: 'light' | 'dark';
+  skeletonType?: 'light' | 'dark'; // 骨架屏样式类型
   hideSkeleton?: boolean; // 是否隐藏骨架屏
   alt?: string;
 }
 
 /** Component */
 export const Img = (props: Props) => {
+  /** Retrieval */
+  const { theme } = store.global();
+
   /** Params */
   const { defaultImg, hideSkeleton, className, skeletonType, ...aImgProps } = props;
 
@@ -37,9 +40,9 @@ export const Img = (props: Props) => {
   }, [props.className]);
 
   const skeleton = useMemo(() => {
-    const type = (props.skeletonType ?? DEFAULT_THEME.search('light') !== -1) ? 'dark' : 'light';
+    const type = (props.skeletonType ?? theme.search('light') !== -1) ? 'dark' : 'light';
     return `skeleton-${type}`;
-  }, [props.skeletonType]);
+  }, [props.skeletonType, theme]);
 
   /** Template */
   return (
