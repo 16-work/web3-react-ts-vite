@@ -1,5 +1,3 @@
-import { DEFAULT_THEME } from '@/constants/common';
-
 /** Props */
 interface Props {
   className: string;
@@ -8,10 +6,14 @@ interface Props {
 
 /** Component */
 export const Skeleton = (props: Props) => {
+  /** Retrieval */
+  const { theme } = store.global();
+
+  /** Params */
   const skeletonType = useMemo(() => {
-    const type = (props.skeletonType ?? DEFAULT_THEME.search('light') !== -1) ? 'dark' : 'light';
+    const type = (props.skeletonType ?? theme.search('light') !== -1) ? 'dark' : 'light';
     return `skeleton-${type}`;
-  }, [props.skeletonType]);
+  }, [props.skeletonType, theme]);
 
   /** Template */
   return <div className={`${skeletonType} ${props.className}`}></div>;
