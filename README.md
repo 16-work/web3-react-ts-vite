@@ -608,16 +608,18 @@ pnpm theme
 --src
   --assets
     --css
-      --antd.scss // 第三方UI库(本项目使用antd)
-      --text.scss // 文字
-      --button.scss // 按钮
-      --input.scss // 输入框
-      --focus.scss // 激活样式
-      --position.scss // 定位
-      --gradient.scss // 渐变
       --animation.scss // 动画
+      --antd.scss // antd公共样式
+      --box.scss // 常用盒子
+      --button.scss // 按钮
+      --focus.scss // 激活样式
+      --gradient.scss // 渐变
+      --hr.scss // 水平线
+      --input.scss // 输入框
       --plugin.scss // 其它插件
-      
+      --position.scss // 位置
+      --shadow.scss // 阴影
+      --text.scss // 文字 
 ```
 
 

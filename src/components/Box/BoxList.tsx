@@ -25,7 +25,7 @@ export const BoxList = (props: Props) => {
 
   /** Template */
   return (
-    <div className={`relative min-h-250 ${props.className}`}>
+    <div className={`relative box-data ${props.className}`}>
       {/* list */}
       {props.children}
 

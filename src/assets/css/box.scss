@@ -1,0 +1,4 @@
+// 放数据的盒子的最小高度，防止no-data显示不下
+.box-data {
+  @apply xs:min-h-300 md:min-h-250;
+}
