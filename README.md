@@ -1459,7 +1459,7 @@ useEffect(() => {
       --PagerSimple.tsx // 无总数分页器
 
     --Popover 弹出提示
-      --PopoverText.tsx // 文本弹出提示
+      --Popover.tsx // 基础弹出提示
       --PopoverTip.tsx // 解释弹出提示
 
     --Providers
