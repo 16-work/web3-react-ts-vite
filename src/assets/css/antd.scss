@@ -96,43 +96,6 @@
 
 
 
-/* 分页器(简洁版) */
-.ant-pagination-simple {
-  display: flex;
-  align-items: center;
-  height: 30px !important;
-
-  li {
-    display: flex !important;
-    align-items: center !important;
-    height: 100% !important;
-  }
-
-  .ant-pagination-simple-pager {
-    @apply text-common-1;
-
-    input {
-      width: fit-content !important;
-      height: 100%;
-      margin-top: -5px;
-      background: transparent !important;
-      border: 1px solid #000 !important;
-      box-shadow: none;
-
-      &:hover {
-        border-color: rgb(var(--cus-primary-1)) !important;
-      }
-    }
-  }
-
-  // 箭头
-  .ant-pagination-item-link {
-    margin-top: -0.2rem;
-  }
-}
-
-
-
 /* 气泡框 */
 .ant-popover {
   // popover背景/圆角写这里,除非不要箭头了
