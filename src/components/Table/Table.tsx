@@ -182,7 +182,7 @@ export const Table = (props: Props) => {
         {props.state.isLoading && props.state.isInit && !props.other?.isFrequentPolling && <Loading />}
 
         {/* no data */}
-        {props.state.list.length === 0 && !props.state.isLoading && <NoData />}
+        {props.state.list.length === 0 && props.state.isInit && <NoData />}
       </div>
     </div>
   );
