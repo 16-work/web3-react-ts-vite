@@ -36,7 +36,7 @@ export const BoxList = (props: Props) => {
       {!props.isInit && props.isLoading && <Loading />}
 
       {/* no data */}
-      {props.isInit && !props.isLoading && props.total === 0 && <NoData />}
+      {props.isInit && props.total === 0 && <NoData />}
     </div>
   );
 };
