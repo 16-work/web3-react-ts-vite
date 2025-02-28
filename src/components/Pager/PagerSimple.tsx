@@ -8,7 +8,7 @@ interface Props {
 }
 
 /** Component
- * 无页数，只有左右翻页
+ * 无总页数，只有左右翻页
  */
 export const PagerSimple = (props: Props) => {
   /** Template */
