@@ -60,7 +60,7 @@ export const tools = {
     };
   },
 
-  // 获取变化率颜色
+  // 获取变化率颜色、文本
   getRadioInfo: (radio: string | number | BigNumber) => {
     const value = BigNumber(radio);
 
