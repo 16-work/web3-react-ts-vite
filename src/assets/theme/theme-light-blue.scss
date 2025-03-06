@@ -1,7 +1,8 @@
 $theme-name: 'theme-light-blue'; 
 
 // 修改后请运行 pnpm theme
-// 只用颜色变量的话可以只写这(eg. var(--cus-gray-100))
+// 如果变量在css和tailwind都能读到，颜色值格式要为: r, g, b 或 var(变量名)
+// 如果只有css需要读，可以直接写颜色值(eg.--cus-scrollbar)
 // 注意：不要用--c，会和antd冲突
 
 // 主色系
@@ -44,8 +45,9 @@ $theme-name: 'theme-light-blue';
   --text-tip-1: var(--cus-gray-500);
 }
 
-// 其它（这里的颜色如果不需要放在color.ts，颜色格式可随意）
+// 其它
 .other {
+  --cus-popover-1: 255, 255, 255;
   --cus-scrollbar: rgba(0, 0, 0, 0.15);
 }
 

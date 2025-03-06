@@ -98,20 +98,15 @@
 
 /* 气泡框 */
 .ant-popover {
-  // popover背景/圆角写这里,除非不要箭头了
-  $bg: #fff; 
+  // .ant-popover-arrow::after {
+  //   box-shadow: none !important;
+  // }
 
-  // 盒子
   .ant-popover-inner {
-    border-radius: 10px !important;
-
     padding: 0 !important;
-    background: $bg !important;
     overflow: hidden;
-  }
-  // 箭头
-  .ant-popover-arrow::before {
-    background: $bg !important;
+
+    // box-shadow: none !important;
   }
 }
 
