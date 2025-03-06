@@ -6,20 +6,20 @@ import { To } from 'react-router-dom';
 const styleType = {
   // 基础表格样式
   base: {
-    table: `h-full flex flex-col overflow-hidden 
+    table: `table-box    h-full flex flex-col overflow-hidden 
             rounded-20`,
-    thead: `grid 
+    thead: `table-thead    grid 
             gap-x-20 py-15 
             border-b-2 border-black 
             text-common-1 font-lg`,
-    tbody: `box-data relative 
+    tbody: `table-tbody    box-data relative 
             `,
-    row: `grid xs:items-start md:items-center overflow-hidden
+    row: `tbody-row    grid xs:items-start md:items-center overflow-hidden
           gap-x-20 gap-y-10 xs:py-25 md:py-15 
           md:hover:bg-black/10 
           text-common-1 font-lg text-center 
           duration-300`,
-    hr: `hr-1`,
+    hr: `tbody-hr    hr-1`,
   },
 };
 
@@ -170,7 +170,12 @@ export const Table = (props: Props) => {
               {/* skeleton */}
               <div className={classNames.row}>
                 {props.elements.skeletons.map((col, colIndex) => (
-                  <TCol label={props.elements.labels[colIndex]} className={classNames.col[colIndex]} alwaysFullyDisplay={props.other?.alwaysFullyDisplay}>
+                  <TCol
+                    key={colIndex}
+                    label={props.elements.labels[colIndex]}
+                    className={classNames.col[colIndex]}
+                    alwaysFullyDisplay={props.other?.alwaysFullyDisplay}
+                  >
                     {col}
                   </TCol>
                 ))}
