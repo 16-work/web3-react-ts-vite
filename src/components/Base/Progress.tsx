@@ -3,7 +3,7 @@ import { Progress as AProgress, ProgressProps } from 'antd';
 const styleType = {
   base: {
     height: 'h-6',
-    bgColor: 'rgb(var(--cus-gray-900))',
+    bgColor: 'rgb(var(--cus-gray-100))',
     progressColor: 'rgb(var(--cus-primary-1))',
   },
 };
