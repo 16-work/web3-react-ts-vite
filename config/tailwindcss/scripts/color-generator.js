@@ -11,7 +11,7 @@ const colorFilePath = 'config/tailwindcss/color.ts'// 生成的color.ts文件位
 // 读取 SCSS 文件路径
 const commonFilePath = path.resolve('./', defaultThemeFilePath);
 const commonFileContent = fs.readFileSync(commonFilePath, 'utf8');
-const defaultThemeMatch = /export\s+const\s+DEFAULT_THEME\s*=\s*'([^']+)'/;
+const defaultThemeMatch = /export\s+const\s+DEFAULT_THEME\s*=\s*["']([^"']+)["']/;
 const defaultThemeMatchResult = commonFileContent.match(defaultThemeMatch);
 if (!defaultThemeMatchResult) {
   console.error('Could not find DEFAULT_THEME in common.ts');
@@ -56,10 +56,10 @@ fs.readFile(scssFilePath, 'utf8', (err, data) => {
       colors.primary[keyName] = `rgb(var(--${colorName}) , <alpha-value>)`;
     } else if (colorName.startsWith('cus-second') || colorName.startsWith('cus-gray')) {
       colors.second[keyName] = `rgb(var(--${colorName}) , <alpha-value>)`;
-    } else if (colorName.startsWith('cus-relax') || colorName.startsWith('cus-info') || colorName.startsWith('cus-warning') || colorName.startsWith('cus-stress')) {
-      colors.feature[keyName] = `rgb(var(--${colorName}) , <alpha-value>)`;
     } else if (colorName.startsWith('text')) {
       colors.text[keyName] = `rgb(var(--${colorName}) , <alpha-value>)`;
+    } else {
+      colors.feature[keyName] = `rgb(var(--${colorName}) , <alpha-value>)`;
     }
   }
 

@@ -182,34 +182,14 @@
 
 /* 进度条 */ 
 .ant-progress {
-  .ant-progress-outer{
-    display: block !important;
-    margin-inline-end:0 !important;
-    padding-inline-end: 0 !important;
-
-    .ant-progress-inner {
-      position: absolute;
-      top: -1px;
-      left:0;
-    }
-  }
-
   .ant-progress-inner {
     overflow: visible !important;
-
-    // 进度条高度
     height: 100%;
 
     // 进度条边框
     border: 2px solid #000 !important;
-
     @media screen and (max-width: 750px) {
       border-width: 1px !important;
-    }
-    
-    // 进度背景
-    .ant-progress-bg {
-      height: 100% !important;
     }
 
     // 进度条粗细
@@ -217,10 +197,9 @@
       stroke-width: 0.2rem;
     }
 
-    // 圆圈
+    // 圆圈样式
     .ant-progress-bg {
       overflow: visible !important;
-
 
       &::before {
         content: '';
@@ -231,6 +210,22 @@
       &::after {
         background: transparent !important;
       }
+    }
+
+    .ant-progress-bg {
+      height: 100% !important;
+    }
+  }
+
+  .ant-progress-outer{
+    display: block !important;
+    margin-inline-end:0 !important;
+    padding-inline-end: 0 !important;
+
+    .ant-progress-inner {
+      position: absolute;
+      top: -1px;
+      left:0;
     }
   }
 }
