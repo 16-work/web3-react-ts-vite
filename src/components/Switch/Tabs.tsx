@@ -5,7 +5,7 @@ const styleType = {
     box: 'w-fit p-5 border rounded-full',
     initOffset: 5,
     list: '',
-    tab: 'px-65 py-6 rounded-full text-black font-xl',
+    tab: 'px-65 py-6 text-black font-xl',
     activeTab: '!text-common-1',
 
     hr: '',
@@ -18,7 +18,7 @@ const styleType = {
     tab: '',
     activeTab: '',
 
-    hr: '',
+    hr: 'border-l border-black',
     activeBlock: 'bg-primary-1',
   },
 };
@@ -82,7 +82,7 @@ export const Tabs = (props: Props) => {
             className={`flex-align-x justify-center duration-300 cursor-pointer whitespace-nowrap
               ${className.tab}
               ${props.tabClassname}
-              ${index === 0 && className.hr}
+              ${index !== 0 && className.hr}
               ${item.value === props.value && className.activeTab}    
             `}
             onClick={() => props.onSwitch(item.value)}
