@@ -13,6 +13,9 @@ interface Props {
   skeletonType?: 'light' | 'dark'; // 骨架屏样式类型
   hideSkeleton?: boolean; // 是否隐藏骨架屏
   alt?: string;
+
+  // 要用canvas读图片信息时开下anonymous，然后开发环境停用缓存
+  crossOrigin?: 'anonymous' | 'use-credentials';
 }
 
 /** Component */

@@ -9,6 +9,9 @@ interface Props {
   contract?: string;
   preview?: boolean;
   skeletonType?: 'light' | 'dark';
+
+  // 要用canvas读图片信息时开下anonymous，然后开发环境停用缓存
+  crossOrigin?: 'anonymous' | 'use-credentials';
 }
 
 /** Component */
@@ -51,7 +54,7 @@ export const TokenIcon = (props: Props) => {
   /** Template */
   return (
     <Img
-      skeletonType={props.skeletonType}
+      {...props}
       className={`${className}`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}

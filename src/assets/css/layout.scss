@@ -13,7 +13,7 @@
   // 版心
   .w {
     @apply max-w-1340  /* 页面最大宽 = 页面内容高度 + 左右安全边距 */
-    xs:px-20 md:px-40 pb-20;  /* 安全边距 */
+    xs:px-20 md:px-40 pb-20;  /* 安全边距(别用margin) */
   }
 }
 
@@ -42,7 +42,7 @@
   // layout-main不建议套base,防止UI设计贯穿样式
   #layout-main {
     .w {
-      @apply relative position-center-h z-[1];
+      @apply relative mx-auto z-[1]; // 不要用position-center-h，否则内部无法正常用fixed
     }
   }
 

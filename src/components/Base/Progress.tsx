@@ -9,14 +9,14 @@ const styleType = {
 };
 
 /** Props */
-interface Props {
+interface Props extends Omit<ProgressProps, 'percent' | 'strokeColor' | 'trailColor' | 'type'> {
   percent: number | string;
 
   type?: keyof typeof styleType;
 }
 
 /** Component */
-export const Progress = (props: Props & Omit<ProgressProps, 'percent' | 'strokeColor' | 'trailColor'>) => {
+export const Progress = (props: Props) => {
   /** Retrieval */
 
   /** Params */

@@ -21,6 +21,7 @@ export const cusColors = {
     'info-2': 'rgb(var(--cus-info-2) , <alpha-value>)',
     'warning-1': 'rgb(var(--cus-warning-1) , <alpha-value>)',
     'stress-1': 'rgb(var(--cus-stress-1) , <alpha-value>)',
+    'popover-1': 'rgb(var(--cus-popover-1) , <alpha-value>)',
   },
   text: {
     'common-1': 'rgb(var(--text-common-1) , <alpha-value>)',
