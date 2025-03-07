@@ -14,3 +14,61 @@
     font-size: 16px !important;
   }
 }
+
+
+
+/* 连接钱包模态框 */ 
+.wallet-adapter-modal-wrapper {
+  background: rgb(var(--cus-popover-1)) !important;
+
+  // 文本颜色
+  .wallet-adapter-modal-title,
+  .wallet-adapter-button,
+  .wallet-adapter-modal-list-more {
+    color: rgb(var(--text-common-1)) !important;
+  }
+
+
+  // 关闭按钮
+  .wallet-adapter-modal-button-close {
+    padding: 0 !important;
+    background: transparent !important;
+
+    svg {
+      transform:scale(1.2);
+    }
+
+    &:hover {
+      svg {
+        fill: rgb(var(--cus-primary-1)) !important;
+      }
+    }
+  }
+
+  // 列表项
+  .wallet-adapter-button  {
+    transition-duration: 300ms;
+    
+    &:hover {
+      background: rgba(var(--cus-primary-1),0.4) !important;
+    }
+  }
+
+  // 展开/折叠按钮
+  .wallet-adapter-modal-list-more {
+    padding-bottom: 12px !important;
+    transition-duration: 300ms;
+
+    svg {
+      fill: rgb(var(--text-common-1)) !important;
+    }
+
+    &:hover {
+      color: rgb(var(--cus-primary-1)) !important;
+
+      svg {
+        fill: rgb(var(--cus-primary-1)) !important;
+      }
+    }
+  } 
+}
