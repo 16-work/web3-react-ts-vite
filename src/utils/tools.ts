@@ -79,6 +79,12 @@ export const tools = {
       };
   },
 
+  getAutoHeightClassName: (className: string) => {
+    const regex = /\b(?:[\w-]+:)*?(h-(\d+|auto|full|screen)|aspect-\S+)\b/;
+    if (regex.test(className ?? '')) return className;
+    else return className + ' aspect-square';
+  },
+
   // 安全除法
   safeDiv: (a: string | number, b: string | number): BigNumber => {
     if (new BigNumber(b).isEqualTo(0) || b === '0' || !b) {
