@@ -20,6 +20,8 @@ export const TokenIcon = (props: Props) => {
   const { tokenIconList, setTokenIconList } = store.global();
 
   /** Params */
+  const { icon, contract, ...params } = props;
+
   const className = useMemo(() => {
     // 未设置height时自动和width一致
     const regex = /\bh-(\d+|auto|full|screen)\b/;
@@ -54,7 +56,7 @@ export const TokenIcon = (props: Props) => {
   /** Template */
   return (
     <Img
-      {...props}
+      {...params}
       className={`${className}`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}

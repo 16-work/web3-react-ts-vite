@@ -1,6 +1,6 @@
 $theme-name: 'theme-light-green'; 
 
-// 修改后请运行 pnpm theme
+// 修改默认主题文件后请运行 pnpm theme；所有主题文件中的变量名必须一致
 // 如果变量在css和tailwind都能读到，颜色值格式要为: r, g, b 或 var(变量名)
 // 如果只有css需要读，可以直接写颜色值(eg.--cus-scrollbar)
 // 注意：不要用--c，会和antd冲突
