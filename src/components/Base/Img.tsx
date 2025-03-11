@@ -66,7 +66,7 @@ export const Img = (props: Props) => {
       {(!state.isError || (state.isError && defaultImgURL)) && (
         <AImage
           {...aImgProps}
-          rootClassName={state.isLoading ? `inline-block shrink-0 ${skeleton} ${sizeClassName}` : props.className}
+          wrapperClassName={state.isLoading ? `inline-block shrink-0 ${skeleton} ${sizeClassName}` : props.className}
           className={state.isLoading ? 'hidden' : 'w-full !h-full'}
           preview={props.preview ?? false}
           fallback={defaultImgURL}
