@@ -22,13 +22,6 @@ export const TokenIcon = (props: Props) => {
   /** Params */
   const { icon, contract, ...params } = props;
 
-  const className = useMemo(() => {
-    // 未设置height时自动和width一致
-    const regex = /\bh-(\d+|auto|full|screen)\b/;
-    if (regex.test(props.className)) return props.className;
-    else return props.className + ' aspect-square';
-  }, [props.className]);
-
   /** Actions */
   const checkIconByContract = async () => {
     // token已存在缓存列表中，则不操作
@@ -57,7 +50,7 @@ export const TokenIcon = (props: Props) => {
   return (
     <Img
       {...params}
-      className={`${className}`}
+      className={`${props.className}`}
       src={props.icon || tokenIconList[props.contract ?? ''] || IconDefaultToken}
       preview={props.preview ?? false}
       defaultImg="token"
