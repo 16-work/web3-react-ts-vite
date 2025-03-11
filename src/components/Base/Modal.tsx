@@ -48,35 +48,38 @@ export const Modal = (props: Props) => {
           <Svg name="close" className="w-24 text-common-1 hover-primary cursor-pointer duration-300" onClick={props.onClose} />
         </div>
 
-        {/* body */}
-        {props.children}
+        <div className="max-h-[80vh] overflow-auto">
+          {/* body */}
+          {props.children}
 
-        {/* footer */}
-        {props.footer ? (
-          props.footer
-        ) : (
-          <div className="grid grid-cols-2 gap-x-20">
-            {/* btn: cancel */}
-            {props.cancelText && (
-              <Button className="btn-second-1 px-10 py-8 rounded-full font-2xl" onClick={props.onClose}>
-                {props.cancelText}
+          {/* footer */}
+          {props.footer ? (
+            props.footer
+          ) : (
+            <div className="grid grid-cols-2 gap-x-20">
+              {/* btn: cancel */}
+              {props.cancelText && (
+                <Button className="btn-second-1 px-10 py-8 rounded-full font-2xl" onClick={props.onClose}>
+                  {props.cancelText}
+                </Button>
+              )}
+
+              {/* btn: ok */}
+              <Button
+                className={`
+                  btn-primary flex justify-center items-center px-10 py-8 rounded-full font-xl
+                  ${props.cancelText ? '' : 'col-span-2'}
+                `}
+                auth={props.okAuth}
+                isLoading={props.isLoading}
+                disabled={props.disabled}
+                onClick={props.onOk}
+              >
+                {okText}
               </Button>
-            )}
-
-            {/* btn: ok */}
-            <Button
-              className={`btn-primary flex justify-center items-center px-10 py-8 rounded-full font-xl
-                ${props.cancelText ? '' : 'col-span-2'}
-              `}
-              auth={props.okAuth}
-              isLoading={props.isLoading}
-              disabled={props.disabled}
-              onClick={props.onOk}
-            >
-              {okText}
-            </Button>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </AModal>
   );
