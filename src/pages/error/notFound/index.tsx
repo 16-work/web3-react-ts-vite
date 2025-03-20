@@ -16,7 +16,7 @@ export const PageNotFound = () => {
             font-lg rounded-8 duration-300"
           onClick={() => router.push('/')}
         >
-          <Svg name="arrow-left" className="w-30 mr-10 text-common-1" />
+          <Svg name="arrow-left" className="xs:w-40 md:w-30 mr-10 text-common-1" />
           {t('tip.returnHome')}
         </Button>
       </div>

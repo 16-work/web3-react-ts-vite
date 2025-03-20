@@ -68,7 +68,7 @@ export const Button = (props: Props) => {
           {btnContent}
 
           {/* loading */}
-          {props.isLoading && <Svg name="spin" className="w-20 ml-10 animate-spin origin-center" />}
+          {props.isLoading && <Svg name="spin" className="xs:w-40 md:w-20 ml-10 animate-spin origin-center" />}
 
           {/* mask */}
           <span className="w-full h-full absolute bg-transparent hover:bg-white/10 duration-300"></span>
@@ -88,7 +88,7 @@ export const Button = (props: Props) => {
           {props.children}
 
           {/* loading */}
-          {props.isLoading && <Svg name="spin" className="w-20 ml-10 animate-spin origin-center" />}
+          {props.isLoading && <Svg name="spin" className="xs:w-40 md:w-20 ml-10 animate-spin origin-center" />}
 
           {/* mask */}
           <span className="w-full h-full absolute top-0 left-0 bg-transparent hover:bg-white/10 duration-300"></span>

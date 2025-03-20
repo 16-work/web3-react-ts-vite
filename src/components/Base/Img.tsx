@@ -39,7 +39,8 @@ export const Img = (props: Props) => {
 
   const sizeClassName = useMemo(() => {
     // 读取w、h、rounded相关属性
-    const className = props.className.match(/\b(?:[\w-]+:)*?(w|h|absolute|reactive|fixed|m|rounded|shadow|aspect)\S*/g)?.join(' ') ?? '';
+    const className =
+      props.className.match(/\b(?:[\w-]+:)*?(w|h|absolute|reactive|fixed|top|bottom|left|right|position|m|rounded|shadow|aspect)\S*/g)?.join(' ') ?? '';
 
     // 无高度则默认h=w
     return tools.getAutoHeightClassName(className);
@@ -66,7 +67,9 @@ export const Img = (props: Props) => {
       {(!state.isError || (state.isError && defaultImgURL)) && (
         <AImage
           {...aImgProps}
-          wrapperClassName={state.isLoading ? `inline-block shrink-0 ${skeleton} ${sizeClassName}` : tools.getAutoHeightClassName(props.className)}
+          wrapperClassName={
+            state.isLoading ? `inline-block shrink-0 ${!hideSkeleton && skeleton} ${sizeClassName}` : tools.getAutoHeightClassName(props.className)
+          }
           className={state.isLoading ? 'hidden' : 'w-full !h-full'}
           preview={props.preview ?? false}
           fallback={defaultImgURL}

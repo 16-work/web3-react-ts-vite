@@ -36,7 +36,7 @@ export const DropUser = (props: Props) => {
   /** Template */
   return (
     account.address && (
-      <div className="drop-user    relative md:px-20 md:py-10">
+      <div className="drop-user    relative px-20 py-10">
         {/* list */}
         {list.map((item, index) => (
           <div key={index}>

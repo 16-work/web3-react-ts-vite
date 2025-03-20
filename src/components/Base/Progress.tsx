@@ -1,5 +1,7 @@
 import { Progress as AProgress, ProgressProps } from 'antd';
 
+// 边框只能用scss改，antd没对外暴露
+
 const styleType = {
   base: {
     height: 'h-6',

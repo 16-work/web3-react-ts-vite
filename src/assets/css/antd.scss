@@ -60,6 +60,9 @@
 
   // 页数按钮(激活)
   .ant-pagination-item-active {
+    border: none;
+    background: transparent !important;
+
     a {
       border: 1px solid;
       border-color: #000;
@@ -237,6 +240,8 @@
 
 /* 抽屉 */ 
 .ant-drawer {
+  // z-index: 2 !important; // 顶部导航需要遮住Drawer时开启
+  
   // 去除聚焦边缘线
   &:focus-visible {
     outline: none !important;
