@@ -8,18 +8,19 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCha
   onFocus?: (newValue: string) => void;
   max?: string | number | BigNumber;
   min?: string | number | BigNumber;
+  isInt?: boolean;
 }
 
 /** Component */
 export const InputNum = (props: Props) => {
   /** Params */
-  const { max, min, ...params } = props;
+  const { max, min, isInt = false, ...params } = props;
 
   /** Actions */
   const getValue = (v: string) => {
-    let value = formatInputOnlyPositive(v.trim());
-    if (props.max && BigNumber(value).gt(props.max)) value = formatInputOnlyPositive(String(props.max));
-    if (props.min && BigNumber(value).lt(props.min)) value = formatInputOnlyPositive(String(props.min));
+    let value = formatInputOnlyPositive(v.trim(), isInt);
+    if (props.max && BigNumber(value).gt(props.max)) value = formatInputOnlyPositive(String(props.max), isInt);
+    if (props.min && BigNumber(value).lt(props.min)) value = formatInputOnlyPositive(String(props.min), isInt);
     return value;
   };
 
@@ -59,16 +60,22 @@ const formatInputLocaleString = (str: string | number) => {
   return intPart + decPart;
 };
 
-const formatInputOnlyPositive = (str: string) => {
+const formatInputOnlyPositive = (str: string, isInt: boolean) => {
   if (!str) return str;
 
-  // 移除所有非数字字符，除了小数点
-  str = str.replace(/[^\d.]/g, '');
+  // 移除所有非数字字符
+  if (isInt) {
+    str = str.replace(/\D/g, '');
+  }
+  // 移除除小数点外所有非数字字符
+  else {
+    str = str.replace(/[^\d.]/g, '');
 
-  // 移除多余的小数点
-  const parts = str.split('.');
-  if (parts.length > 2) {
-    str = parts[0] + '.' + parts.slice(1).join('');
+    // 移除多余的小数点
+    const parts = str.split('.');
+    if (parts.length > 2) {
+      str = parts[0] + '.' + parts.slice(1).join('');
+    }
   }
 
   return str;
