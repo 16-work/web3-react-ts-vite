@@ -60,6 +60,9 @@
 
   // 页数按钮(激活)
   .ant-pagination-item-active {
+    border: none;
+    background: transparent !important;
+
     a {
       border: 1px solid;
       border-color: #000;
