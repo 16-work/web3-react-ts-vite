@@ -12,13 +12,10 @@ export const format = {
 
   timeDistance: (time: number) => {
     const seconds = (new Date().getTime() - new Date(time).getTime()) / 1000;
-    if (seconds < 60) return t('common.aFewSecondsAgo', { secs: seconds.toFixed(0) });
-    else if (seconds <= 60 * 2) return t('common.aMinuteAgo');
+    if (seconds <= 60) return t('common.aFewSecondsAgo', { secs: seconds.toFixed(0) });
     else if (seconds <= 60 * 60) return t('common.nMinutesAgo', { minutes: Math.floor(seconds / 60) });
-    else if (seconds <= 60 * 60 * 2) return t('common.aHourAgo');
     else if (seconds <= 60 * 60 * 24) return t('common.nHoursAgo', { hours: Math.floor(seconds / 60 / 60) });
-    else if (seconds <= 60 * 60 * 24 * 2) return t('common.aDayAgo');
-    else if (seconds <= 60 * 60 * 24 * 31) return t('common.nDaysAgo', { days: Math.floor(seconds / 60 / 60 / 24) });
+    else if (seconds <= 60 * 60 * 24 * 30) return t('common.nDaysAgo', { days: Math.floor(seconds / 60 / 60 / 24) });
     else return moment(time).format('YYYY/MM/DD HH:mm:ss');
   },
 
