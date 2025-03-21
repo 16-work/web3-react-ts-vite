@@ -12,8 +12,7 @@ export const format = {
 
   timeDistance: (time: number) => {
     const seconds = (new Date().getTime() - new Date(time).getTime()) / 1000;
-    if (seconds <= 30) return t('common.aFewSecondsAgo');
-    else if (seconds <= 60) return t('common.halfAMinuteAgo');
+    if (seconds < 60) return t('common.aFewSecondsAgo', { secs: seconds.toFixed(0) });
     else if (seconds <= 60 * 2) return t('common.aMinuteAgo');
     else if (seconds <= 60 * 60) return t('common.nMinutesAgo', { minutes: Math.floor(seconds / 60) });
     else if (seconds <= 60 * 60 * 2) return t('common.aHourAgo');
