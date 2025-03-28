@@ -8,7 +8,7 @@ const options = Object.entries(supportLanguages).map((item) => {
 /** Component */
 export const SwitchLanguage = () => {
   /** Retrieval */
-  const [language, setLanguage] = useState(LANGUAGE);
+  const [language, setLanguage] = useState(localCache.get('language', LANGUAGE));
 
   /** Actions */
   const onChangeLanguage = (value: string) => {
