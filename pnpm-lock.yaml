@@ -172,6 +172,9 @@ devDependencies:
   mockjs:
     specifier: ^1.1.0
     version: 1.1.0
+  opencc-js:
+    specifier: ^1.0.5
+    version: 1.0.5
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -9637,6 +9640,10 @@ packages:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
       is-wsl: 2.2.0
+
+  /opencc-js@1.0.5:
+    resolution: {integrity: sha512-LD+1SoNnZdlRwtYTjnQdFrSVCAaYpuDqL5CkmOaHOkKoKh7mFxUicLTRVNLU5C+Jmi1vXQ3QL4jWdgSaa4sKjg==}
+    dev: true
 
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}

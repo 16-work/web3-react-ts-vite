@@ -24,7 +24,6 @@ export const LayoutDrawer = () => {
         </div>
 
         {/* bottom */}
-
         <div className="flex-align-x justify-between">
           {/* left */}
           <div className="flex-align-x gap-x-30">
