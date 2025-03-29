@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 import xlsx from "xlsx";
-import { converter } from './zhTWConverter.js';
+import { zhCN2zhTW } from './zhTWConverter.js';
 
 const commonFilePath = path.resolve("./", "src/constants/i18n/config.ts");
 const commonFileContent = fs.readFileSync(commonFilePath, "utf8");
@@ -77,7 +77,7 @@ if (languageType.find((item) => item === "zh-TW")) {
   Object.keys(lang["zh-CN"]).map((sheetName) => {
     const sheet = {};
     Object.keys(lang["zh-CN"][sheetName]).map((key) => {
-      sheet[key] = converter(lang["zh-CN"][sheetName][key]);
+      sheet[key] = zhCN2zhTW(lang["zh-CN"][sheetName][key]);
     });
 
     table[sheetName] = sheet;
