@@ -115,7 +115,7 @@ export const tools = {
   scrollToTop: (selector: string = 'document', behavior: ScrollBehavior = 'smooth') => {
     // 默认滚动到页面最上方
     if (selector === 'document') {
-      const scrollBox = document.querySelector('.scroll-box>div');
+      const scrollBox = document.querySelector('#layout-scroll>div');
       scrollBox?.scrollTo({ top: 0, behavior });
     }
     // 滚动到指定元素的顶端
