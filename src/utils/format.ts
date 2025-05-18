@@ -3,7 +3,11 @@ import { t } from 'i18next';
 import BigNumber from 'bignumber.js';
 
 // 数字缩写（别改顺序）
-export const NUMBER_ABBRS = ['Y', 'Z', 'E', 'P', 'T', 'B', 'M', 'K'] as const;
+export const NUMBER_ABBRS = [
+  // 'Y', 'Z', 'E', 'P', 'T', 'B',
+  'M',
+  'K',
+] as const;
 
 export const format = {
   time: (time: Date | number, format: string = 'YYYY/MM/DD HH:mm:ss') => {
@@ -83,21 +87,35 @@ export const format = {
         const dec = decimals ?? 2; // 缩写默认保留两位小数
 
         for (let i = 0; i < abbrs.length; i++) {
-          if (BigNumber(integralPart).gte(10 ** (3 * (abbrs.length - i))))
-            return `${BigNumber(integralPart)
+          if (BigNumber(integralPart).gte(10 ** (3 * (abbrs.length - i)))) {
+            const v = BigNumber(integralPart)
               .div(10 ** (3 * (abbrs.length - i)))
-              .toFixed(dec)} ${abbrs[i]}`;
+              .toString();
+
+            const [iPart, dPart] = v.split('.');
+
+            const intPart = format.int(iPart);
+            const decPart = format.dec(v, dPart, dec);
+
+            return `${intPart + decPart}${abbrs[i]}`;
+          }
         }
       }
     }
 
     const dec = decimals ?? 4; // 非缩写默认保留4位小数
 
-    // 检查是否为负数
+    const intPart = format.int(integralPart);
+    const decPart = format.dec(value, decimalPart, dec);
+    console.log(decPart);
+
+    return `${intPart}${decPart}`;
+  },
+
+  int: (integralPart: string) => {
     const isNegative = integralPart.startsWith('-');
     const positiveIntegralPart = isNegative ? integralPart.slice(1) : integralPart;
 
-    // 格式化整数部分(根据位数插入',')
     let digit = 0;
     const intPartArr = [];
     for (let i = positiveIntegralPart.length - 1; i >= 0; i--) {
@@ -112,10 +130,18 @@ export const format = {
       intPart = '-' + intPart;
     }
 
+    return intPart;
+  },
+
+  dec: (value: BigNumber | string | bigint | number, decimalPart: string, decimal: number) => {
+    const isLt1 = BigNumber(value.toString()).lt(1);
+
+    if (!decimalPart || decimal === 0) return '';
+
     let decPart = '';
     let count = 0;
-    if (decimalPart?.length > 0) {
-      for (let i = 0; i < decimalPart?.length; i++) {
+    if (decimalPart.length > 0) {
+      for (let i = 0; i < decimalPart.length; i++) {
         if (decimalPart[i] === '0') {
           count++;
         } else {
@@ -123,31 +149,30 @@ export const format = {
         }
       }
       const sliceStr = decimalPart.slice(count, decimalPart.length);
-      if (count > 3 && BigNumber(value.toString()).lt(1)) {
-        let currentDecimal = sliceStr.slice(0, dec).length;
+      if (count > 3 && isLt1) {
+        let currentDecimal = sliceStr.slice(0, decimal).length;
         let str = '';
-        while (currentDecimal < dec) {
+        while (currentDecimal < decimal) {
           str += '0';
           currentDecimal += 1;
         }
-        decPart = `.0${format.subscript(count)}${sliceStr.slice(0, dec)}`;
+        decPart = `.0${format.subscript(count)}${sliceStr.slice(0, decimal)}`;
         decPart = decPart + str;
-      } else if (BigNumber(value.toString()).lt(1)) {
+      } else {
         let currentDecimal = decimalPart.length;
 
         let str = '';
-        while (currentDecimal < dec) {
+        while (currentDecimal < decimal) {
           str += '0';
           currentDecimal += 1;
         }
-        decPart = `.${decimalPart.slice(0, dec)}${str}`;
-      } else {
-        decPart = `.${decimalPart.slice(0, 2)}`;
+        decPart = `.${decimalPart.slice(0, decimal)}${str}`;
       }
-    } else if (dec !== 0) {
+    } else if (decimal !== 0) {
       decPart = '.00';
     }
-    return `${intPart}${decPart}`;
+
+    return decPart;
   },
 
   rate: (current: BigNumber | number | string, max: BigNumber | number | string, returnType: 'string' | 'number' = 'string', decimalPlaces: number = 2) => {

@@ -7,7 +7,7 @@ export enum SCREEN {
 
 export const screenMinSize = {
   [SCREEN.XS]: 0,
-  [SCREEN.MD]: 750,
+  [SCREEN.MD]: 751,
   [SCREEN.LG]: 1000,
   [SCREEN.XL]: 1340,
 };
