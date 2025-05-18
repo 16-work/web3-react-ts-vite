@@ -97,7 +97,7 @@ export const Table = (props: Props) => {
           <div className={classNames.thead}>
             {props.elements.labels.map((label, index) => (
               // field
-              <div key={index} className="flex-align-x justify-center">
+              <div key={index} className={`flex-align-x justify-center ${classNames.col[index]}`}>
                 <FieldSort
                   label={label}
                   isShowSortIcon={Boolean(props.sort && Object.entries(props.sort.sortFields).find((item) => Number(item[0]) === index))}
